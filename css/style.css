@@ -1,0 +1,29 @@
+/* Estilo para o corpo da página */
+body {
+  background-color: #141414; /* Um fundo escuro, estilo streaming */
+  color: #fff;
+}
+
+/* Estilizando o card para os efeitos */
+.card {
+  background-color: #222;
+  border: none; /* Remove a borda padrão */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+  cursor: pointer;
+}
+
+/* Efeito de hover: zoom e sombra mais forte */
+.card:hover {
+  transform: scale(1.05); /* Efeito de zoom */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra mais destacada */
+}
+
+.card-title {
+  color: #fff;
+}
+
+.card-text {
+  color: #ccc;
+}
