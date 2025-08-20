@@ -1,149 +1,114 @@
 # Meu Streaming 🎬
 
-![Status do Projeto](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status do Projeto](https://img.shields.io/badge/status-planejamento-blue)
 
-Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e séries desenvolvido como parte de um estudo prático de tecnologias web. A aplicação consome APIs públicas para exibir um catálogo de mídia dinâmico e interativo.
+Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e séries. A aplicação consome múltiplas APIs públicas para exibir um catálogo de mídia dinâmico, visualizações de dados com Chart.js e foca em boas práticas de desenvolvimento, acessibilidade e testes.
 
 ## Índice
 
-1.  [Visão Geral do Projeto](#1-visão-geral-do-projeto)
-2.  [Justificativa](#2-justificativa)
-3.  [Escopo e Funcionalidades](#3-escopo-e-funcionalidades)
-4.  [Protótipo de UI (User Interface)](#4-protótipo-de-ui-user-interface)
-5.  [Tecnologias Utilizadas](#5-tecnologias-utilizadas)
-6.  [APIs Selecionadas](#6-apis-selecionadas)
-7.  [Estrutura do Projeto](#7-estrutura-do-projeto)
+1.  [Visão Geral e Justificativa](#1-visão-geral-e-justificativa)
+2.  [Escopo e Funcionalidades](#2-escopo-e-funcionalidades)
+3.  [Wireframe e Protótipo de UI](#3-wireframe-e-protótipo-de-ui)
+4.  [Tecnologias Utilizadas](#4-tecnologias-utilizadas)
+5.  [APIs Selecionadas](#5-apis-selecionadas)
+6.  [Estrutura do Projeto](#6-estrutura-do-projeto)
+7.  [Versionamento com Git](#7-versionamento-com-git)
 8.  [Acessibilidade e Responsividade](#8-acessibilidade-e-responsividade)
 9.  [Testes Automatizados](#9-testes-automatizados)
-10. [Como Executar o Projeto](#10-como-executar-o-projeto)
 
 ---
 
-### 1. Visão Geral do Projeto
+### 1. Visão Geral e Justificativa
 
-O "Meu Streaming" é uma interface web responsiva que permite aos usuários navegar por catálogos de filmes e séries, buscar por títulos específicos e visualizar informações detalhadas sobre cada obra. O projeto foi concebido para aplicar conhecimentos em HTML, CSS, JavaScript e Bootstrap, com foco na integração de APIs, boas práticas de desenvolvimento, acessibilidade e testes automatizados.
+**Visão Geral:** O "Meu Streaming" é uma interface web que permite aos usuários navegar por catálogos de filmes, buscar títulos, ver notícias sobre o mundo do entretenimento e entrar em contato através de um formulário. O projeto integra dados de fontes externas e apresenta análises visuais através de gráficos.
 
-### 2. Justificativa
+**Justificativa:** Este projeto foi escolhido pela oportunidade de trabalhar com desafios técnicos completos, como o consumo de múltiplas APIs, a criação de uma interface de usuário rica e acessível, a implementação de testes automatizados e a prática de um fluxo de trabalho de versionamento profissional com Git.
 
-Este projeto foi escolhido por sua relevância no mercado atual e pela oportunidade de trabalhar com uma variedade de desafios técnicos importantes, como:
+### 2. Escopo e Funcionalidades
 
-- **Consumo de APIs externas:** Praticar requisições assíncronas (fetch/AJAX) para obter e exibir dados dinâmicos.
-- **Manipulação de Dados:** Tratar e apresentar dados complexos (listas de filmes, detalhes, gêneros).
-- **Interface de Usuário Moderna:** Criar um layout atrativo e funcional, utilizando um framework de UI como o Bootstrap.
-- **Qualidade de Software:** Implementar testes automatizados para garantir a estabilidade das funcionalidades críticas.
-- **Inclusão Digital:** Aplicar conceitos de acessibilidade para garantir que a plataforma possa ser utilizada por todos.
-
-### 3. Escopo e Funcionalidades
-
-O projeto contará com as seguintes funcionalidades e telas:
+O projeto contará com as seguintes funcionalidades e telas/seções:
 
 - **Página Inicial (`index.html`):**
 
-  - Apresenta uma visão geral da plataforma.
-  - Exibe seções de "Filmes Populares" e "Séries em Alta", com cards interativos.
-  - Barra de navegação e rodapé informativos.
-
-- **Página de Catálogo (`catalogo.html`):**
-
-  - Exibirá o catálogo completo de filmes e séries, com opções de filtro (por gênero, ano, etc.).
-  - Funcionalidade de busca para encontrar títulos específicos.
+  - Visão geral da plataforma com destaques do catálogo.
+  - Uma **visão geral da dashboard** (ex: um gráfico pequeno com Chart.js mostrando gêneros populares).
+  - Uma seção com as **últimas notícias** sobre filmes (usando a segunda API).
+  - Um **formulário de contato** funcional.
 
 - **Página de Detalhes (`detalhes.html`):**
 
-  - Mostra informações completas de um filme ou série selecionado, como sinopse, elenco, avaliação, trailer (se disponível) e recomendações.
-
-- **Página de Análise/Dashboard (`dashboard.html`):**
-
-  - Utilizará a biblioteca **Chart.js** para exibir gráficos interativos, como "Popularidade de Gêneros" ou "Filmes com Maiores Avaliações".
+  - Mostra informações completas de um filme/série, como sinopse, elenco, avaliação e trailer.
 
 - **Página de Ajuda/Acessibilidade (`ajuda.html`):**
-  - Fornecerá informações sobre o projeto e, principalmente, sobre os recursos de acessibilidade implementados, como navegação por teclado e compatibilidade com leitores de tela.
+  - Fornece informações sobre o projeto.
+  - Detalha os recursos de acessibilidade implementados e oferece **opções de acessibilidade** (ex: botão para modo de alto contraste).
 
-### 4. Protótipo de UI (User Interface)
+### 3. Wireframe e Protótipo de UI
 
-O design da interface será inspirado nas principais plataformas de streaming, com um tema escuro para proporcionar conforto visual.
+Um wireframe de baixa fidelidade foi criado para planejar a estrutura visual e a disposição dos elementos nas telas principais do projeto.
 
-- **Paleta de Cores:** Fundo escuro (`#141414`), cards em um tom de cinza (`#222`), e textos em branco ou cinza claro, com uma cor de destaque (ex: vermelho ou azul) para links e botões.
-- **Layout:** Baseado em grid (Bootstrap), com cards de conteúdo que se ajustam a diferentes tamanhos de tela.
-- **Interatividade:** Efeitos de `hover` nos cards para dar feedback visual ao usuário (zoom suave e sombra, como já implementado no `style.css`).
+- **[Acesse o Wireframe aqui](wireframe.png)**
 
-### 5. Tecnologias Utilizadas
+O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, utilizando componentes do Bootstrap 5 para uma prototipação ágil.
 
-- **Frontend:**
+### 4. Tecnologias Utilizadas
 
-  - **HTML5:** Estruturação semântica do conteúdo.
-  - **CSS3:** Estilização customizada e animações.
-  - **JavaScript (ES6+):** Manipulação do DOM, lógica da aplicação e requisições à API.
-  - **Bootstrap 5:** Framework de UI para prototipação rápida, responsividade e componentes pré-estilizados.
+- **Frontend:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.
+- **Bibliotecas:** Chart.js (para visualização de dados).
+- **Testes:** Selenium (para testes de interface do usuário).
+- **Ferramentas:** Git, GitHub, VS Code.
 
-- **Ferramentas e Boas Práticas:**
-  - **Git & GitHub:** Versionamento de código, com uso de branches para desenvolvimento de funcionalidades e Pull Requests para revisão.
-  - **Selenium:** Automação de testes de interface do usuário (UI testing).
-  - **WAI-ARIA:** Padrões para acessibilidade em aplicações web.
-
-### 6. APIs Selecionadas
+### 5. APIs Selecionadas
 
 1.  **The Movie Database (TMDb) API:**
 
-    - **Propósito:** Será a fonte principal de dados sobre filmes e séries.
-    - **Endpoints Utilizados:**
-      - `/movie/popular`: Para buscar os filmes mais populares.
-      - `/tv/popular`: Para buscar as séries mais populares.
-      - `/search/movie`: Para a funcionalidade de busca.
-      - `/movie/{id}`: Para obter os detalhes de um filme específico.
+    - **Propósito:** Fonte principal de dados sobre filmes e séries (pôsteres, sinopses, avaliações, etc.).
+    - **Status:** Chave de API a ser obtida.
 
-2.  **Chart.js (Biblioteca):**
-    - **Propósito:** Embora seja uma biblioteca e não uma API de dados, será utilizada para criar visualizações de dados na página de Dashboard. Os dados para os gráficos serão processados a partir das informações obtidas da TMDb API.
+2.  **GNews API:**
 
-### 7. Estrutura do Projeto
+    - **Propósito:** Fornecer notícias em tempo real sobre o mundo do cinema para uma seção na página inicial. Isso cumpre o requisito de uma segunda API de dados.
+    - **Status:** Chave de API a ser obtida.
+
+3.  **Chart.js (Biblioteca):**
+    - **Propósito:** Será utilizada para criar gráficos interativos, como a "visão geral da dashboard" na página inicial, processando dados obtidos da TMDb.
+
+### 6. Estrutura do Projeto
 
 /meu-streaming
 |
 |-- /css
-| |-- style.css # Estilos personalizados
-|
 |-- /js
-| |-- api.js # Lógica para chamadas à API TMDb
-| |-- main.js # Script principal (manipulação do DOM)
-| |-- charts.js # Script para a página de dashboard com Chart.js
-|
 |-- /tests
-| |-- test_search.py # Exemplo de teste com Selenium para a busca
-| |-- test_navigation.py # Exemplo de teste de navegação entre páginas
+|-- /images
 |
-|-- index.html # Página inicial
-|-- catalogo.html # Página com o catálogo completo
-|-- detalhes.html # Página de detalhes do filme/série
-|-- dashboard.html # Página com os gráficos
-|-- ajuda.html # Página de ajuda e acessibilidade
+|-- index.html
+|-- detalhes.html
+|-- ajuda.html
 |
-|-- README.md # Documentação do projeto
+|-- wireframe.png <-- Imagem do Wireframe
+|-- README.md
+
+### 7. Versionamento com Git
+
+O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes branches:
+
+- **`main`:** Contém o código de produção, estável e pronto para deploy. Cada versão final (entrega) será marcada com uma `tag`.
+- **`develop`:** Branch principal de desenvolvimento. Novas funcionalidades são integradas aqui antes de serem enviadas para a `main`.
+- **`feature/*`:** Branches temporárias para o desenvolvimento de novas funcionalidades (ex: `feature/formulario-contato`). Após a conclusão, são mescladas na `develop`.
 
 ### 8. Acessibilidade e Responsividade
 
-- **Responsividade:** O layout será construído com o sistema de grid do Bootstrap e Flexbox, garantindo uma experiência de uso consistente em desktops, tablets e smartphones.
-- **Acessibilidade (WCAG):**
-  - **Contraste de Cores:** A paleta de cores será escolhida para garantir um contraste adequado entre texto e fundo.
-  - **Textos Alternativos:** Todas as imagens (como pôsteres de filmes) terão o atributo `alt` preenchido.
-  - **Navegação por Teclado:** Todos os elementos interativos (links, botões) serão acessíveis através da tecla `Tab`.
-  - **ARIA Roles:** Serão utilizados atributos WAI-ARIA para melhorar a semântica de componentes complexos para leitores de tela.
+- **Responsividade:** O layout será totalmente adaptável a desktops, tablets e smartphones.
+- **Acessibilidade (WCAG):** Serão implementadas práticas como contraste de cores adequado, textos alternativos para imagens, navegação completa via teclado e uso de atributos WAI-ARIA. Haverá uma **opção de acessibilidade** na página de ajuda para ativar um modo de alto contraste.
 
 ### 9. Testes Automatizados
 
-Os testes serão focados na interface do usuário para garantir que as funcionalidades críticas funcionem como esperado. Utilizaremos **Selenium** para simular a interação do usuário.
+Serão criados testes de interface com Selenium para validar as funcionalidades críticas. Os casos de teste serão documentados e incluirão cenários como:
 
-- **Casos de Teste Planejados:**
-  1.  **Teste de Busca:**
-      - **Cenário:** O usuário digita o nome de um filme na barra de busca e clica em "Buscar".
-      - **Resultado Esperado:** A página de catálogo é carregada com os resultados correspondentes.
-  2.  **Teste de Navegação para Detalhes:**
-      - **Cenário:** O usuário clica em um card de filme na página inicial.
-      - **Resultado Esperado:** A página de detalhes do filme correspondente é carregada.
-  3.  **Teste de Responsividade do Layout:**
-      - **Cenário:** A janela do navegador é redimensionada para uma largura de dispositivo móvel.
-      - **Resultado Esperado:** O layout de grid se ajusta, exibindo menos colunas de filmes sem quebrar a interface.
-
----
+- Submissão do formulário de contato.
+- Funcionalidade da barra de busca.
+- Navegação entre a página inicial e a de detalhes.
 
 ### 10. Como Executar o Projeto
 
@@ -151,4 +116,4 @@ Os testes serão focados na interface do usuário para garantir que as funcional
 2.  Navegue até a pasta do projeto: `cd meu-streaming`
 3.  Abra o arquivo `index.html` em seu navegador.
 
-_Observação: Para as funcionalidades de API funcionarem, será necessário obter uma chave de API gratuita no site da [TMDb](https://www.themoviedb.org/documentation/api) e configurá-la no arquivo `js/api.js`._
+\*Observação: Para as funcionalidades de API funcionarem, será necessário ob
