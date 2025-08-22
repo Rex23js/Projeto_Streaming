@@ -54,7 +54,7 @@ Foram criados wireframes de baixa fidelidade para planejar a estrutura visual e 
 ![Wireframe da Página de Catálogo](wireframes/Wireframe_Catalogo.png)
 
 #### Página de Detalhes
-![Wireframe da Página de Detalhes](wireframes/Wireframe_Detalhes.png)
+![Wireframe da Página de Detalhes](wireframes/Wireframe_Detalhes_Trailers.png)
 
 O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, utilizando componentes do Bootstrap 5 para uma prototipação ágil.
 
