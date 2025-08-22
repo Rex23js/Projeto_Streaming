@@ -28,7 +28,7 @@ Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e 
 
 O projeto contará com as seguintes funcionalidades e telas/seções:
 
-- **Página Inicial (`index.html`):**
+- **Página Inicial (`Bem-Vindo`):**
 
   - Visão geral da plataforma com destaques do catálogo.
   - Uma **visão geral da dashboard** (ex: um gráfico pequeno com Chart.js mostrando gêneros populares).
@@ -45,9 +45,18 @@ O projeto contará com as seguintes funcionalidades e telas/seções:
 
 ### 3. Wireframe e Protótipo de UI
 
-Um wireframe de baixa fidelidade foi criado para planejar a estrutura visual e a disposição dos elementos nas telas principais do projeto.
+Foram criados wireframes de baixa fidelidade para planejar a estrutura visual e a disposição dos elementos nas telas principais do projeto.
 
-- **[Acesse o Wireframe aqui](wireframe.png)**
+#### Página Inicial (Home)
+![Wireframe da Página Inicial](wireframes/Wireframe_Bem_Vindo.png)
+
+#### Página de Catálogo
+![Wireframe da Página de Catálogo](wireframes/Wireframe_Catalogo.png)
+
+#### Página de Detalhes
+![Wireframe da Página de Detalhes](wireframes/Wireframe-Detalhes.png)
+
+- **[Acesse o Wireframe aqui]()**
 
 O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, utilizando componentes do Bootstrap 5 para uma prototipação ágil.
 
@@ -93,8 +102,8 @@ O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, 
 
 O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes branches:
 
-- **`main`:** Contém o código de produção, estável e pronto para deploy. Cada versão final (entrega) será marcada com uma `tag`.
-- **`develop`:** Branch principal de desenvolvimento. Novas funcionalidades são integradas aqui antes de serem enviadas para a `main`.
+- **`master`:** Contém o código de produção, estável e pronto para deploy. Cada versão final (entrega) será marcada com uma `tag`.
+- **`develop`:** Branch principal de desenvolvimento. Novas funcionalidades são integradas aqui antes de serem enviadas para a `master`.
 - **`feature/*`:** Branches temporárias para o desenvolvimento de novas funcionalidades (ex: `feature/formulario-contato`). Após a conclusão, são mescladas na `develop`.
 
 ### 8. Acessibilidade e Responsividade
