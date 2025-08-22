@@ -125,19 +125,46 @@ a:hover {
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito Shadow Hover Estilo Twitch com Deslizamento */
+.card:hover {
+  transform: translateY(-8px) translateX(5px) scale(1.02);
+  border-color: var(--primary-accent);
+  box-shadow: 
+    -15px 15px 0px var(--primary-accent),
+    -15px 15px 30px rgba(229, 62, 62, 0.4),
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 8px 25px rgba(229, 62, 62, 0.3),
+    0 0 0 1px rgba(229, 62, 62, 0.2);
+}
+
+/* Efeito especial para cards dentro de links */
+a .card:hover {
+  box-shadow: 
+    -20px 20px 0px var(--primary-accent-hover),
+    -20px 20px 40px rgba(255, 45, 85, 0.5),
+    0 25px 50px rgba(0, 0, 0, 0.6),
+    0 12px 30px rgba(229, 62, 62, 0.4),
+    0 0 0 2px rgba(229, 62, 62, 0.3);
+}
+
+/* Efeito para quando card está sendo clicado */
+.card:active {
+  transform: translateY(-4px) translateX(2px) scale(1.01);
+  transition: all 0.1s ease;
+  box-shadow: 
+    -8px 8px 0px var(--primary-accent-dark),
+    -8px 8px 20px rgba(197, 48, 48, 0.6),
+    0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Desabilitar animação glow nos cards */
 .card.glow-effect {
   animation: none !important;
-}
-
-/* Hover limpo para cards */
-.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--primary-accent);
-  box-shadow: 0 6px 15px rgba(229, 62, 62, 0.15);
 }
 
 .card-body {
@@ -166,12 +193,19 @@ a:hover {
   backdrop-filter: blur(10px);
   border-radius: 15px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-plan:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px) translateX(6px) scale(1.03);
+  box-shadow: 
+    -18px 18px 0px var(--primary-accent),
+    -18px 18px 35px rgba(229, 62, 62, 0.3),
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 15px 35px rgba(229, 62, 62, 0.2),
+    0 0 0 1px rgba(229, 62, 62, 0.3);
   border-color: var(--border-primary);
 }
 
@@ -200,6 +234,15 @@ a:hover {
   overflow: visible;
 }
 
+.card-featured:hover {
+  box-shadow: 
+    -22px 22px 0px var(--primary-accent-hover),
+    -22px 22px 40px rgba(255, 45, 85, 0.4),
+    0 30px 60px rgba(0, 0, 0, 0.5),
+    0 18px 40px rgba(229, 62, 62, 0.3),
+    0 0 0 2px rgba(255, 45, 85, 0.4);
+}
+
 .card-featured::before {
   content: "POPULAR";
   position: absolute;
@@ -216,6 +259,12 @@ a:hover {
   font-size: 0.75rem;
   font-weight: bold;
   z-index: 10;
+  transition: all 0.4s ease;
+}
+
+.card-featured:hover::before {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 45, 85, 0.4);
 }
 
 .card-featured .card-header {
@@ -487,9 +536,12 @@ footer p {
 
 @media (max-width: 768px) {
   .card:hover {
-    transform: none;
-    border-color: var(--primary-accent);
-    box-shadow: 0 4px 10px rgba(229, 62, 62, 0.1);
+    transform: translateY(-4px) translateX(2px) scale(1.01);
+    box-shadow: 
+      -8px 8px 0px var(--primary-accent),
+      -8px 8px 20px rgba(229, 62, 62, 0.3),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      0 4px 10px rgba(229, 62, 62, 0.2);
   }
 
   .btn-primary:hover,
@@ -498,6 +550,10 @@ footer p {
   }
 
   .card-plan:hover {
-    transform: translateY(-2px);
+    transform: translateY(-5px) translateX(3px) scale(1.01);
+    box-shadow: 
+      -10px 10px 0px var(--primary-accent),
+      -10px 10px 25px rgba(229, 62, 62, 0.2),
+      0 15px 30px rgba(0, 0, 0, 0.3);
   }
 }
