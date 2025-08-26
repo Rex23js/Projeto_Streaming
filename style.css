@@ -1,0 +1,1366 @@
+/* =================================================================== */
+/* ===================== VARIÁVEIS CSS CUSTOMIZADAS ================== */
+/* =================================================================== */
+:root {
+  /* Tons de Preto e Cinza */
+  --background-primary: #0a0a0a;
+  --background-secondary: #1a1a1a;
+  --background-tertiary: #2a2a2a;
+
+  /* Paleta Vermelha Refinada */
+  --primary-accent: #e53e3e;
+  --primary-accent-hover: #ff2d55;
+  --primary-accent-dark: #c53030;
+  --primary-accent-light: #ff6b6b;
+
+  /* Tons Intermediários para Gradientes */
+  --accent-gradient-start: #1a0000;
+  --accent-gradient-mid: #330000;
+  --accent-gradient-end: #6e0000;
+
+  /* Textos com Melhor Contraste */
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #b9c6d8;
+
+  /* Bordas e Efeitos */
+  --border-primary: rgba(229, 62, 62, 0.4);
+  --border-secondary: rgba(255, 255, 255, 0.15);
+  --shadow-red: rgba(229, 62, 62, 0.5);
+  --shadow-dark: rgba(0, 0, 0, 0.7);
+}
+
+/* =================================================================== */
+/* ===================== ESTILOS GLOBAIS ============================= */
+/* =================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+
+  /* Gradiente de fundo sofisticado */
+  background: radial-gradient(
+    ellipse at top left,
+    var(--accent-gradient-start) 0%,
+    var(--background-primary) 40%,
+    var(--background-primary) 60%,
+    var(--accent-gradient-mid) 100%
+  );
+  background-attachment: fixed;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Links */
+a {
+  color: var(--primary-accent-light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-accent-hover);
+  text-shadow: 0 0 8px rgba(255, 45, 85, 0.6);
+}
+
+/* =================================================================== */
+/* ===================== COMPONENTES PRINCIPAIS ====================== */
+/* =================================================================== */
+
+/* --- NAVBAR E GLASSMORPHISM --- */
+.navbar-custom,
+.newsletter-section {
+  background: rgba(26, 26, 26, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border-primary);
+  box-shadow: 0 4px 20px var(--shadow-dark);
+}
+
+.newsletter-section {
+  border-top: 1px solid var(--border-primary);
+  border-bottom: none;
+}
+
+.navbar-brand {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 50%,
+    var(--primary-accent-dark) 100%
+  );
+}
+
+/* =================================================================== */
+/* ===================== SISTEMA DE CARDS ============================= */
+/* =================================================================== */
+
+/* --- CARDS PRINCIPAIS --- */
+.card {
+  background: linear-gradient(
+    145deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border: 1px solid var(--border-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito Shadow Hover Estilo Twitch com Deslizamento */
+.card:hover {
+  transform: translateY(-8px) translateX(5x) scale(1.02);
+  border-color: var(--primary-accent);
+  box-shadow: -15px 15px 0px var(--primary-accent),
+    -15px 15px 30px rgba(229, 62, 62, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5),
+    0 8px 25px rgba(229, 62, 62, 0.3), 0 0 0 1px rgba(229, 62, 62, 0.2);
+}
+
+/* Efeito especial para cards dentro de links */
+a .card:hover {
+  box-shadow: -20px 20px 0px var(--primary-accent-hover),
+    -20px 20px 40px rgba(255, 45, 85, 0.5), 0 25px 50px rgba(0, 0, 0, 0.6),
+    0 12px 30px rgba(229, 62, 62, 0.4), 0 0 0 2px rgba(229, 62, 62, 0.3);
+}
+
+/* Efeito para quando card está sendo clicado */
+.card:active {
+  transform: translateY(-4px) translateX(2px) scale(1.01);
+  transition: all 0.1s ease;
+  box-shadow: -8px 8px 0px var(--primary-accent-dark),
+    -8px 8px 20px rgba(197, 48, 48, 0.6), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Desabilitar animação glow nos cards */
+.card.glow-effect {
+  animation: none !important;
+}
+
+.card-body {
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+}
+
+.card-title {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+.card-text {
+  color: var(--text-secondary) !important;
+}
+
+/* --- CARDS DE PLANOS --- */
+.card-plan {
+  background: linear-gradient(
+    145deg,
+    rgba(26, 26, 26, 0.8) 0%,
+    rgba(42, 42, 42, 0.6) 100%
+  );
+  border: 1px solid var(--border-secondary);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-plan:hover {
+  transform: translateY(-10px) translateX(6px) scale(1.03);
+  box-shadow: -18px 18px 0px var(--primary-accent),
+    -18px 18px 35px rgba(229, 62, 62, 0.3), 0 25px 50px rgba(0, 0, 0, 0.4),
+    0 15px 35px rgba(229, 62, 62, 0.2), 0 0 0 1px rgba(229, 62, 62, 0.3);
+  border-color: var(--border-primary);
+}
+
+.card-plan .card-header {
+  background: linear-gradient(
+    135deg,
+    var(--background-tertiary) 0%,
+    var(--background-secondary) 100%
+  );
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.card-plan ul li {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-plan ul li.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* --- CARD FEATURED (PLANO POPULAR) --- */
+.card-featured {
+  border: 2px solid var(--primary-accent);
+  position: relative;
+  overflow: visible;
+}
+
+.card-featured:hover {
+  box-shadow: -22px 22px 0px var(--primary-accent-hover),
+    -22px 22px 40px rgba(255, 45, 85, 0.4), 0 30px 60px rgba(0, 0, 0, 0.5),
+    0 18px 40px rgba(229, 62, 62, 0.3), 0 0 0 2px rgba(255, 45, 85, 0.4);
+}
+
+.card-featured::before {
+  content: "POPULAR";
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-hover) 100%
+  );
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
+  transition: all 0.4s ease;
+}
+
+.card-featured:hover::before {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 45, 85, 0.4);
+}
+
+.card-featured .card-header {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  );
+  color: #fff;
+}
+
+/* =================================================================== */
+/* ===================== SISTEMA DE BOTÕES ========================== */
+/* =================================================================== */
+
+/* --- BOTÃO PRIMÁRIO --- */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  );
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-accent) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(160, 45, 0, 0.5);
+}
+
+.btn-primary:active {
+  background: var(--accent-gradient-end) !important;
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(197, 48, 48, 0.6);
+}
+
+/* Manter glow apenas nos botões */
+.btn-primary.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* --- BOTÃO OUTLINE PRIMÁRIO --- */
+.btn-outline-primary {
+  border: 2px solid var(--primary-accent);
+  color: var(--primary-accent);
+  background: transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  ) !important;
+  border-color: var(--primary-accent-hover) !important;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(229, 62, 62, 0.5);
+}
+
+/* --- BOTÃO OUTLINE LIGHT --- */
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  color: var(--text-primary);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+}
+
+/* =================================================================== */
+/* ===================== FORMULÁRIOS E INPUTS ======================= */
+/* =================================================================== */
+
+.form-control {
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid var(--border-secondary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.form-control:focus {
+  background: rgba(26, 26, 26, 0.9);
+  border-color: var(--primary-accent);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.25rem rgba(229, 62, 62, 0.3);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.form-select {
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid var(--border-secondary);
+  color: var(--text-primary);
+  border-radius: 8px;
+}
+
+.form-select:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 0.25rem rgba(229, 62, 62, 0.3);
+}
+
+.form-label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* =================================================================== */
+/* ===================== COMPONENTES ESPECIAIS ====================== */
+/* =================================================================== */
+
+/* --- PREÇOS --- */
+.price-display {
+  color: var(--text-primary);
+}
+
+.price-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-accent-light);
+}
+
+.price-period {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* --- BADGES --- */
+.badge {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  );
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5em 0.75em;
+  border-radius: 6px;
+}
+
+.bg-info {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent-light) 0%,
+    var(--primary-accent) 100%
+  ) !important;
+}
+
+/* --- ACCORDION/FAQ --- */
+.accordion-item {
+  background: linear-gradient(
+    145deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.accordion-button {
+  background: rgba(26, 26, 26, 0.8);
+  color: var(--text-primary);
+  border: none;
+  font-weight: 600;
+}
+
+.accordion-button:not(.collapsed) {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  );
+  color: #fff;
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(229, 62, 62, 0.5);
+  border: none;
+}
+
+/* --- FOOTER --- */
+footer {
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 50%,
+    var(--background-primary) 100%
+  );
+  border-top: 1px solid var(--border-primary);
+}
+
+footer a {
+  color: var(--text-primary) !important;
+}
+
+footer h5 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+footer p {
+  color: var(--text-secondary);
+}
+
+/* =================================================================== */
+/* ===================== CLASSES UTILITÁRIAS ======================== */
+/* =================================================================== */
+
+.lead {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-white {
+  color: var(--text-primary) !important;
+}
+
+/* =================================================================== */
+/* ===================== ANIMAÇÕES ================================== */
+/* =================================================================== */
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(220, 20, 60, 0.6);
+  }
+}
+
+.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* =================================================================== */
+/* ===================== RESPONSIVE DESIGN =========================== */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+  .card:hover {
+    transform: translateY(-4px) translateX(2px) scale(1.01);
+    box-shadow: -8px 8px 0px var(--primary-accent),
+      -8px 8px 20px rgba(229, 62, 62, 0.3), 0 10px 20px rgba(0, 0, 0, 0.3),
+      0 4px 10px rgba(229, 62, 62, 0.2);
+  }
+
+  .btn-primary:hover,
+  .btn-outline-primary:hover {
+    transform: none;
+  }
+
+  .card-plan:hover {
+    transform: translateY(-5px) translateX(3px) scale(1.01);
+    box-shadow: -10px 10px 0px var(--primary-accent),
+      -10px 10px 25px rgba(229, 62, 62, 0.2), 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+  transform: translateY(-2px);
+}
+
+/* =================================================================== */
+/* ===================== COMPONENTES ESPECIAIS ====================== */
+/* =================================================================== */
+
+/* --- QR CODE CONTAINER --- */
+.qr-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.qr-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(229, 62, 62, 0.2);
+}
+
+.qr-placeholder {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(
+      45deg,
+      #f8f9fa 25%,
+      transparent 25%,
+      transparent 75%,
+      #f8f9fa 75%,
+      #f8f9fa
+    ),
+    linear-gradient(
+      45deg,
+      #f8f9fa 25%,
+      transparent 25%,
+      transparent 75%,
+      #f8f9fa 75%,
+      #f8f9fa
+    );
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  margin: 0 auto;
+  border: 2px solid var(--primary-accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-weight: 600;
+}
+
+/* --- PREÇOS --- */
+.price-display {
+  color: var(--text-primary);
+}
+
+.price-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-accent-light);
+}
+
+.price-period {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* --- LOADING SPINNER --- */
+.spinner-border {
+  color: var(--primary-accent) !important;
+}
+
+/* --- PAYMENT STEPS --- */
+.payment-steps {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.payment-steps::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border-secondary);
+  z-index: 1;
+}
+
+.payment-step {
+  background: var(--background-secondary);
+  border: 2px solid var(--border-secondary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-weight: bold;
+  z-index: 2;
+  position: relative;
+}
+
+.payment-step.active {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: white;
+}
+
+.payment-step.completed {
+  background: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+/* --- FOOTER --- */
+footer {
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 50%,
+    var(--background-primary) 100%
+  );
+  border-top: 1px solid var(--border-primary);
+}
+
+footer a {
+  color: var(--text-primary) !important;
+}
+
+/* =================================================================== */
+/* ===================== CLASSES UTILITÁRIAS ======================== */
+/* =================================================================== */
+
+.lead {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-white {
+  color: var(--text-primary) !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* =================================================================== */
+/* ===================== RESPONSIVE DESIGN =========================== */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+  .payment-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .payment-steps::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .qr-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .qr-placeholder {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* =================================================================== */
+/* ===================== NAVBAR PADRONIZADA ========================== */
+/* =================================================================== */
+
+.navbar-streaming {
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--border-primary);
+  box-shadow: 0 4px 30px var(--shadow-dark);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-streaming .navbar-brand {
+  color: var(--text-primary) !important;
+  font-weight: 800;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar-streaming .navbar-brand::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-accent),
+    var(--primary-accent-hover)
+  );
+  transition: width 0.3s ease;
+}
+
+.navbar-streaming .navbar-brand:hover::after {
+  width: 100%;
+}
+
+.navbar-streaming .navbar-brand:hover {
+  color: var(--primary-accent-light) !important;
+  text-shadow: 0 0 15px rgba(229, 62, 62, 0.6);
+}
+
+.navbar-streaming .navbar-nav .nav-link {
+  color: var(--text-secondary) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0.5rem;
+  padding: 0.8rem 1.2rem !important;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.navbar-streaming .navbar-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(229, 62, 62, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.navbar-streaming .navbar-nav .nav-link:hover::before {
+  left: 100%;
+}
+
+.navbar-streaming .navbar-nav .nav-link:hover {
+  color: var(--text-primary) !important;
+  background: rgba(229, 62, 62, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+}
+
+.navbar-streaming .navbar-nav .nav-link.active {
+  color: var(--primary-accent-light) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(229, 62, 62, 0.2) 0%,
+    rgba(229, 62, 62, 0.1) 100%
+  );
+  border: 1px solid var(--border-primary);
+}
+
+/* Navbar Toggler Personalizado */
+.navbar-streaming .navbar-toggler {
+  border: 2px solid var(--primary-accent);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-streaming .navbar-toggler:hover {
+  background: rgba(229, 62, 62, 0.1);
+  box-shadow: 0 0 15px rgba(229, 62, 62, 0.4);
+}
+
+.navbar-streaming .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28229, 62, 62, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Botões da Navbar */
+.navbar-streaming .btn {
+  margin-left: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-streaming .btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.navbar-streaming .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.navbar-streaming .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  );
+  border: none;
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
+}
+
+.navbar-streaming .btn-primary:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent-hover) 0%,
+    var(--primary-accent) 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(229, 62, 62, 0.6);
+}
+
+/* =================================================================== */
+/* ===================== HERO SECTION PADRONIZADA =================== */
+/* =================================================================== */
+
+.hero-streaming {
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 30%,
+    var(--accent-gradient-mid) 70%,
+    var(--primary-accent-dark) 100%
+  );
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+.hero-streaming::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>');
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(10px) rotate(270deg);
+  }
+}
+
+.hero-streaming .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-streaming h1 {
+  font-weight: 800;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--primary-accent-light) 50%,
+    var(--text-primary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+}
+
+.hero-streaming .lead {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* =================================================================== */
+/* ===================== FOOTER PADRONIZADO ========================== */
+/* =================================================================== */
+
+.footer-streaming {
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 30%,
+    var(--background-primary) 100%
+  );
+  border-top: 2px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-streaming::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary-accent) 20%,
+    var(--primary-accent-hover) 40%,
+    var(--primary-accent) 60%,
+    var(--primary-accent-dark) 80%,
+    transparent 100%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.footer-streaming .social-section .btn {
+  background: rgba(229, 62, 62, 0.1);
+  border: 2px solid var(--border-primary);
+  color: var(--text-primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-streaming .social-section .btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(229, 62, 62, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.footer-streaming .social-section .btn:hover::before {
+  left: 100%;
+}
+
+.footer-streaming .social-section .btn:hover {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent-hover);
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
+}
+
+.footer-streaming h5 {
+  color: var(--text-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.footer-streaming h5::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--primary-accent);
+}
+
+.footer-streaming .footer-link {
+  color: var(--text-secondary) !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  padding: 0.3rem 0;
+}
+
+.footer-streaming .footer-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary-accent);
+  transition: width 0.3s ease;
+}
+
+.footer-streaming .footer-link:hover::before {
+  width: 100%;
+}
+
+.footer-streaming .footer-link:hover {
+  color: var(--primary-accent-light) !important;
+  transform: translateX(5px);
+}
+
+.footer-streaming .footer-description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.footer-streaming .copyright-section {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(229, 62, 62, 0.2);
+}
+
+.footer-streaming .copyright-section a {
+  color: var(--primary-accent-light) !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.footer-streaming .copyright-section a:hover {
+  color: var(--primary-accent-hover) !important;
+  text-shadow: 0 0 10px rgba(255, 45, 85, 0.6);
+}
+
+/* =================================================================== */
+/* ===================== RESPONSIVE DESIGN =========================== */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+  .hero-streaming h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-streaming .lead {
+    font-size: 1.1rem;
+  }
+
+  .navbar-streaming .navbar-nav .nav-link {
+    margin: 0.2rem 0;
+    text-align: center;
+  }
+
+  .footer-streaming .social-section .btn {
+    margin: 0.25rem;
+  }
+}
+
+/* =================================================================== */
+/* ============= AJUSTES DE CONSISTÊNCIA VISUAL ====================== */
+/* =================================================================== */
+
+/* --- 1. MELHORIAS NA NAVBAR --- */
+
+/* Efeito de hover e active para os links da navbar */
+.navbar-streaming .nav-link {
+  position: relative; /* Necessário para o pseudo-elemento ::after */
+  transition: color 0.3s ease;
+}
+
+.navbar-streaming .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-accent-light);
+  transition: width 0.3s ease-out;
+}
+
+/* Efeito de hover: expande o sublinhado */
+.navbar-streaming .nav-link:hover::after,
+.navbar-streaming .nav-link:focus::after {
+  width: 100%;
+}
+
+/* Estilo para o link ativo: mantém o sublinhado e a cor de destaque */
+.navbar-streaming .nav-link.active {
+  color: var(--primary-accent-light) !important; /* Garante a cor de destaque */
+  font-weight: 600; /* Torna o texto um pouco mais forte */
+}
+
+.navbar-streaming .nav-link.active::after {
+  width: 100%;
+} /* --- 2. PADRONIZAÇÃO DE BOTÕES E LINKS --- */
+
+/* Transição suave para todos os botões */
+.btn {
+  transition: all 0.3s ease;
+}
+
+/* Efeito de foco para acessibilidade e destaque */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.25rem var(--border-primary) !important;
+  border-color: var(--primary-accent-light) !important;
+}
+
+/* Melhoria no hover do botão primário */
+.btn-primary:hover {
+  transform: translateY(-2px); /* Efeito de elevação sutil */
+  box-shadow: 0 4px 15px var(--shadow-red);
+}
+
+/* Hover para botões de contorno na página de ajuda/planos */
+.card-plan .btn-outline-primary:hover {
+  background-color: var(--primary-accent);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* =================================================================== */
+/* ============== AJUSTES DE CONTRASTE E LEGIBILIDADE ================ */
+/* =================================================================== */
+
+/*--- MELHORAR LEITURA EM TEXTO SOBRE IMAGENS --- */
+
+/* Sombra de texto para os heros para garantir legibilidade */
+.hero-streaming h1,
+.hero-streaming .lead,
+.hero-details .display-4,
+.hero-details p,
+.hero-details .badge {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* --- 3. MELHORAR VISIBILIDADE DE PLACEHOLDERS --- */
+
+/* Cor personalizada para placeholders para garantir o contraste */
+.form-control::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--text-muted);
+  opacity: 0.8; /* Ajuste a opacidade conforme necessário */
+}
+
+.form-control:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--text-muted);
+}
+
+.form-control::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--text-muted);
+}
+
+/* =================================================================== */
+/* ================== CORREÇÃO DO ACORDEÃO (FAQ) ===================== */
+/* =================================================================== */
+
+/* Estilo geral para cada item do acordeão */
+.accordion-item {
+  background-color: var(
+    --background-tertiary
+  ); /* Fundo um pouco mais claro para destaque */
+  border: 1px solid var(--border-secondary);
+}
+
+/* Remove a sombra padrão do botão quando está ativo/aberto */
+.accordion-button:focus {
+  box-shadow: none; /* Mantém o foco que já criamos, sem a sombra azul padrão */
+}
+
+/* Estilo do botão do acordeão quando está FECHADO */
+.accordion-button.collapsed {
+  color: var(--text-secondary);
+  background-color: var(--background-secondary);
+}
+
+/* Estilo do botão do acordeão quando está ABERTO */
+.accordion-button:not(.collapsed) {
+  color: var(--primary-accent-light); /* Cor de destaque quando aberto */
+  background-color: var(--accent-gradient-mid);
+  box-shadow: inset 0 -1px 0 var(--border-primary);
+}
+
+/* Cor do texto dentro do corpo do acordeão (a resposta da pergunta) */
+.accordion-body {
+  color: var(--text-secondary);
+  background-color: var(--background-secondary);
+}
+
+/* Aqui está a mágica para o ícone de seta. 
+  Bootstrap usa um SVG como background-image. 
+  O filtro 'invert(1)' transforma o preto em branco, e 'brightness(1.5)' dá um brilho extra.
+*/
+.accordion-button::after,
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  filter: invert(1) brightness(1.5);
+  background-size: 1rem;
+}
+
+/* =================================================================== */
+/* ============== ESTILIZAÇÃO DOS FILTROS DO CATÁLOGO (v2) ============ */
+/* =================================================================== */
+
+/* Estilo para os rótulos (labels) dos filtros */
+.filter-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo base para campos de input e select */
+.form-control,
+.form-select {
+  background-color: var(--background-secondary); /* Fundo mais escuro */
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 0.375rem; /* Bordas levemente arredondadas */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Remove a aparência padrão do navegador para o select */
+.form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Estilo para quando o campo está em hover (mouse em cima) */
+.form-control:hover,
+.form-select:hover {
+  border-color: var(--primary-accent);
+  background-color: var(--primary-accent);
+  transition: all 0.4s ease;
+  color: #fff;
+}
+
+/* Estilo da seta personalizada para o menu de seleção (select) */
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e2e8f0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+/* Estilização das opções DENTRO do menu dropdown.
+  Nota: A aparência pode variar um pouco entre navegadores.
+*/
+.form-select option {
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  padding: 8px; /* Adiciona um respiro, embora não seja suportado por todos os browsers */
+}
+
+.form-select option:hover {
+  background-color: var(--primary-accent);
+  color: #fff;
+}

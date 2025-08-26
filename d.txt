@@ -1,0 +1,239 @@
+<!-- Informações sobre Planos -->
+      <section id="plans" class="mb-5">
+        <div class="card card-plan">
+          <div class="card-header">
+            <h2 class="mb-0">💎 Informações sobre Planos</h2>
+          </div>
+          <div class="card-body">
+            <p class="lead">
+              Conheça todos os detalhes dos nossos planos de assinatura.
+            </p>
+
+            <div class="row g-4">
+              <!-- Plano Básico -->
+              <div class="col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header text-center">
+                    <h4 class="my-0 fw-normal">Básico</h4>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <div class="price-display my-3 text-center">
+                      <span class="price-value">R$19</span>
+                      <span class="price-period">,90/mês</span>
+                    </div>
+                    <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
+                      <li>✓ Qualidade HD (720p)</li>
+                      <li>✓ Assista em 1 tela por vez</li>
+                      <li>✓ Catálogo completo</li>
+                      <li class="text-muted">✗ Sem download offline</li>
+                      <li class="text-muted">✗ Sem conteúdo 4K</li>
+                    </ul>
+                    <div class="text-center">
+                      <a
+                        href="Pagamento.html?plano=basico"
+                        class="btn btn-outline-primary"
+                        >Assinar Agora</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Plano Padrão -->
+              <div class="col-lg-4">
+                <div class="card card-featured h-100">
+                  <div class="card-header text-center">
+                    <h4 class="my-0 fw-normal">Padrão</h4>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <div class="price-display my-3 text-center">
+                      <span class="price-value">R$29</span>
+                      <span class="price-period">,90/mês</span>
+                    </div>
+                    <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
+                      <li>✓ Qualidade Full HD (1080p)</li>
+                      <li>✓ Assista em 2 telas simultaneamente</li>
+                      <li>✓ Baixe para assistir offline</li>
+                      <li>✓ Catálogo completo</li>
+                      <li class="text-muted">✗ Sem conteúdo 4K</li>
+                    </ul>
+                    <div class="text-center">
+                      <a
+                        href="Pagamento.html?plano=padrao"
+                        class="btn btn-primary"
+                        >Assinar Agora</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Plano Premium -->
+              <div class="col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header text-center">
+                    <h4 class="my-0 fw-normal">Premium</h4>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <div class="price-display my-3 text-center">
+                      <span class="price-value">R$49</span>
+                      <span class="price-period">,90/mês</span>
+                    </div>
+                    <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
+                      <li>✓ Qualidade 4K + HDR</li>
+                      <li>✓ Assista em 4 telas simultaneamente</li>
+                      <li>✓ Baixe para assistir offline</li>
+                      <li>✓ Catálogo completo + exclusivos</li>
+                      <li>✓ Áudio Dolby Atmos</li>
+                    </ul>
+                    <div class="text-center">
+                      <a
+                        href="Pagamento.html?plano=premium"
+                        class="btn btn-outline-primary"
+                        >Assinar Agora</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comparação de Recursos -->
+            <div class="mt-5">
+              <h4>Comparação de Recursos</h4>
+              <div class="table-responsive">
+                <table class="table table-dark table-striped">
+                  <thead>
+                    <tr>
+                      <th>Recurso</th>
+                      <th class="text-center">Básico</th>
+                      <th class="text-center">Padrão</th>
+                      <th class="text-center">Premium</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Qualidade de vídeo</td>
+                      <td class="text-center">HD (720p)</td>
+                      <td class="text-center">Full HD (1080p)</td>
+                      <td class="text-center">4K + HDR</td>
+                    </tr>
+                    <tr>
+                      <td>Telas simultâneas</td>
+                      <td class="text-center">1</td>
+                      <td class="text-center">2</td>
+                      <td class="text-center">4</td>
+                    </tr>
+                    <tr>
+                      <td>Download offline</td>
+                      <td class="text-center">❌</td>
+                      <td class="text-center">✅</td>
+                      <td class="text-center">✅</td>
+                    </tr>
+                    <tr>
+                      <td>Conteúdo exclusivo</td>
+                      <td class="text-center">❌</td>
+                      <td class="text-center">❌</td>
+                      <td class="text-center">✅</td>
+                    </tr>
+                    <tr>
+                      <td>Áudio Dolby Atmos</td>
+                      <td class="text-center">❌</td>
+                      <td class="text-center">❌</td>
+                      <td class="text-center">✅</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Perguntas Frequentes sobre Planos -->
+            <div class="mt-5">
+              <h4>Perguntas Frequentes sobre Planos</h4>
+              <div class="accordion" id="plansAccordion">
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="plansfaq1">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#planscollapse1"
+                      aria-expanded="false"
+                      aria-controls="planscollapse1"
+                    >
+                      Posso trocar de plano a qualquer momento?
+                    </button>
+                  </h3>
+                  <div
+                    id="planscollapse1"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="plansfaq1"
+                    data-bs-parent="#plansAccordion"
+                  >
+                    <div class="accordion-body">
+                      Sim! Você pode fazer upgrade ou downgrade do seu plano a
+                      qualquer momento. O novo plano entra em vigor
+                      imediatamente para upgrades, ou no próximo ciclo de
+                      cobrança para downgrades.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="plansfaq2">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#planscollapse2"
+                      aria-expanded="false"
+                      aria-controls="planscollapse2"
+                    >
+                      Existe período de fidelidade?
+                    </button>
+                  </h3>
+                  <div
+                    id="planscollapse2"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="plansfaq2"
+                    data-bs-parent="#plansAccordion"
+                  >
+                    <div class="accordion-body">
+                      Não! Todos os nossos planos são mensais e podem ser
+                      cancelados a qualquer momento sem multa ou taxa de
+                      cancelamento.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="plansfaq3">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#planscollapse3"
+                      aria-expanded="false"
+                      aria-controls="planscollapse3"
+                    >
+                      Como funciona a cobrança?
+                    </button>
+                  </h3>
+                  <div
+                    id="planscollapse3"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="plansfaq3"
+                    data-bs-parent="#plansAccordion"
+                  >
+                    <div class="accordion-body">
+                      A cobrança é mensal e acontece sempre no mesmo dia do mês
+                      em que você fez a primeira assinatura. Aceitamos cartão de
+                      crédito, débito e Pix.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
