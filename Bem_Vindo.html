@@ -12,29 +12,73 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar Padronizada -->
+    <nav class="navbar navbar-expand-lg navbar-streaming">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Meu Streaming</a>
-        <a href="catalogo.html" class="btn btn-primary ms-auto">Assistir</a>
+        <a class="navbar-brand" href="Bem_Vindo.html">
+          <i class="fas fa-play-circle me-2"></i>Meu Streaming
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="Bem_Vindo.html"
+                >Início</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="catalogo.html">Catálogo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ajuda.html">Ajuda</a>
+            </li>
+            <li class="nav-item ms-2">
+              <a href="catalogo.html" class="btn btn-primary">Assistir</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-    <!-- Banner -->
-    <header class="bg-dark text-white text-center p-5">
-      <h1>Bem-vindo ao Meu Streaming</h1>
-      <p>Assista seus filmes e séries favoritos</p>
+    <!-- Hero Section Padronizada -->
+    <header class="hero-streaming text-white text-center">
+      <div class="container">
+        <h1>Bem-vindo ao Meu Streaming</h1>
+        <p class="lead">
+          Assista seus filmes e séries favoritos onde e quando quiser
+        </p>
+        <div class="mt-4">
+          <a href="catalogo.html" class="btn btn-primary btn-lg me-3">
+            Começar a Assistir
+          </a>
+          <a href="#planos" class="btn btn-outline-light btn-lg">
+            Ver Planos
+          </a>
+        </div>
+      </div>
     </header>
 
     <!-- Grid de filmes -->
-
     <div class="container my-4">
       <h2 class="mb-4">Filmes Populares</h2>
       <div class="row">
         <!-- Filme 1 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -50,7 +94,7 @@
         <!-- Filme 2 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -66,7 +110,7 @@
         <!-- Filme 3 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -82,7 +126,7 @@
         <!-- Filme 4 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -99,14 +143,13 @@
     </div>
 
     <!-- Grid de séries -->
-
     <div class="container my-4">
       <h2 class="mb-4">Séries em Alta</h2>
       <div class="row">
         <!-- série 1 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -123,7 +166,7 @@
         <!-- série 2 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -140,7 +183,7 @@
         <!-- série 3 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -157,7 +200,7 @@
         <!-- série 4 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
+            <div class="card h-100 glow-effect">
               <img
                 src="https://via.placeholder.com/300x450"
                 class="card-img-top"
@@ -173,69 +216,179 @@
       </div>
     </div>
 
-    <footer class="bg-dark text-center text-white mt-5">
+    <!-- Seção de Planos -->
+    <section id="planos" class="container my-5 py-5 text-center">
+      <h2 class="mb-4">Planos e Preços</h2>
+      <p class="lead text-muted mb-5">
+        Escolha o plano que melhor se adapta a você. Cancele a qualquer momento.
+      </p>
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="card card-plan h-100 shadow">
+            <div class="card-header">
+              <h4 class="my-0 fw-normal">Básico</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <div class="price-display my-4">
+                <span class="price-value">R$19</span>
+                <span class="price-period">,90/mês</span>
+              </div>
+              <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
+                <li>Qualidade HD (720p)</li>
+                <li>Assista em 1 tela por vez</li>
+                <li class="text-muted">Sem conteúdo 4K</li>
+              </ul>
+              <a
+                href="Pagamento.html?plano=basico"
+                class="btn btn-lg btn-outline-primary"
+                >Assinar Plano Básico</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card card-plan card-featured h-100 shadow-lg">
+            <div class="card-header">
+              <h4 class="my-0 fw-normal">Padrão</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <div class="price-display my-4">
+                <span class="price-value">R$29</span>
+                <span class="price-period">,90/mês</span>
+              </div>
+              <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
+                <li>Qualidade Full HD (1080p)</li>
+                <li>Assista em 2 telas simultaneamente</li>
+                <li>Baixe para assistir offline</li>
+                <li class="text-muted">Sem conteúdo 4K</li>
+              </ul>
+              <a
+                href="Pagamento.html?plano=padrao"
+                class="btn btn-lg btn-outline-primary"
+                >Assinar Plano Padrão</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card card-plan h-100 shadow">
+            <div class="card-header">
+              <h4 class="my-0 fw-normal">Premium</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <div class="price-display my-4">
+                <span class="price-value">R$49</span>
+                <span class="price-period">,90/mês</span>
+              </div>
+              <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
+                <li>Qualidade 4K + HDR</li>
+                <li>Assista em 4 telas simultaneamente</li>
+                <li>Baixe para assistir offline</li>
+              </ul>
+              <a
+                href="Pagamento.html?plano=premium"
+                class="btn btn-lg btn-outline-primary"
+                >Assinar Plano Premium</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Padronizado -->
+    <footer class="footer-streaming text-center text-white mt-5">
       <div class="container p-4">
-        <section class="mb-4">
+        <!-- Seção de Redes Sociais -->
+        <section class="social-section mb-4">
+          <h5>Siga-nos</h5>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            class="btn btn-outline-light btn-floating"
             href="#!"
             role="button"
-            >Facebook</a
+            aria-label="Facebook"
           >
+            <i class="fab fa-facebook-f"></i>F
+          </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            class="btn btn-outline-light btn-floating"
             href="#!"
             role="button"
-            >Twitter</a
+            aria-label="Twitter"
           >
+            <i class="fab fa-twitter"></i>T
+          </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            class="btn btn-outline-light btn-floating"
             href="#!"
             role="button"
-            >Instagram</a
+            aria-label="Instagram"
           >
+            <i class="fab fa-instagram"></i>I
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="YouTube"
+          >
+            <i class="fab fa-youtube"></i>Y
+          </a>
         </section>
 
+        <!-- Descrição do Projeto -->
         <section class="mb-4">
-          <p>
+          <p class="footer-description">
             Este é um protótipo de plataforma de streaming criado para fins
             educacionais. Nenhuma das mídias exibidas está hospedada neste
-            servidor.
+            servidor. Experiência premium de entretenimento ao seu alcance.
           </p>
         </section>
 
+        <!-- Links do Footer -->
         <section class="">
           <div class="row">
             <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Navegação</h5>
+              <h5>Navegação</h5>
               <ul class="list-unstyled mb-0">
-                <li><a href="index.html" class="text-white">Início</a></li>
-                <li><a href="#!" class="text-white">Séries</a></li>
-                <li><a href="#!" class="text-white">Filmes</a></li>
+                <li><a href="Bem_Vindo.html" class="footer-link">Início</a></li>
+                <li>
+                  <a href="catalogo.html" class="footer-link">Catálogo</a>
+                </li>
+                <li><a href="ajuda.html" class="footer-link">Ajuda</a></li>
               </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Ajuda</h5>
+              <h5>Suporte</h5>
               <ul class="list-unstyled mb-0">
-                <li><a href="#!" class="text-white">FAQ</a></li>
-                <li><a href="#!" class="text-white">Contato</a></li>
-                <li><a href="#!" class="text-white">Termos de Uso</a></li>
+                <li><a href="ajuda.html#faq" class="footer-link">FAQ</a></li>
+                <li>
+                  <a href="ajuda.html#contact" class="footer-link">Contato</a>
+                </li>
+                <li>
+                  <a href="ajuda.html#accessibility" class="footer-link"
+                    >Acessibilidade</a
+                  >
+                </li>
               </ul>
             </div>
             <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Sobre</h5>
-              <p>
-                Projeto desenvolvido como parte de um estudo prático de HTML,
-                CSS, Bootstrap e JavaScript.
+              <h5>Sobre o Projeto</h5>
+              <p class="footer-description">
+                Desenvolvido com HTML, CSS, Bootstrap e JavaScript como projeto
+                educacional de desenvolvimento web moderno.
               </p>
             </div>
           </div>
         </section>
       </div>
 
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      <!-- Seção de Copyright -->
+      <div class="copyright-section text-center p-3">
         © 2025 Copyright:
-        <a class="text-white" href="index.html">MeuStreaming.com</a>
+        <a class="text-white" href="Bem_Vindo.html">MeuStreaming.com</a>
       </div>
     </footer>
 
