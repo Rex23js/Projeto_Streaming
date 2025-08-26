@@ -11,17 +11,61 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar Padronizada -->
+    <nav class="navbar navbar-expand-lg navbar-streaming">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Meu Streaming</a>
-        <a href="index.html" class="btn btn-outline-light ms-auto">Sair</a>
+        <a class="navbar-brand" href="Bem_Vindo.html">
+          <i class="fas fa-play-circle me-2"></i>Meu Streaming
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Bem_Vindo.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="catalogo.html"
+                >Catálogo</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ajuda.html">Ajuda</a>
+            </li>
+            <li class="nav-item ms-2">
+              <a href="Bem_Vindo.html" class="btn btn-outline-light">Voltar</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-    <header class="container my-4">
+    <!-- Header do Catálogo -->
+    <header class="hero-streaming text-white text-center">
+      <div class="container">
+        <h1>Explore nosso Catálogo</h1>
+        <p class="lead">
+          Descubra milhares de filmes e séries em alta qualidade
+        </p>
+      </div>
+    </header>
+
+    <!-- Seção de Busca e Filtros -->
+    <section class="container my-5">
       <div class="row align-items-center">
         <div class="col-md-8">
-          <h1>Explore nosso Catálogo</h1>
           <div class="input-group mb-3">
             <input
               type="text"
@@ -35,11 +79,11 @@
           </div>
         </div>
         <div class="col-md-4">
-          <label for="genre-filter" class="form-label"
+          <label for="genre-filter" class="form-label text-white"
             >Filtrar por Gênero:</label
           >
           <select id="genre-filter" class="form-select">
-            <option selected>Todos</option>
+            <optDDDDDDDselected>Todos</optDDDDDDDselected>
             <option value="acao">Ação</option>
             <option value="comedia">Comédia</option>
             <option value="drama">Drama</option>
@@ -47,10 +91,12 @@
           </select>
         </div>
       </div>
-    </header>
+    </section>
 
+    <!-- Grid de Conteúdo -->
     <main class="container my-4">
       <div id="results-grid" class="row">
+        <!-- Filme 1 -->
         <div class="col-md-3 mb-4">
           <a href="detalhes.html" class="text-decoration-none">
             <div class="card h-100">
@@ -61,6 +107,86 @@
               />
               <div class="card-body">
                 <h5 class="card-title">Título do Filme</h5>
+                <p class="card-text">Breve descrição do filme...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Filme 2 -->
+        <div class="col-md-3 mb-4">
+          <a href="detalhes.html" class="text-decoration-none">
+            <div class="card h-100">
+              <img
+                src="https://via.placeholder.com/300x450"
+                class="card-img-top"
+                alt="Filme"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Título do Filme</h5>
+                <p class="card-text">Breve descrição do filme...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Filme 3 -->
+        <div class="col-md-3 mb-4">
+          <a href="detalhes.html" class="text-decoration-none">
+            <div class="card h-100">
+              <img
+                src="https://via.placeholder.com/300x450"
+                class="card-img-top"
+                alt="Filme"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Título do Filme</h5>
+                <p class="card-text">Breve descrição do filme...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Filme 4 -->
+        <div class="col-md-3 mb-4">
+          <a href="detalhes.html" class="text-decoration-none">
+            <div class="card h-100">
+              <img
+                src="https://via.placeholder.com/300x450"
+                class="card-img-top"
+                alt="Filme"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Título do Filme</h5>
+                <p class="card-text">Breve descrição do filme...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Mais filmes podem ser adicionados aqui -->
+        <div class="col-md-3 mb-4">
+          <a href="detalhes.html" class="text-decoration-none">
+            <div class="card h-100">
+              <img
+                src="https://via.placeholder.com/300x450"
+                class="card-img-top"
+                alt="Série"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Título da Série</h5>
+                <p class="card-text">Breve descrição da série...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3 mb-4">
+          <a href="detalhes.html" class="text-decoration-none">
+            <div class="card h-100">
+              <img
+                src="https://via.placeholder.com/300x450"
+                class="card-img-top"
+                alt="Série"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Título da Série</h5>
+                <p class="card-text">Breve descrição da série...</p>
               </div>
             </div>
           </a>
@@ -75,6 +201,7 @@
               />
               <div class="card-body">
                 <h5 class="card-title">Título do Filme</h5>
+                <p class="card-text">Breve descrição do filme...</p>
               </div>
             </div>
           </a>
@@ -89,20 +216,7 @@
               />
               <div class="card-body">
                 <h5 class="card-title">Título do Filme</h5>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
+                <p class="card-text">Breve descrição do filme...</p>
               </div>
             </div>
           </a>
@@ -110,13 +224,101 @@
       </div>
     </main>
 
-    <footer class="bg-dark text-center text-white mt-5">
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    <!-- Footer Padronizado -->
+    <footer class="footer-streaming text-center text-white mt-5">
+      <div class="container p-4">
+        <!-- Seção de Redes Sociais -->
+        <section class="social-section mb-4">
+          <h5>Siga-nos</h5>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>F
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>T
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>I
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="YouTube"
+          >
+            <i class="fab fa-youtube"></i>Y
+          </a>
+        </section>
+
+        <!-- Descrição do Projeto -->
+        <section class="mb-4">
+          <p class="footer-description">
+            Este é um protótipo de plataforma de streaming criado para fins
+            educacionais. Nenhuma das mídias exibidas está hospedada neste
+            servidor. Experiência premium de entretenimento ao seu alcance.
+          </p>
+        </section>
+
+        <!-- Links do Footer -->
+        <section class="">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+              <h5>Navegação</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="Bem_Vindo.html" class="footer-link">Início</a></li>
+                <li>
+                  <a href="catalogo.html" class="footer-link">Catálogo</a>
+                </li>
+                <li><a href="ajuda.html" class="footer-link">Ajuda</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+              <h5>Suporte</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="ajuda.html#faq" class="footer-link">FAQ</a></li>
+                <li>
+                  <a href="ajuda.html#contact" class="footer-link">Contato</a>
+                </li>
+                <li>
+                  <a href="ajuda.html#accessibility" class="footer-link"
+                    >Acessibilidade</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+              <h5>Sobre o Projeto</h5>
+              <p class="footer-description">
+                Desenvolvido com HTML, CSS, Bootstrap e JavaScript como projeto
+                educacional de desenvolvimento web moderno.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Seção de Copyright -->
+      <div class="copyright-section text-center p-3">
         © 2025 Copyright:
-        <a class="text-white" href="index.html">MeuStreaming.com</a>
+        <a class="text-white" href="Bem_Vindo.html">MeuStreaming.com</a>
       </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
