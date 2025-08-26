@@ -1,134 +1,49 @@
 # Meu Streaming 🎬
 
-![Status do Projeto](https://img.shields.io/badge/status-planejamento-blue)
+![Status do Projeto](https://img.shields.io/badge/versão-v1.0--ui-success)
 
-Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e séries. A aplicação consome múltiplas APIs públicas para exibir um catálogo de mídia dinâmico, visualizações de dados com Chart.js e foca em boas práticas de desenvolvimento, acessibilidade e testes.
+Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e séries. Esta primeira versão foca na construção de uma interface de usuário (UI) moderna, responsiva e acessível, servindo como a base visual para futuras funcionalidades dinâmicas.
+
+As próximas etapas incluirão o consumo de APIs públicas para exibir um catálogo dinâmico, visualizações de dados com Chart.js e implementação de testes.
 
 ## Índice
 
-1.  [Visão Geral e Justificativa](#1-visão-geral-e-justificativa)
-2.  [Escopo e Funcionalidades](#2-escopo-e-funcionalidades)
-3.  [Wireframe e Protótipo de UI](#3-wireframe-e-protótipo-de-ui)
-4.  [Tecnologias Utilizadas](#4-tecnologias-utilizadas)
-5.  [APIs Selecionadas](#5-apis-selecionadas)
-6.  [Estrutura do Projeto](#6-estrutura-do-projeto)
+1.  [Visão Geral](#1-visão-geral)
+2.  [Funcionalidades da Versão Atual (v1.0-ui)](#2-funcionalidades-da-versão-atual-v10-ui)
+3.  [Tecnologias Utilizadas](#3-tecnologias-utilizadas)
+4.  [Estrutura do Projeto](#4-estrutura-do-projeto)
+5.  [Como Executar o Projeto](#5-como-executar-o-projeto)
+6.  [Próximos Passos](#6-próximos-passos)
 7.  [Versionamento com Git](#7-versionamento-com-git)
-8.  [Acessibilidade e Responsividade](#8-acessibilidade-e-responsividade)
-9.  [Testes Automatizados](#9-testes-automatizados)
+8.  [Acessibilidade](#8-acessibilidade)
 
 ---
 
-### 1. Visão Geral e Justificativa
+### 1. Visão Geral
 
-**Visão Geral:** O "Meu Streaming" é uma interface web que permite aos usuários navegar por catálogos de filmes, buscar títulos, ver notícias sobre o mundo do entretenimento e entrar em contato através de um formulário. O projeto integra dados de fontes externas e apresenta análises visuais através de gráficos.
+O "Meu Streaming" é uma interface web front-end que simula uma plataforma de streaming. O projeto foi desenvolvido como um estudo prático de desenvolvimento web, aplicando conceitos de HTML semântico, CSS moderno com variáveis, um design system consistente e componentização com Bootstrap 5.
 
-**Justificativa:** Este projeto foi escolhido pela oportunidade de trabalhar com desafios técnicos completos, como o consumo de múltiplas APIs, a criação de uma interface de usuário rica e acessível, a implementação de testes automatizados e a prática de um fluxo de trabalho de versionamento profissional com Git.
+### 2. Funcionalidades da Versão Atual (v1.0-ui)
 
-### 2. Escopo e Funcionalidades
+- **Página Inicial (`Bem_Vindo.html`):** Apresentação do serviço com seção "hero", listagem de planos e chamada para ação.
+- **Catálogo (`catalogo.html`):** Grade de filmes com cards interativos e uma seção de busca e filtros.
+- **Detalhes do Filme (`detalhes.html`):** Página modelo para exibir informações detalhadas de um título, como sinopse, elenco e trailer (simulado).
+- **Página de Pagamento (`Pagamento.html`):** Interface para a finalização da assinatura de um plano.
+- **Página de Ajuda (`ajuda.html`):** Seção com FAQ, formulário de contato e informações de acessibilidade.
+- **Design Responsivo:** A interface se adapta a diferentes tamanhos de tela, de desktops a dispositivos móveis.
+- **Tema Escuro e Estilização Coesa:** Todas as páginas seguem uma identidade visual única, com foco em uma experiência de usuário imersiva.
 
-### 2. Escopo e Funcionalidades
+### 3. Tecnologias Utilizadas
 
-O projeto contará com as seguintes funcionalidades e telas/seções:
+- **HTML5:** Estruturação semântica do conteúdo.
+- **CSS3:** Estilização avançada, com uso de Flexbox, Grid, Variáveis CSS e animações.
+- **Bootstrap 5:** Framework para a construção de layout responsivo e componentização rápida.
+- **Font Awesome:** Biblioteca de ícones.
+- **Git & GitHub:** Para versionamento de código e gerenciamento do projeto.
 
-- **Página Inicial (`Bem_Vindo.html`):**
+### 4. Estrutura do Projeto
 
-  - Visão geral da plataforma com destaques do catálogo.
-  - Apresentação dos **planos de assinatura** com botões de ação.
-  - Seção de Perguntas Frequentes (FAQ) e um formulário de Newsletter.
-  - Uma **visão geral da dashboard** (ex: um gráfico com Chart.js mostrando gêneros populares).
-
-- **Página de Catálogo (`catalogo.html`):**
-
-  - Exibirá o catálogo completo de filmes e séries.
-  - Funcionalidade de **busca**, **filtro** e **ordenação** dos resultados.
-  - Componente de Paginação para navegar por múltiplos resultados.
-
-- **Página de Pagamento (`pagamento.html`):**
-
-  - Uma nova página para simular o pagamento da assinatura.
-  - Exibirá um **QR Code de pagamento fictício (Pix)** gerado dinamicamente com base no plano que o usuário selecionou na página inicial.
-
-- **Página de Detalhes (`detalhes.html`):**
-
-  - Mostra informações completas de um filme/série.
-
-- **Página de Ajuda/Acessibilidade (`ajuda.html`):**
-  - Fornece informações sobre os recursos de acessibilidade do site.
-  - Oferece uma opção para alternar para um tema de alto contraste.
-
-### 3. Wireframe e Protótipo de UI
-
-Foram criados wireframes de baixa fidelidade para planejar a estrutura visual e a disposição dos elementos nas telas principais do projeto.
-
-#### Página Inicial (Home)
-
-![Wireframe da Página Inicial](wireframes/Wireframe_Bem_Vindo.png)
-
-#### Página de Catálogo
-
-![Wireframe da Página de Catálogo](wireframes/Wireframe_Catalogo.png)
-
-#### Página de Detalhes
-
-![Wireframe da Página de Detalhes](wireframes/Wireframe_Detalhes_Trailers.png)
-
-O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, utilizando componentes do Bootstrap 5 para uma prototipação ágil.
-
-### 4. Tecnologias Utilizadas
-
-- **Frontend:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.
-- **Bibliotecas:** Chart.js (para visualização de dados).
-- **Testes:** Selenium (para testes de interface do usuário).
-- **Ferramentas:** Git, GitHub, VS Code.
-
-### 5. APIs Selecionadas
-
-### 5. APIs Selecionadas
-
-1.  **The Movie Database (TMDb) API:**
-
-    - **Propósito:** Fonte principal de dados sobre filmes e séries (pôsteres, sinopses, avaliações, etc.).
-    - **Status:** Chave de API a ser obtida.
-
-2.  **QR Code Generator API (`goqr.me`):**
-
-    - **Propósito:** Gerar dinamicamente uma imagem de QR Code para simular um pagamento via Pix. Isso cumpre o requisito de uma segunda API.
-    - **Implementação:** A aplicação irá construir um texto no formato "Copia e Cola" do Pix (fictício) contendo o nome do plano e o valor. Esse texto será enviado para a API, que retornará a imagem do QR Code correspondente.
-    - **Endpoint Principal:** `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SEUTEXTOAQUI`
-    - **Status:** Não requer chave, pronta para uso.
-
-3.  **Chart.js (Biblioteca):**
-    - **Propósito:** Será utilizada para criar gráficos interativos, como a "visão geral da dashboard" na página inicial, processando dados obtidos da TMDb.
-
-### 6. Estrutura do Projeto
-
-/meu-streaming
-|
-|-- style.css
-|-- script.js
-|-- tests
-|
-|-- Bem_Vindo.html
-|-- catalogo.html
-|-- detalhes.html
-|-- Pagamento.html
-|-- ajuda.html
-|
-|-- /wireframes <-- Imagens do Wireframe
-|-- README.md
-
-### 7. Versionamento com Git
-
-O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes branches:
-
-- **`master`:** Contém o código de produção, estável e pronto para deploy. Cada versão final (entrega) será marcada com uma `tag`.
-- **`develop`:** Branch principal de desenvolvimento. Novas funcionalidades são integradas aqui antes de serem enviadas para a `master`.
-- **`feature/*`:** Branches temporárias para o desenvolvimento de novas funcionalidades (ex: `feature/formulario-contato`). Após a conclusão, são mescladas na `develop`.
-
-### 8. Acessibilidade e Responsividade
-
-- **Responsividade:** O layout será totalmente adaptável a desktops, tablets e smartphones.
-- **Acessibilidade (WCAG):** Serão implementadas práticas como contraste de cores adequado, textos alternativos para imagens, navegação completa via teclado e uso de atributos WAI-ARIA. Haverá uma **opção de acessibilidade** na página de ajuda para ativar um modo de alto contraste.
+A estrutura de arquivos foi mantida de forma simples e direta para esta fase inicial do projeto.
 
 ### 9. Testes Automatizados
 
