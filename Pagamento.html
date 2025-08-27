@@ -4,9 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagamento - Meu Streaming</title>
+    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
+    />
+    <!-- Font Awesome para ícones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -39,223 +45,265 @@
             <li class="nav-item">
               <a class="nav-link" href="ajuda.html">Ajuda</a>
             </li>
+            <li class="nav-item ms-2">
+              <a href="catalogo.html" class="btn btn-primary">Assistir</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-streaming text-white text-center">
+    <!-- Hero Section com Detalhes do Pagamento -->
+    <header class="hero-streaming text-white text-center py-4">
       <div class="container">
-        <h1>Finalizar Assinatura</h1>
+        <h1 class="display-4">Finalizar Pagamento</h1>
         <p class="lead">
-          Você está a um passo de desfrutar do melhor entretenimento
+          Complete sua assinatura do
+          <span id="plano-selecionado">Plano Selecionado</span>
         </p>
+        <div class="badge bg-info fs-6 mt-2">
+          <i class="fas fa-shield-alt me-1"></i>
+          Pagamento Seguro e Criptografado
+        </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container my-5">
-      <!-- Payment Steps -->
-      <div class="payment-steps mb-5">
-        <div class="payment-step completed">1</div>
-        <div class="payment-step active">2</div>
-        <div class="payment-step">3</div>
+    <!-- Container Principal -->
+    <div class="container my-5">
+      <!-- Etapas do Pagamento -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+          <div class="payment-steps">
+            <div class="payment-step completed" id="etapa-plano">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="payment-step active" id="etapa-pagamento">2</div>
+            <div class="payment-step" id="etapa-confirmacao">3</div>
+          </div>
+          <div class="row text-center mt-3">
+            <div class="col-4">
+              <small class="text-muted">Escolha do Plano</small>
+            </div>
+            <div class="col-4">
+              <small class="text-white">Pagamento</small>
+            </div>
+            <div class="col-4">
+              <small class="text-muted">Confirmação</small>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="row justify-content-center">
+      <div class="row">
+        <!-- Coluna do Resumo do Pedido -->
+        <div class="col-lg-4 mb-4">
+          <div class="card card-plan h-100">
+            <div class="card-header">
+              <h4 class="mb-0">
+                <i class="fas fa-receipt me-2"></i>
+                Resumo do Pedido
+              </h4>
+            </div>
+            <div class="card-body">
+              <!-- Detalhes do Plano -->
+              <div class="plan-details mb-4">
+                <h5 id="plano-nome-resumo">Carregando plano...</h5>
+                <div class="price-display">
+                  <span class="price-value"
+                    >R$ <span id="valor-plano">0</span></span
+                  >
+                  <span class="price-period">/mês</span>
+                </div>
+              </div>
+
+              <!-- Benefícios do Plano -->
+              <div class="plan-benefits mb-4">
+                <h6 class="text-muted mb-3">Benefícios inclusos:</h6>
+                <ul class="list-unstyled" id="beneficios-plano">
+                  <li class="mb-2">
+                    <i class="fas fa-spinner fa-spin me-2"></i>
+                    Carregando benefícios...
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Total -->
+              <hr />
+              <div class="total-section">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Total:</h5>
+                  <h4 class="mb-0 text-success">
+                    R$ <span id="total-pedido">0,00</span>
+                  </h4>
+                </div>
+                <small class="text-muted"
+                  >Primeiro mês • Renovação automática</small
+                >
+              </div>
+
+              <!-- Informações Adicionais -->
+              <div class="mt-4 p-3 bg-dark bg-opacity-25 rounded">
+                <small class="text-muted">
+                  <i class="fas fa-info-circle me-1"></i>
+                  Você pode cancelar a qualquer momento sem taxas adicionais.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna do QR Code e Pagamento -->
         <div class="col-lg-8">
-          <!-- Plan Summary -->
-          <section class="mb-5">
-            <div class="card card-plan">
-              <div class="card-header">
-                <h2 class="mb-0">Resumo do Plano Selecionado</h2>
-              </div>
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-md-8">
-                    <h4 id="plan-name">Carregando plano...</h4>
-                    <ul id="plan-features" class="list-unstyled mt-3">
-                      <li>Carregando recursos...</li>
-                    </ul>
-                  </div>
-                  <div class="col-md-4 text-center">
-                    <div class="price-display">
-                      <span id="plan-price" class="price-value">R$0</span>
-                      <span class="price-period">,90/mês</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Payment Method -->
-          <section class="mb-5">
-            <div class="card card-plan">
-              <div class="card-header">
-                <h2 class="mb-0">Forma de Pagamento</h2>
-              </div>
-              <div class="card-body">
-                <div class="row g-3">
-                  <div class="col-12">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="paymentMethod"
-                        id="pixPayment"
-                        value="pix"
-                        checked
-                      />
-                      <label class="form-check-label" for="pixPayment">
-                        <strong>PIX - Pagamento Instantâneo</strong><br />
-                        <small class="text-muted">
-                          Escaneie o QR Code com o app do seu banco
-                        </small>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="paymentMethod"
-                        id="cardPayment"
-                        value="card"
-                        disabled
-                      />
-                      <label
-                        class="form-check-label text-muted"
-                        for="cardPayment"
-                      >
-                        <strong>Cartão de Crédito/Débito</strong><br />
-                        <small>Em breve disponível</small>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- QR Code Section -->
+          <!-- SEÇÃO QR CODE ATUALIZADA: Container com estrutura correta -->
           <section class="mb-5" id="qr-section">
             <div class="card card-plan">
               <div class="card-header">
-                <h2 class="mb-0">Escaneie o QR Code para Pagar</h2>
+                <h2 class="mb-0">
+                  <i class="fas fa-qrcode me-2"></i>
+                  Escaneie o QR Code para Pagar
+                </h2>
               </div>
               <div class="card-body text-center">
-                <p class="lead mb-4">
-                  Use o aplicativo do seu banco para escanear o código abaixo
+                <p class="lead mb-4 text-light">
+                  Use o aplicativo do seu banco para escanear o código abaixo e
+                  finalizar o pagamento
                 </p>
 
-                <!-- QR Code Container -->
-                <div class="qr-container" id="qr-container">
-                  <div id="qr-loading" class="text-center">
-                    <div class="spinner-border text-danger mb-3" role="status">
-                      <span class="visually-hidden">Gerando QR Code...</span>
-                    </div>
-                    <p class="text-dark mb-0">Gerando QR Code...</p>
-                  </div>
-
-                  <div id="qr-content" class="d-none">
-                    <div class="qr-placeholder mb-3">QR CODE</div>
-                    <p class="text-dark mb-2">
-                      <strong
-                        >Valor: <span id="qr-amount">R$ 0,00</span></strong
-                      >
-                    </p>
-                    <small class="text-muted">
-                      Código expira em <span id="qr-timer">15:00</span>
-                    </small>
-                  </div>
-                </div>
-
-                <!-- Instructions -->
-                <div class="row mt-4">
-                  <div class="col-md-4">
-                    <div class="mb-3">
+                <!-- Container principal do QR Code -->
+                <div
+                  class="qr-container d-flex justify-content-center align-items-center mb-4"
+                >
+                  <!-- Container onde o QR Code será inserido pelo JavaScript -->
+                  <div id="qrcode" class="qr-placeholder">
+                    <div
+                      class="d-flex flex-column align-items-center justify-content-center h-100"
+                    >
                       <div
-                        class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center"
-                        style="width: 40px; height: 40px"
+                        class="spinner-border text-primary mb-3"
+                        role="status"
                       >
-                        <strong>1</strong>
+                        <span class="visually-hidden">Gerando QR Code...</span>
                       </div>
-                      <p class="mt-2 mb-0 text-white">
-                        <small>Abra o app do seu banco</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="mb-3">
-                      <div
-                        class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center"
-                        style="width: 40px; height: 40px"
-                      >
-                        <strong>2</strong>
-                      </div>
-                      <p class="mt-2 mb-0 text-white">
-                        <small>Escaneie o QR Code</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="mb-3">
-                      <div
-                        class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center"
-                        style="width: 40px; height: 40px"
-                      >
-                        <strong>3</strong>
-                      </div>
-                      <p class="mt-2 mb-0 text-white">
-                        <small>Confirme o pagamento</small>
-                      </p>
+                      <p class="mb-0 text-muted">Carregando QR Code...</p>
                     </div>
                   </div>
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="mt-4">
-                  <button class="btn btn-primary me-2" onclick="refreshQR()">
-                    Gerar Novo QR Code
-                  </button>
+                <!-- Informações do pagamento -->
+                <div class="payment-info mb-4">
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div
+                        class="card"
+                        style="
+                          background: rgba(255, 255, 255, 0.1);
+                          backdrop-filter: blur(10px);
+                        "
+                      >
+                        <div class="card-body">
+                          <div class="row text-center">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                              <h6 class="text-muted mb-1">Valor Total</h6>
+                              <h4 class="text-success mb-0">
+                                R$
+                                <span id="qr-amount" class="fw-bold">0,00</span>
+                              </h4>
+                            </div>
+                            <div class="col-md-6">
+                              <h6 class="text-muted mb-1">Vencimento</h6>
+                              <h5 class="mb-0" id="payment-due">Hoje, 23:59</h5>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Instruções de pagamento -->
+                <div class="payment-instructions mb-4">
+                  <h6 class="mb-3">Como pagar com PIX:</h6>
+                  <div class="row text-start">
+                    <div class="col-md-6">
+                      <div class="instruction-item mb-3">
+                        <span class="badge bg-primary me-2">1</span>
+                        <span>Abra o aplicativo do seu banco</span>
+                      </div>
+                      <div class="instruction-item mb-3">
+                        <span class="badge bg-primary me-2">2</span>
+                        <span>Procure pela opção PIX</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="instruction-item mb-3">
+                        <span class="badge bg-primary me-2">3</span>
+                        <span>Escaneie o código QR</span>
+                      </div>
+                      <div class="instruction-item mb-3">
+                        <span class="badge bg-primary me-2">4</span>
+                        <span>Confirme o pagamento</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Botões de ação -->
+                <div class="action-buttons">
                   <button
-                    class="btn btn-outline-primary"
-                    onclick="checkPayment()"
+                    class="btn btn-outline-light me-3"
+                    onclick="window.recarregarQRCode ? window.recarregarQRCode(window.paginaManager?.obterPlanoSelecionado() || 'basico') : location.reload()"
+                    title="Recarregar QR Code"
                   >
-                    Verificar Pagamento
+                    <i class="fas fa-sync-alt me-2"></i>
+                    Atualizar QR Code
                   </button>
+                  <a href="Bem_Vindo.html" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Voltar aos Planos
+                  </a>
                 </div>
-
-                <p class="text-muted mt-4">
-                  <small>
-                    Esta é uma transação fictícia para fins de demonstração.<br />
-                    Nenhum pagamento real será processado.
-                  </small>
-                </p>
               </div>
             </div>
           </section>
 
-          <!-- Support -->
-          <section class="mb-5">
-            <div class="card card-plan">
-              <div class="card-body text-center">
-                <h5>Precisa de ajuda?</h5>
-                <p class="mb-3">
-                  Nossa equipe de suporte está disponível para ajudá-lo
-                </p>
-                <a href="ajuda.html#contact" class="btn btn-outline-primary">
-                  Entrar em Contato
-                </a>
+          <!-- Seção de Segurança -->
+          <div class="card card-plan">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="fas fa-shield-alt me-2"></i>
+                Segurança do Pagamento
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4 text-center mb-3">
+                  <i class="fas fa-lock fa-2x text-success mb-2"></i>
+                  <h6>Criptografia SSL</h6>
+                  <small class="text-muted">Seus dados estão protegidos</small>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                  <i class="fas fa-credit-card fa-2x text-primary mb-2"></i>
+                  <h6>PIX Instantâneo</h6>
+                  <small class="text-muted">Ativação imediata</small>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                  <i class="fas fa-undo-alt fa-2x text-warning mb-2"></i>
+                  <h6>Cancele Quando Quiser</h6>
+                  <small class="text-muted">Sem multas ou taxas</small>
+                </div>
+              </div>
+
+              <div class="alert alert-info mt-3">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>Atenção:</strong> Este é um ambiente de demonstração.
+                Nenhum pagamento real será processado. O QR Code é apenas
+                ilustrativo.
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
 
     <!-- Footer Padronizado -->
     <footer class="footer-streaming text-center text-white mt-5">
@@ -327,15 +375,17 @@
                   <a href="ajuda.html#contact" class="footer-link">Contato</a>
                 </li>
                 <li>
-                  <a href="ajuda.html#plans" class="footer-link">Planos</a>
+                  <a href="ajuda.html#accessibility" class="footer-link"
+                    >Acessibilidade</a
+                  >
                 </li>
               </ul>
             </div>
             <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
               <h5>Sobre o Projeto</h5>
               <p class="footer-description">
-                Projeto desenvolvido como parte de um estudo prático de HTML,
-                CSS, Bootstrap e JavaScript.
+                Desenvolvido com HTML, CSS, Bootstrap e JavaScript como projeto
+                educacional de desenvolvimento web moderno.
               </p>
             </div>
           </div>
@@ -349,6 +399,7 @@
       </div>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
