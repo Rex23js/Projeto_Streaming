@@ -26,8 +26,6 @@ Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e 
 
 ### 2. Escopo e Funcionalidades
 
-### 2. Escopo e Funcionalidades
-
 O projeto contará com as seguintes funcionalidades e telas/seções:
 
 - **Página Inicial (`Bem_Vindo.html`):**
@@ -80,8 +78,6 @@ O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, 
 - **Bibliotecas:** Chart.js (para visualização de dados).
 - **Testes:** Selenium (para testes de interface do usuário).
 - **Ferramentas:** Git, GitHub, VS Code.
-
-### 5. APIs Selecionadas
 
 ### 5. APIs Selecionadas
 
