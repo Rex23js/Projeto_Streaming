@@ -41,10 +41,37 @@ O "Meu Streaming" é uma interface web front-end que simula uma plataforma de st
 - **Font Awesome:** Biblioteca de ícones.
 - **Git & GitHub:** Para versionamento de código e gerenciamento do projeto.
 
-### 4. Estrutura do Projeto
+4. Tecnologias Utilizadas
+Frontend: HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.
+Bibliotecas: Chart.js (para visualização de dados).
+Testes: Selenium (para testes de interface do usuário).
+Ferramentas: Git, GitHub, VS Code.
+5. APIs Selecionadas
+API do Banco de Dados de Filmes (TMDb):
 
-A estrutura de arquivos foi mantida de forma simples e direta para esta fase inicial do projeto.
+Propósito: Fonte principal de dados sobre filmes e séries (pôsteres, sinopses, avaliações, etc.).
+Status: Chave de API a ser obtida.
+API do gerador de código QR ( goqr.me):
 
+Propósito: Gerar dinamicamente uma imagem de QR Code para simular um pagamento via Pix. Isso atende ao requisito de uma segunda API.
+Implementação: A aplicação irá construir um texto no formato "Copia e Cola" do Pix (fictício) contendo o nome do plano e o valor. Esse texto será enviado para a API, que retornará a imagem do QR Code correspondente.
+Ponto final principal: https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SEUTEXTOAQUI
+Status: Não requer chave, pronta para uso.
+Chart.js (Biblioteca):
+
+Propósito: Será utilizado para criar gráficos interativos, como a "visão geral do dashboard" na página inicial, processando dados obtidos do TMDb.
+6. Estrutura do Projeto
+/meu-streaming | |-- estilo.css |-- script.js |-- testes | |-- Bem_Vindo.html |-- catalogo.html |-- detalhes.html |-- Pagamento.html |-- ajuda.html | |-- /wireframes <-- Imagens do Wireframe |-- README.md
+
+7. Versionamento com Git
+O projeto utiliza um fluxo de trabalho baseado no Git Flow, com os seguintes ramos:
+
+master: Contém o código de produção, estável e pronto para implantação. Cada versão final (entrega) será marcada com uma tag.
+develop: Filial principal de desenvolvimento. Novas funcionalidades são integradas aqui antes de serem enviadas para um master.
+feature/*: Agências temporárias para o desenvolvimento de novas funcionalidades (ex: feature/formulario-contato). Após a conclusão, são mescladas na develop.
+8. Acessibilidade e Responsividade
+Responsividade: O layout será totalmente adaptável a desktops, tablets e smartphones.
+Acessibilidade (WCAG): Serão inovações práticas como contraste de núcleos adequados, textos alternativos para imagens, navegação completa via teclado e uso de atributos WAI-ARIA. Haverá uma opção de acessibilidade na página de ajuda para ativar um modo de alto contraste.
 ### 9. Testes Automatizados
 
 #### **Tabela de Casos de Teste**
