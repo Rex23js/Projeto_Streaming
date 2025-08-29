@@ -602,3 +602,481 @@ document.addEventListener("DOMContentLoaded", function () {
     paymentDue.textContent = `Hoje, 23:59`;
   }
 });
+
+// =================================================================
+// =================== INTEGRAÇÃO API TMDB =======================
+// =================================================================
+
+// CONFIGURAÇÃO DA API
+const TMDB_CONFIG = {
+  apiKey: "76f602a068980cf0c3f918176a5f3214",
+  baseURL: "https://api.themoviedb.org/3",
+  imageBaseURL: "https://image.tmdb.org/t/w500", // Para pôsteres
+  language: "pt-BR",
+};
+
+class TMDbAPI {
+  constructor() {
+    this.cache = new Map(); // Cache simples para otimização
+  }
+
+  /**
+   * Constrói URL da API com parâmetros
+   * @param {string} endpoint - Endpoint da API
+   * @param {Object} params - Parâmetros adicionais
+   * @returns {string} URL completa
+   */
+  construirURL(endpoint, params = {}) {
+    const url = new URL(`${TMDB_CONFIG.baseURL}${endpoint}`);
+    url.searchParams.append("api_key", TMDB_CONFIG.apiKey);
+    url.searchParams.append("language", TMDB_CONFIG.language);
+
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) url.searchParams.append(key, value);
+    });
+
+    return url.toString();
+  }
+
+  /**
+   * Faz requisição para a API com tratamento de erro
+   * @param {string} url - URL da requisição
+   * @returns {Object} Dados da API
+   */
+  async fazerRequisicao(url) {
+    const cacheKey = url;
+
+    // Verifica cache primeiro
+    if (this.cache.has(cacheKey)) {
+      console.log("Dados recuperados do cache:", cacheKey);
+      return this.cache.get(cacheKey);
+    }
+
+    try {
+      console.log("Fazendo requisição para:", url);
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(
+          `Erro HTTP: ${response.status} - ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+
+      // Armazena no cache por 5 minutos
+      this.cache.set(cacheKey, data);
+      setTimeout(() => this.cache.delete(cacheKey), 300000);
+
+      return data;
+    } catch (error) {
+      console.error("Erro na requisição TMDb:", error);
+      throw new Error(`Falha ao conectar com TMDb: ${error.message}`);
+    }
+  }
+
+  /**
+   * Busca filmes populares
+   * @param {number} page - Página dos resultados
+   * @returns {Object} Dados dos filmes populares
+   */
+  async buscarFilmesPopulares(page = 1) {
+    const url = this.construirURL("/movie/popular", { page });
+    return await this.fazerRequisicao(url);
+  }
+
+  /**
+   * Busca filmes por query de pesquisa
+   * @param {string} query - Termo de busca
+   * @param {number} page - Página dos resultados
+   * @returns {Object} Resultados da busca
+   */
+  async buscarFilmesPorQuery(query, page = 1) {
+    if (!query.trim()) {
+      throw new Error("Query de busca não pode estar vazia");
+    }
+
+    const url = this.construirURL("/search/movie", {
+      query: encodeURIComponent(query.trim()),
+      page,
+    });
+    return await this.fazerRequisicao(url);
+  }
+
+  /**
+   * Busca filmes por gênero
+   * @param {number} genreId - ID do gênero
+   * @param {number} page - Página dos resultados
+   * @returns {Object} Filmes do gênero
+   */
+  async buscarFilmesPorGenero(genreId, page = 1) {
+    const url = this.construirURL("/discover/movie", {
+      with_genres: genreId,
+      sort_by: "popularity.desc",
+      page,
+    });
+    return await this.fazerRequisicao(url);
+  }
+
+  /**
+   * Busca lista de gêneros disponíveis
+   * @returns {Object} Lista de gêneros
+   */
+  async buscarGeneros() {
+    const url = this.construirURL("/genre/movie/list");
+    return await this.fazerRequisicao(url);
+  }
+
+  /**
+   * Constrói URL completa da imagem
+   * @param {string} posterPath - Caminho do pôster
+   * @returns {string} URL completa da imagem
+   */
+  // Função corrigida e tolerante
+  construirURLImagem(posterPath) {
+    // fallback local (melhor do que depender de via.placeholder.com)
+    const placeholderLocal = "assets/img/fallback.jpg"; // garanta que exista esse arquivo no projeto
+
+    if (!posterPath) return placeholderLocal;
+
+    // limpa barras indevidas
+    const cleanPath = posterPath.startsWith("/")
+      ? posterPath
+      : "/" + posterPath;
+
+    // base correta do TMDb: /t/p/<size>/<path>
+    // use apenas '/t/p' como base e adicione o tamanho desejado
+    const base = "https://image.tmdb.org/t/p";
+    const size = "/w500"; // você pode mudar para '/original', '/w780', etc.
+    return `${base}${size}${cleanPath}`;
+  }
+
+  /**
+   * Formata dados do filme para uso na aplicação
+   * @param {Object} movie - Dados brutos do filme da API
+   * @returns {Object} Dados formatados
+   */
+  formatarDadosFilme(movie) {
+    // Dentro de TMDbAPI.formatarDadosFilme(movie) — adicione no topo
+    console.log(
+      "TMDb movie:",
+      movie.id,
+      movie.title,
+      "poster_path:",
+      movie.poster_path
+    );
+    const posterURL = this.construirURLImagem(movie.poster_path);
+    console.log("URL do poster construído:", posterURL);
+
+    return {
+      id: movie.id,
+      titulo: movie.title || "Título não disponível",
+      sinopse: movie.overview || "Sinopse não disponível.",
+      poster: this.construirURLImagem(movie.poster_path),
+      dataLancamento: movie.release_date || "",
+      nota: movie.vote_average || 0,
+      generos: movie.genre_ids || [],
+      popularidade: movie.popularity || 0,
+    };
+  }
+}
+
+// =================================================================
+// ============== EXTENSÃO DA CLASSE PAGINAMANAGER ===============
+// =================================================================
+
+// Adiciona métodos de catálogo à classe existente
+PaginaManager.prototype.initCatalogo = function () {
+  console.log("Inicializando página de Catálogo com API TMDb...");
+
+  // Inicializa a API TMDb
+  this.tmdbAPI = new TMDbAPI();
+  this.filmesCache = [];
+  this.paginaAtual = 1;
+  this.ultimaBusca = null;
+  this.generoAtual = null;
+
+  // Configura elementos da interface
+  this.configurarElementosCatalogo();
+
+  // Carrega conteúdo inicial
+  this.carregarConteudoInicial();
+};
+
+PaginaManager.prototype.configurarElementosCatalogo = function () {
+  // Elementos da interface
+  this.searchInput = document.getElementById("search-input");
+  this.searchButton = document.getElementById("search-button");
+  this.genreFilter = document.getElementById("genre-filter");
+  this.resultsGrid = document.getElementById("results-grid");
+
+  // Event listeners
+  if (this.searchButton) {
+    this.searchButton.addEventListener("click", () => this.executarBusca());
+  }
+
+  if (this.searchInput) {
+    this.searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        this.executarBusca();
+      }
+    });
+  }
+
+  if (this.genreFilter) {
+    this.genreFilter.addEventListener("change", (e) => {
+      this.filtrarPorGenero(e.target.value);
+    });
+  }
+
+  console.log("Event listeners do catálogo configurados");
+};
+
+PaginaManager.prototype.carregarConteudoInicial = async function () {
+  try {
+    // Mostra loading
+    this.mostrarLoading();
+
+    // Carrega gêneros primeiro
+    await this.carregarGeneros();
+
+    // Carrega filmes populares
+    await this.carregarFilmesPopulares();
+  } catch (error) {
+    console.error("Erro ao carregar conteúdo inicial:", error);
+    this.mostrarErro("Erro ao carregar catálogo. Verifique sua conexão.");
+  }
+};
+
+PaginaManager.prototype.carregarGeneros = async function () {
+  try {
+    const data = await this.tmdbAPI.buscarGeneros();
+    this.popularSelectGeneros(data.genres);
+    console.log(`${data.genres.length} gêneros carregados`);
+  } catch (error) {
+    console.error("Erro ao carregar gêneros:", error);
+    // Mantém gêneros estáticos se API falhar
+  }
+};
+
+PaginaManager.prototype.popularSelectGeneros = function (generos) {
+  if (!this.genreFilter) return;
+
+  // Limpa opções existentes (exceto "Todos")
+  const opcaoTodos = this.genreFilter.querySelector('option[value=""]');
+  this.genreFilter.innerHTML = "";
+
+  // Readiciona "Todos"
+  const optionTodos = document.createElement("option");
+  optionTodos.value = "";
+  optionTodos.textContent = "Todos";
+  optionTodos.selected = true;
+  this.genreFilter.appendChild(optionTodos);
+
+  // Adiciona gêneros da API
+  generos.forEach((genero) => {
+    const option = document.createElement("option");
+    option.value = genero.id;
+    option.textContent = genero.name;
+    this.genreFilter.appendChild(option);
+  });
+};
+
+PaginaManager.prototype.carregarFilmesPopulares = async function () {
+  try {
+    const data = await this.tmdbAPI.buscarFilmesPopulares();
+    const filmesFormatados = data.results.map((movie) =>
+      this.tmdbAPI.formatarDadosFilme(movie)
+    );
+
+    this.filmesCache = filmesFormatados;
+    this.exibirFilmes(filmesFormatados);
+
+    console.log(`${filmesFormatados.length} filmes populares carregados`);
+  } catch (error) {
+    console.error("Erro ao carregar filmes populares:", error);
+    this.mostrarErro("Não foi possível carregar os filmes populares.");
+  }
+};
+
+PaginaManager.prototype.executarBusca = async function () {
+  const query = this.searchInput?.value?.trim();
+
+  if (!query) {
+    // Se busca vazia, volta para populares
+    await this.carregarFilmesPopulares();
+    this.ultimaBusca = null;
+    return;
+  }
+
+  try {
+    this.mostrarLoading();
+
+    const data = await this.tmdbAPI.buscarFilmesPorQuery(query);
+    const filmesFormatados = data.results.map((movie) =>
+      this.tmdbAPI.formatarDadosFilme(movie)
+    );
+
+    this.filmesCache = filmesFormatados;
+    this.ultimaBusca = query;
+    this.exibirFilmes(filmesFormatados);
+
+    console.log(`Busca por "${query}": ${filmesFormatados.length} resultados`);
+
+    if (filmesFormatados.length === 0) {
+      this.mostrarSemResultados(`Nenhum filme encontrado para "${query}"`);
+    }
+  } catch (error) {
+    console.error("Erro na busca:", error);
+    this.mostrarErro(`Erro ao buscar "${query}". Tente novamente.`);
+  }
+};
+
+PaginaManager.prototype.filtrarPorGenero = async function (genreId) {
+  if (!genreId || genreId === "") {
+    // "Todos" selecionado
+    await this.carregarFilmesPopulares();
+    this.generoAtual = null;
+    return;
+  }
+
+  try {
+    this.mostrarLoading();
+
+    const data = await this.tmdbAPI.buscarFilmesPorGenero(genreId);
+    const filmesFormatados = data.results.map((movie) =>
+      this.tmdbAPI.formatarDadosFilme(movie)
+    );
+
+    this.filmesCache = filmesFormatados;
+    this.generoAtual = genreId;
+    this.exibirFilmes(filmesFormatados);
+
+    const genreOption = this.genreFilter.querySelector(
+      `option[value="${genreId}"]`
+    );
+    const genreName = genreOption
+      ? genreOption.textContent
+      : "gênero selecionado";
+
+    console.log(`Filtro ${genreName}: ${filmesFormatados.length} filmes`);
+  } catch (error) {
+    console.error("Erro ao filtrar por gênero:", error);
+    this.mostrarErro("Erro ao filtrar filmes. Tente novamente.");
+  }
+};
+
+PaginaManager.prototype.exibirFilmes = function (filmes) {
+  if (!this.resultsGrid) {
+    console.error("Grid de resultados não encontrado");
+    return;
+  }
+
+  this.resultsGrid.innerHTML = "";
+
+  if (filmes.length === 0) {
+    this.mostrarSemResultados();
+    return;
+  }
+
+  filmes.forEach((filme) => {
+    const cardHTML = this.criarCardFilme(filme);
+    this.resultsGrid.insertAdjacentHTML("beforeend", cardHTML);
+  });
+
+  // Força o reflow para animações CSS
+  this.resultsGrid.offsetHeight;
+};
+
+PaginaManager.prototype.criarCardFilme = function (filme) {
+  const sinopseResumida =
+    filme.sinopse.length > 100
+      ? filme.sinopse.substring(0, 100) + "..."
+      : filme.sinopse;
+
+  const anoLancamento = filme.dataLancamento
+    ? new Date(filme.dataLancamento).getFullYear()
+    : "";
+
+  const notaFormatada = filme.nota.toFixed(1);
+
+  return `
+    <div class="col-md-3 mb-4">
+      <a href="detalhes.html?id=${filme.id}" class="text-decoration-none">
+        <div class="card h-100">
+         <img
+  src="${filme.poster}"
+  class="card-img-top"
+  alt="Pôster de ${filme.titulo}"
+  loading="lazy"
+  style="height: 375px; object-fit: cover;"
+  onload="console.log('IMG OK →', this.src)"
+  onerror="console.error('IMG ERROR →', this.src); this.onerror=null; this.src='https://via.placeholder.com/500x750/333/fff?text=Sem+Imagem';"
+>
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${filme.titulo}</h5>
+            ${
+              anoLancamento
+                ? `<p class="text-muted mb-1">${anoLancamento}</p>`
+                : ""
+            }
+            ${
+              filme.nota > 0
+                ? `<p class="text-warning mb-2">⭐ ${notaFormatada}</p>`
+                : ""
+            }
+            <p class="card-text flex-grow-1">${sinopseResumida}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  `;
+};
+
+PaginaManager.prototype.mostrarLoading = function () {
+  if (!this.resultsGrid) return;
+
+  this.resultsGrid.innerHTML = `
+    <div class="col-12 text-center py-5">
+      <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p class="mt-3 text-muted">Carregando filmes...</p>
+    </div>
+  `;
+};
+
+PaginaManager.prototype.mostrarErro = function (mensagem) {
+  if (!this.resultsGrid) return;
+
+  this.resultsGrid.innerHTML = `
+    <div class="col-12">
+      <div class="alert alert-danger text-center" role="alert">
+        <i class="fas fa-exclamation-triangle mb-2"></i>
+        <h4>Oops! Algo deu errado</h4>
+        <p>${mensagem}</p>
+        <button class="btn btn-primary" onclick="window.location.reload()">
+          Tentar novamente
+        </button>
+      </div>
+    </div>
+  `;
+};
+
+PaginaManager.prototype.mostrarSemResultados = function (
+  mensagem = "Nenhum filme encontrado"
+) {
+  if (!this.resultsGrid) return;
+
+  this.resultsGrid.innerHTML = `
+    <div class="col-12 text-center py-5">
+      <i class="fas fa-film mb-3" style="font-size: 4rem; color: var(--text-muted);"></i>
+      <h3 class="text-muted">${mensagem}</h3>
+      <p class="text-muted">Tente ajustar os filtros ou fazer uma nova busca.</p>
+      <button class="btn btn-primary" onclick="window.paginaManager.carregarFilmesPopulares()">
+        Ver Filmes Populares
+      </button>
+    </div>
+  `;
+};
