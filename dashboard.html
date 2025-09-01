@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Meu Streaming</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Chart.js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+    ></script>
+  </head>
+  <body>
+    <!-- Navbar Padronizada -->
+    <nav class="navbar navbar-expand-lg navbar-streaming">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="Bem_Vindo.html">
+          <i class="fas fa-play-circle me-2"></i>Meu Streaming
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Bem_Vindo.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="catalogo.html">Catálogo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ajuda.html">Ajuda</a>
+            </li>
+            <li class="nav-item ms-2">
+              <a href="catalogo.html" class="btn btn-primary">Assistir</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section do Dashboard -->
+    <header class="hero-streaming text-white text-center py-4">
+      <div class="container">
+        <h1>Dashboard Analytics</h1>
+        <p class="lead">
+          Visualize dados e tendências do nosso catálogo de filmes
+        </p>
+      </div>
+    </header>
+
+    <!-- Loading inicial -->
+    <div id="dashboard-loading" class="container my-5 text-center">
+      <div
+        class="spinner-border text-primary"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="visually-hidden">Carregando dados...</span>
+      </div>
+      <p class="mt-3 text-muted">Processando dados da API TMDb...</p>
+    </div>
+
+    <!-- Container Principal dos Gráficos -->
+    <div id="dashboard-content" class="container my-5" style="display: none">
+      <!-- Estatísticas Gerais -->
+      <div class="row mb-5">
+        <div class="col-12">
+          <h2 class="mb-4">Visão Geral do Catálogo</h2>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <h3 class="text-primary" id="total-filmes">-</h3>
+              <p class="card-text">Total de Filmes</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <h3 class="text-primary" id="media-rating">-</h3>
+              <p class="card-text">Avaliação Média</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <h3 class="text-primary" id="genero-popular">-</h3>
+              <p class="card-text">Gênero Mais Popular</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <h3 class="text-primary" id="ano-popular">-</h3>
+              <p class="card-text">Ano Mais Popular</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="row">
+        <!-- Gráfico de Gêneros -->
+        <div class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Distribuição por Gênero</h5>
+            </div>
+            <div class="card-body">
+              <canvas id="genresChart" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico de Avaliações -->
+        <div class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Distribuição de Avaliações</h5>
+            </div>
+            <div class="card-body">
+              <canvas id="ratingsChart" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico de Anos -->
+        <div class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Filmes por Década</h5>
+            </div>
+            <div class="card-body">
+              <canvas id="yearsChart" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico de Popularidade -->
+        <div class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Top 10 Filmes Mais Populares</h5>
+            </div>
+            <div class="card-body">
+              <canvas id="popularityChart" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção de Insights -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Insights Automáticos</h5>
+            </div>
+            <div class="card-body">
+              <div id="insights-content">
+                <div
+                  class="spinner-border spinner-border-sm text-primary me-2"
+                  role="status"
+                ></div>
+                Gerando insights...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Padronizado -->
+    <footer class="footer-streaming text-center text-white mt-5">
+      <div class="container p-4">
+        <section class="social-section mb-4">
+          <h5>Siga-nos</h5>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>F
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>T
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>I
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="YouTube"
+          >
+            <i class="fab fa-youtube"></i>Y
+          </a>
+        </section>
+
+        <section class="mb-4">
+          <p class="footer-description">
+            Dashboard analítico baseado em dados da API TMDb. Todas as
+            estatísticas são processadas em tempo real.
+          </p>
+        </section>
+
+        <section class="">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+              <h5>Navegação</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="Bem_Vindo.html" class="footer-link">Início</a></li>
+                <li>
+                  <a href="catalogo.html" class="footer-link">Catálogo</a>
+                </li>
+                <li>
+                  <a href="dashboard.html" class="footer-link">Dashboard</a>
+                </li>
+                <li><a href="ajuda.html" class="footer-link">Ajuda</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <h5>Análise de Dados</h5>
+              <ul class="list-unstyled mb-0">
+                <li><span class="footer-link">Chart.js</span></li>
+                <li><span class="footer-link">TMDb API</span></li>
+                <li><span class="footer-link">Insights Automáticos</span></li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-12 mb-4">
+              <h5>Sobre o Dashboard</h5>
+              <p class="footer-description">
+                Interface analítica desenvolvida para visualizar tendências e
+                padrões no catálogo de filmes.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="copyright-section text-center p-3">
+        © 2025 Copyright:
+        <a class="text-white" href="Bem_Vindo.html">MeuStreaming.com</a>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>
