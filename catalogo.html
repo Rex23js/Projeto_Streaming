@@ -8,6 +8,11 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Font Awesome para ícones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -22,9 +27,6 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,18 +36,16 @@
               <a class="nav-link" href="Bem_Vindo.html">Início</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="catalogo.html"
-                >Catálogo</a
-              >
+              <a class="nav-link active" href="catalogo.html">Catálogo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="ajuda.html">Ajuda</a>
             </li>
             <li class="nav-item ms-2">
-              <a href="Bem_Vindo.html" class="btn btn-outline-light">Voltar</a>
+              <a href="catalogo.html" class="btn btn-primary">Assistir</a>
             </li>
           </ul>
         </div>
@@ -64,165 +64,97 @@
 
     <!-- Seção de Busca e Filtros -->
     <section class="container my-5">
-      <div class="row align-items-center">
-        <div class="col-md-8">
-          <div class="input-group mb-3">
+      <div class="row align-items-end">
+        <!-- Campo de Busca -->
+        <div class="col-lg-8 col-md-7 mb-3">
+          <label for="search-input" class="form-label text-white">
+            <i class="fas fa-search me-2"></i>Buscar Filmes
+          </label>
+          <div class="input-group">
             <input
               type="text"
               id="search-input"
               class="form-control"
               placeholder="Digite o nome do filme ou série..."
+              aria-label="Campo de busca de filmes"
             />
-            <button class="btn btn-primary" type="button" id="search-button">
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="search-button"
+              aria-label="Buscar filmes"
+            >
+              <i class="fas fa-search me-1"></i>
               Buscar
             </button>
           </div>
         </div>
-        <div class="col-md-4">
-          <label for="genre-filter" class="form-label text-white"
-            >Filtrar por Gênero:</label
+
+        <!-- Filtro de Gênero -->
+        <div class="col-lg-4 col-md-5 mb-3">
+          <label for="genre-filter" class="form-label text-white">
+            <i class="fas fa-filter me-2"></i>Filtrar por Gênero
+          </label>
+          <select
+            id="genre-filter"
+            class="form-select"
+            aria-label="Filtro de gênero de filmes"
           >
-          <select id="genre-filter" class="form-select">
-            <optDDDDDDDselected>Todos</optDDDDDDDselected>
-            <option value="acao">Ação</option>
-            <option value="comedia">Comédia</option>
-            <option value="drama">Drama</option>
-            <option value="sci-fi">Ficção Científica</option>
+            <option value="" selected>Todos</option>
+            <!-- Opções serão populadas dinamicamente via JavaScript -->
           </select>
+        </div>
+      </div>
+
+      <!-- Indicador de Status (opcional) -->
+      <div class="row mt-2">
+        <div class="col-12">
+          <div id="status-indicator" class="text-muted small">
+            <!-- Aqui pode aparecer algo como "Mostrando filmes populares" -->
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Grid de Conteúdo -->
     <main class="container my-4">
+      <!-- 
+        IMPORTANTE: Removemos todos os cards estáticos!
+        Agora o conteúdo será gerado dinamicamente pelo JavaScript
+        a partir da API TMDb
+      -->
       <div id="results-grid" class="row">
-        <!-- Filme 1 -->
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
-                <p class="card-text">Breve descrição do filme...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <!-- Filme 2 -->
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
-                <p class="card-text">Breve descrição do filme...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <!-- Filme 3 -->
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
-                <p class="card-text">Breve descrição do filme...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <!-- Filme 4 -->
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
-                <p class="card-text">Breve descrição do filme...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <!-- Mais filmes podem ser adicionados aqui -->
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Série"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título da Série</h5>
-                <p class="card-text">Breve descrição da série...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Série"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título da Série</h5>
-                <p class="card-text">Breve descrição da série...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
-                <p class="card-text">Breve descrição do filme...</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 mb-4">
-          <a href="detalhes.html" class="text-decoration-none">
-            <div class="card h-100">
-              <img
-                src="https://via.placeholder.com/300x450"
-                class="card-img-top"
-                alt="Filme"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Título do Filme</h5>
-                <p class="card-text">Breve descrição do filme...</p>
-              </div>
-            </div>
-          </a>
+        <!-- Cards de filmes serão inseridos aqui dinamicamente -->
+
+        <!-- Loading inicial enquanto a API carrega -->
+        <div class="col-12 text-center py-5" id="initial-loading">
+          <div
+            class="spinner-border text-primary"
+            role="status"
+            style="width: 3rem; height: 3rem"
+          >
+            <span class="visually-hidden">Carregando catálogo...</span>
+          </div>
+          <p class="mt-3 text-muted">Carregando filmes mais populares...</p>
+          <small class="text-muted">Conectando com TMDb API</small>
         </div>
       </div>
     </main>
+
+    <!-- Seção de Informações Adicionais -->
+    <section class="container my-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="alert alert-info" role="alert">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Sobre o catálogo:</strong>
+            Os filmes são obtidos em tempo real da base de dados TMDb (The Movie
+            Database). Use os filtros acima para encontrar exatamente o que
+            procura!
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer Padronizado -->
     <footer class="footer-streaming text-center text-white mt-5">
@@ -236,7 +168,7 @@
             role="button"
             aria-label="Facebook"
           >
-            <i class="fab fa-facebook-f"></i>F
+            <i class="fab fa-facebook-f"></i>
           </a>
           <a
             class="btn btn-outline-light btn-floating"
@@ -244,7 +176,7 @@
             role="button"
             aria-label="Twitter"
           >
-            <i class="fab fa-twitter"></i>T
+            <i class="fab fa-twitter"></i>
           </a>
           <a
             class="btn btn-outline-light btn-floating"
@@ -252,7 +184,7 @@
             role="button"
             aria-label="Instagram"
           >
-            <i class="fab fa-instagram"></i>I
+            <i class="fab fa-instagram"></i>
           </a>
           <a
             class="btn btn-outline-light btn-floating"
@@ -260,7 +192,7 @@
             role="button"
             aria-label="YouTube"
           >
-            <i class="fab fa-youtube"></i>Y
+            <i class="fab fa-youtube"></i>
           </a>
         </section>
 
@@ -303,8 +235,8 @@
             <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
               <h5>Sobre o Projeto</h5>
               <p class="footer-description">
-                Desenvolvido com HTML, CSS, Bootstrap e JavaScript como projeto
-                educacional de desenvolvimento web moderno.
+                Desenvolvido com HTML, CSS, Bootstrap e JavaScript. Integrado
+                com TMDb API para dados reais de filmes e séries.
               </p>
             </div>
           </div>
@@ -315,9 +247,20 @@
       <div class="copyright-section text-center p-3">
         © 2025 Copyright:
         <a class="text-white" href="Bem_Vindo.html">MeuStreaming.com</a>
+        <br />
+        <small class="text-muted">
+          Dados de filmes fornecidos por
+          <a
+            href="https://www.themoviedb.org/"
+            target="_blank"
+            class="text-info"
+            >TMDb</a
+          >
+        </small>
       </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>

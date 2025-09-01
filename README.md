@@ -10,12 +10,14 @@ As próximas etapas incluirão o consumo de APIs públicas para exibir um catál
 
 1.  [Visão Geral](#1-visão-geral)
 2.  [Funcionalidades da Versão Atual (v1.0-ui)](#2-funcionalidades-da-versão-atual-v10-ui)
-3.  [Tecnologias Utilizadas](#3-tecnologias-utilizadas)
-4.  [Estrutura do Projeto](#4-estrutura-do-projeto)
-5.  [Como Executar o Projeto](#5-como-executar-o-projeto)
-6.  [Próximos Passos](#6-próximos-passos)
+3.  [Wireframe e Protótipo de UI](#3-wireframe-e-protótipo-de-ui)
+4.  [Tecnologias Utilizadas](#4-tecnologias-utilizadas)
+5.  [APIs Selecionadas](#5-apis-selecionadas)
+6.  [Estrutura do Projeto](#6-estrutura-do-projeto)
 7.  [Versionamento com Git](#7-versionamento-com-git)
-8.  [Acessibilidade](#8-acessibilidade)
+8.  [Acessibilidade e Responsividade](#8-acessibilidade-e-responsividade)
+9.  [Testes Automatizados](#9-testes-automatizados)
+10. [Como Executar o Projeto](#10-como-executar-o-projeto)
 
 ---
 
@@ -33,36 +35,121 @@ O "Meu Streaming" é uma interface web front-end que simula uma plataforma de st
 - **Design Responsivo:** A interface se adapta a diferentes tamanhos de tela, de desktops a dispositivos móveis.
 - **Tema Escuro e Estilização Coesa:** Todas as páginas seguem uma identidade visual única, com foco em uma experiência de usuário imersiva.
 
-### 3. Tecnologias Utilizadas
+O projeto contará com as seguintes funcionalidades e telas/seções:
 
-- **HTML5:** Estruturação semântica do conteúdo.
-- **CSS3:** Estilização avançada, com uso de Flexbox, Grid, Variáveis CSS e animações.
-- **Bootstrap 5:** Framework para a construção de layout responsivo e componentização rápida.
-- **Font Awesome:** Biblioteca de ícones.
-- **Git & GitHub:** Para versionamento de código e gerenciamento do projeto.
+- Visão geral da plataforma com destaques do catálogo.
+- Apresentação dos **planos de assinatura** com botões de ação.
+- Seção de Perguntas Frequentes (FAQ) e um formulário de Newsletter.
+- Uma **visão geral da dashboard** (ex: um gráfico com Chart.js mostrando gêneros populares).
 
-### 4. Estrutura do Projeto
+- **Página de Catálogo (`catalogo.html`):**
 
-A estrutura de arquivos foi mantida de forma simples e direta para esta fase inicial do projeto.
+  - Exibirá o catálogo completo de filmes e séries.
+  - Funcionalidade de **busca**, **filtro** e **ordenação** dos resultados.
+  - Componente de Paginação para navegar por múltiplos resultados.
+
+- **Página de Pagamento (`pagamento.html`):**
+
+  - Uma nova página para simular o pagamento da assinatura.
+  - Exibirá um **QR Code de pagamento fictício (Pix)** gerado dinamicamente com base no plano que o usuário selecionou na página inicial.
+
+- **Página de Detalhes (`detalhes.html`):**
+
+  - Mostra informações completas de um filme/série.
+
+- **Página de Ajuda/Acessibilidade (`ajuda.html`):**
+  - Fornece informações sobre os recursos de acessibilidade do site.
+  - Oferece uma opção para alternar para um tema de alto contraste.
+
+### 3. Wireframe e Protótipo de UI
+
+Foram criados wireframes de baixa fidelidade para planejar a estrutura visual e a disposição dos elementos nas telas principais do projeto.
+
+#### Página Inicial (Home)
+
+![Wireframe da Página Inicial](wireframes/Wireframe_Bem_Vindo.png)
+
+#### Página de Catálogo
+
+![Wireframe da Página de Catálogo](wireframes/Wireframe_Catalogo.png)
+
+#### Página de Detalhes
+
+![Wireframe da Página de Detalhes](wireframes/Wireframe_Detalhes_Trailers.png)
+
+O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, utilizando componentes do Bootstrap 5 para uma prototipação ágil.
+
+### 4. Tecnologias Utilizadas
+
+- **Frontend:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.
+- **Bibliotecas:** Chart.js (para visualização de dados).
+- **Testes:** Selenium (para testes de interface do usuário).
+- **Ferramentas:** Git, GitHub, VS Code.
+
+### 5. APIs Selecionadas
+
+1. **The Movie Database (TMDb) API:**
+
+   - Fonte principal de dados sobre filmes e séries.
+
+2. **QR Code Generator API (`goqr.me`):**
+
+   - Gera QR Codes de pagamento fictício (Pix).
+
+3. **Chart.js (Biblioteca):**
+   - Para criar gráficos interativos.
+
+### 6. Estrutura do Projeto
+
+/meu-streaming
+|-- style.css
+|-- script.js
+|-- tests/
+|-- Bem_Vindo.html
+|-- catalogo.html
+|-- dashboard.html
+|-- deashboard.js
+|-- Pagamento.html
+|-- ajuda.html
+|-- wireframes/
+| |-- Wireframe_Bem_Vindo.png
+| |-- Wireframe_Catalogo.png
+| |-- Wireframe_Detalhes_Trailers.png
+|-- README.md
+
+### 7. Versionamento com Git
+
+O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes branches:
+
+- **master:** Contém o código de produção, estável e pronto para deploy. Cada versão final será marcada com uma `tag`.
+- **develop:** Branch principal de desenvolvimento. Novas funcionalidades são integradas aqui antes de irem para a `master`.
+- **feature/\*:** Branches temporárias para o desenvolvimento de novas funcionalidades (ex: `feature/formulario-contato`).
+
+### 8. Acessibilidade e Responsividade
+
+- **Responsividade:** Layout totalmente adaptável a desktops, tablets e smartphones.
+- **Acessibilidade (WCAG):** Contraste de cores adequado, textos alternativos para imagens, navegação via teclado e uso de atributos WAI-ARIA.
+- Haverá uma **opção de acessibilidade** na página de ajuda para ativar um modo de alto contraste.
 
 ### 9. Testes Automatizados
 
 #### **Tabela de Casos de Teste**
 
-| ID do Teste | Funcionalidade Testada       | Cenário de Teste                                 | Passos de Execução                                                                                                                     | Resultado Esperado                                                                                                                                              |
-| :---------- | :--------------------------- | :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **TC-001**  | **Navegação Principal**      | Navegação da Home para o Catálogo                | 1. Abrir a página inicial (`Bem_Vindo.html`).<br>2. Clicar no botão/link "Assistir" ou "Login".                                        | O usuário é redirecionado para a página `catalogo.html`. O título `<h1>Explore nosso Catálogo</h1>` está visível.                                               |
-| **TC-002**  | **Seleção de Plano**         | Redirecionamento para pagamento do Plano Premium | 1. Abrir a página inicial.<br>2. Localizar a seção de planos.<br>3. Clicar no botão "Assinar Agora" do card "Premium".                 | O usuário é redirecionado para a URL `/pagamento.html?plano=premium`. A página de pagamento é carregada.                                                        |
-| **TC-003**  | **Geração de QR Code**       | Verificação da criação do QR Code de pagamento   | 1. Acessar a URL `/pagamento.html?plano=padrao`.                                                                                       | O contêiner do QR Code (`#qrcode-container`) deve conter uma tag `<img>` com um `src` válido da API de QR Code. O título da página deve indicar "Plano Padrão". |
-| **TC-004**  | **Formulário de Newsletter** | Submissão de e-mail válido                       | 1. Abrir a página inicial.<br>2. Inserir um e-mail válido (ex: `teste@teste.com`) no campo da newsletter.<br>3. Clicar em "Inscrever". | Uma mensagem de sucesso (ex: "Obrigado por se inscrever!") é exibida. O campo de e-mail é limpo.                                                                |
-| **TC-005**  | **Interatividade do FAQ**    | Funcionalidade do Accordion                      | 1. Abrir a página inicial.<br>2. Clicar no título de uma pergunta na seção FAQ.<br>3. Clicar novamente no mesmo título.                | Ao primeiro clique, o corpo da resposta correspondente se torna visível.<br>Ao segundo clique, o corpo da resposta é ocultado.                                  |
-| **TC-006**  | **Acessibilidade**           | Alternância de Tema de Alto Contraste            | 1. Abrir a página `ajuda.html`.<br>2. Clicar no switch "Ativar Modo de Alto Contraste".                                                | O `<body>` da página deve receber uma classe (ex: `high-contrast`), e as cores de fundo e texto devem mudar para um esquema de maior contraste.                 |
-| **TC-007**  | **Busca no Catálogo**        | Simulação de busca por um filme                  | 1. Abrir a página `catalogo.html`.<br>2. Digitar "Inception" no campo de busca.<br>3. Clicar no botão "Buscar".                        | (Requisito para Etapa 3) A grade de filmes é atualizada, e os cards exibidos devem corresponder aos resultados da busca.                                        |
-| **TC-008**  | **Validação de Formulário**  | Submissão de e-mail inválido na Newsletter       | 1. Abrir a página inicial.<br>2. Inserir um texto inválido (ex: "email-invalido") no campo da newsletter.<br>3. Clicar em "Inscrever". | Uma mensagem de erro indicando "Por favor, insira um e-mail válido" é exibida abaixo do campo. O formulário não é enviado.                                      |
-| **TC-009**  | **Responsividade**           | Verificação do Layout em Dispositivo Móvel       | 1. Abrir a página inicial.<br>2. Redimensionar a janela do navegador para uma largura de 375px.                                        | Os cards de planos e de filmes devem se reorganizar em uma única coluna. A barra de navegação deve ser substituída por um menu "hambúrguer".                    |
+| ID do Teste | Funcionalidade Testada       | Cenário de Teste                        | Passos de Execução                                                             | Resultado Esperado                                                                       |
+| ----------- | ---------------------------- | --------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| **TC-001**  | **Navegação Principal**      | Navegação da Home para o Catálogo       | 1. Abrir `Bem_Vindo.html`.<br>2. Clicar em "Assistir" ou "Login".              | Usuário é redirecionado para `catalogo.html`. `<h1>Explore nosso Catálogo</h1>` visível. |
+| **TC-002**  | **Seleção de Plano**         | Redirecionamento para pagamento Premium | 1. Abrir a página inicial.<br>2. Clicar em "Assinar Agora" no card Premium.    | Usuário vai para `/pagamento.html?plano=premium`.                                        |
+| **TC-003**  | **Geração de QR Code**       | Verificação do QR Code                  | 1. Acessar `/pagamento.html?plano=padrao`.                                     | O container `#qrcode-container` exibe `<img>` com `src` válido da API de QR Code.        |
+| **TC-004**  | **Formulário de Newsletter** | Submissão de e-mail válido              | 1. Inserir `teste@teste.com` no campo newsletter.<br>2. Clicar em "Inscrever". | Mensagem de sucesso exibida e campo limpo.                                               |
+| **TC-005**  | **Interatividade do FAQ**    | Abrir e fechar pergunta                 | 1. Clicar em uma pergunta no FAQ.<br>2. Clicar novamente.                      | Primeira vez: resposta aparece.<br>Segunda vez: resposta some.                           |
+| **TC-006**  | **Acessibilidade**           | Alternância de Alto Contraste           | 1. Ir em `ajuda.html`.<br>2. Clicar no switch "Ativar Modo de Alto Contraste". | `<body>` recebe classe `high-contrast`, cores mudam.                                     |
+| **TC-007**  | **Busca no Catálogo**        | Busca por filme                         | 1. Digitar "Inception" no campo de busca.<br>2. Clicar em "Buscar".            | Grade de filmes atualizada apenas com "Inception".                                       |
+| **TC-008**  | **Validação de Formulário**  | Submissão de e-mail inválido            | 1. Inserir "email-invalido".<br>2. Clicar em "Inscrever".                      | Mensagem de erro exibida. Formulário não enviado.                                        |
+| **TC-009**  | **Responsividade**           | Layout em mobile                        | 1. Redimensionar navegador para 375px de largura.                              | Cards reorganizados em 1 coluna, navbar vira menu hambúrguer.                            |
 
 ### 10. Como Executar o Projeto
 
-1.  Clone o repositório: `git clone https://github.com/seu-usuario/meu-streaming.git`
-2.  Navegue até a pasta do projeto: `cd meu-streaming`
-3.  Abra o arquivo `Bem_Vindo.html` em seu navegador.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Rex23js/meu-streaming.git
+   ```
