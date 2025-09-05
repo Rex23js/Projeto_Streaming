@@ -6,6 +6,9 @@ Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e 
 
 As próximas etapas incluirão o consumo de APIs públicas para exibir um catálogo dinâmico, visualizações de dados com Chart.js e implementação de testes.
 
+# Link do Projeto Em Deploy
+meu-streaming.netlify.app
+
 ## Índice
 
 1.  [Visão Geral](#1-visão-geral)
