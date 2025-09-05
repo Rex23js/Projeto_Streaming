@@ -32,7 +32,6 @@ O "Meu Streaming" é uma interface web front-end que simula uma plataforma de st
 
 - **Página Inicial (`Bem_Vindo.html`):** Apresentação do serviço com seção "hero", listagem de planos e chamada para ação.
 - **Catálogo (`catalogo.html`):** Grade de filmes com cards interativos e uma seção de busca e filtros.
-- **Detalhes do Filme (`detalhes.html`):** Página modelo para exibir informações detalhadas de um título, como sinopse, elenco e trailer (simulado).
 - **Página de Pagamento (`Pagamento.html`):** Interface para a finalização da assinatura de um plano.
 - **Página de Ajuda (`ajuda.html`):** Seção com FAQ, formulário de contato e informações de acessibilidade.
 - **Design Responsivo:** A interface se adapta a diferentes tamanhos de tela, de desktops a dispositivos móveis.
