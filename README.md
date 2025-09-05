@@ -48,14 +48,11 @@ meu-streaming.netlify.app
 
 ---
 
+### 1. Visão Geral e Justificativa
 
+**Visão Geral:** O "Meu Streaming" é uma interface web que permite aos usuários navegar por catálogos de filmes, buscar títulos, ver notícias sobre o mundo do entretenimento e entrar em contato através de um formulário. O projeto integra dados de fontes externas e apresenta análises visuais através de gráficos.
 
-### 1. Visão Geral
-
-
-
-O "Meu Streaming" é uma interface web front-end que simula uma plataforma de streaming. O projeto foi desenvolvido como um estudo prático de desenvolvimento web, aplicando conceitos de HTML semântico, CSS moderno com variáveis, um design system consistente e componentização com Bootstrap 5.
-
+**Justificativa:** Este projeto foi escolhido pela oportunidade de trabalhar com desafios técnicos completos, como o consumo de múltiplas APIs, a criação de uma interface de usuário rica e acessível, a implementação de testes automatizados e a prática de um fluxo de trabalho de versionamento profissional com Git.
 
 
 ### 2. Funcionalidades da Versão Atual (v1.0-ui)
