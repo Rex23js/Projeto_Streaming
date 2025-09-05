@@ -1464,3 +1464,714 @@ body.light-theme .insights {
     height: 10rem;
   }
 }
+
+/* =================================================================== */
+/* ================ ESTILOS PARA PÁGINA DE DETALHES ================= */
+/* =================================================================== */
+
+/* Adicione este código ao final do seu style.css existente */
+
+/* Hero Section com Backdrop */
+.movie-hero {
+  position: relative;
+  min-height: 60vh;
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 30%,
+    var(--accent-gradient-mid) 70%,
+    var(--primary-accent-dark) 100%
+  );
+  overflow: hidden;
+}
+
+.movie-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 1;
+}
+
+.movie-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Breadcrumb personalizado */
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--primary-accent-light) !important;
+  text-shadow: 0 0 0.5rem rgba(229, 62, 62, 0.6);
+}
+
+.breadcrumb-item.active {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+}
+
+body.light-theme .breadcrumb-item a {
+  color: var(--text-secondary) !important;
+}
+
+body.light-theme .breadcrumb-item a:hover {
+  color: var(--primary-accent) !important;
+  text-shadow: none;
+}
+
+/* Pôster com efeito de profundidade */
+.movie-poster-container {
+  position: relative;
+}
+
+.movie-poster-container img {
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5),
+    0 0 0 0.25rem rgba(229, 62, 62, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.movie-poster-container:hover img {
+  transform: translateY(-0.5rem) scale(1.02);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6),
+    0 0 0 0.25rem rgba(229, 62, 62, 0.3), 0 0 2rem rgba(229, 62, 62, 0.2);
+}
+
+body.light-theme .movie-poster-container img {
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15),
+    0 0 0 0.125rem rgba(220, 53, 69, 0.1);
+}
+
+body.light-theme .movie-poster-container:hover img {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
+    0 0 0 0.125rem rgba(220, 53, 69, 0.2);
+}
+
+/* Botões de ação especiais */
+.action-buttons .btn {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-buttons .btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.action-buttons .btn:hover::before {
+  left: 100%;
+}
+
+.action-buttons .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-dark) 100%
+  );
+  border: none;
+  box-shadow: 0 0.25rem 1rem rgba(229, 62, 62, 0.4);
+}
+
+.action-buttons .btn-primary:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent-hover) 0%,
+    var(--primary-accent) 100%
+  );
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.5rem rgba(229, 62, 62, 0.6);
+}
+
+/* Informações do filme */
+.movie-info {
+  background: linear-gradient(
+    145deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border: 0.0625rem solid var(--border-secondary);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0.25rem 1rem var(--shadow-dark);
+}
+
+body.light-theme .movie-info {
+  background: linear-gradient(
+    145deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  box-shadow: 0 0.125rem 0.5rem var(--shadow-strong);
+}
+
+/* Seções com títulos destacados */
+.section-title {
+  color: var(--text-title);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  width: 0.25rem;
+  height: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent) 0%,
+    var(--primary-accent-hover) 100%
+  );
+  border-radius: 0.125rem;
+}
+
+.section-title i {
+  color: var(--primary-accent);
+  margin-right: 0.5rem;
+}
+
+/* Container do trailer */
+.trailer-container {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.trailer-container:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.4);
+}
+
+.trailer-container iframe {
+  border-radius: 0.75rem;
+}
+
+body.light-theme .trailer-container {
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .trailer-container:hover {
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* Cards do elenco */
+.cast-card {
+  background: linear-gradient(
+    145deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border: 0.0625rem solid var(--border-secondary);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.25rem 0.5rem var(--shadow-dark);
+}
+
+.cast-card:hover {
+  transform: translateY(-0.25rem);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0.5rem 1.5rem rgba(229, 62, 62, 0.2);
+}
+
+.cast-card img {
+  transition: transform 0.3s ease;
+}
+
+.cast-card:hover img {
+  transform: scale(1.05);
+}
+
+.cast-card .card-body {
+  background: var(--background-secondary);
+  padding: 1rem;
+}
+
+.cast-card .card-title {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.cast-card .card-text {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+body.light-theme .cast-card {
+  background: var(--background-secondary);
+  box-shadow: 0 0.125rem 0.375rem var(--shadow-strong);
+}
+
+body.light-theme .cast-card:hover {
+  box-shadow: 0 0.25rem 0.75rem var(--shadow-strong);
+}
+
+/* Seção de recomendações */
+.recommendations-section {
+  background: linear-gradient(
+    135deg,
+    var(--background-primary) 0%,
+    var(--accent-gradient-start) 50%,
+    var(--background-primary) 100%
+  );
+  border-top: 0.125rem solid var(--border-primary);
+}
+
+.recommendations-section .card {
+  background: linear-gradient(
+    145deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border: 0.0625rem solid var(--border-secondary);
+  transition: all 0.3s ease;
+}
+
+.recommendations-section .card:hover {
+  transform: translateY(-0.25rem);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0.5rem 1.5rem rgba(229, 62, 62, 0.3);
+}
+
+.recommendations-section a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.recommendations-section .card-title {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+body.light-theme .recommendations-section {
+  background: linear-gradient(
+    135deg,
+    var(--background-tertiary) 0%,
+    var(--accent-gradient-start) 50%,
+    var(--background-tertiary) 100%
+  );
+}
+
+/* Badges personalizados */
+.genre-badge {
+  background: linear-gradient(
+    135deg,
+    rgba(229, 62, 62, 0.8) 0%,
+    rgba(229, 62, 62, 0.6) 100%
+  );
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: 0.0625rem solid transparent;
+}
+
+.genre-badge:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent-hover) 0%,
+    var(--primary-accent) 100%
+  );
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.25rem 0.5rem rgba(229, 62, 62, 0.3);
+}
+
+.quick-info-badge {
+  background: rgba(229, 62, 62, 0.1);
+  color: var(--primary-accent);
+  border: 0.0625rem solid var(--border-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  margin-right: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.quick-info-badge:hover {
+  background: var(--primary-accent);
+  color: #ffffff;
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.125rem 0.5rem rgba(229, 62, 62, 0.3);
+}
+
+body.light-theme .quick-info-badge {
+  background: rgba(220, 53, 69, 0.1);
+  color: var(--primary-accent);
+  border-color: rgba(220, 53, 69, 0.3);
+}
+
+body.light-theme .quick-info-badge:hover {
+  background: var(--primary-accent);
+  color: #ffffff;
+}
+
+/* Estados de carregamento específicos para detalhes */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--background-tertiary) 25%,
+    var(--background-secondary) 50%,
+    var(--background-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 2s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-text {
+  height: 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-text.large {
+  height: 2rem;
+}
+
+.skeleton-text.small {
+  height: 0.75rem;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 0.5rem;
+}
+
+body.light-theme .loading-skeleton {
+  background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
+  background-size: 200% 100%;
+}
+
+/* Fallback para imagens sem trailer */
+.trailer-fallback {
+  background: linear-gradient(
+    135deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border: 0.125rem dashed var(--border-secondary);
+  border-radius: 0.75rem;
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.trailer-fallback i {
+  font-size: 3rem;
+  color: var(--primary-accent);
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.trailer-fallback h4 {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.trailer-fallback p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+body.light-theme .trailer-fallback {
+  background: var(--background-tertiary);
+  border-color: rgba(220, 53, 69, 0.2);
+}
+
+/* Container de erro personalizado */
+.error-container {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-content {
+  text-align: center;
+  max-width: 500px;
+}
+
+.error-icon {
+  font-size: 5rem;
+  color: var(--primary-accent);
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.error-title {
+  color: var(--text-title);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.error-actions .btn {
+  margin: 0 0.5rem;
+}
+
+/* Sticky sidebar para informações do filme */
+.sticky-sidebar {
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+/* Efeitos de transição suaves */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade específica para detalhes */
+@media (max-width: 992px) {
+  .movie-hero {
+    min-height: 40vh;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .movie-info {
+    padding: 1.5rem;
+  }
+
+  .sticky-sidebar {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-hero {
+    min-height: 30vh;
+    padding: 2rem 0;
+  }
+
+  .hero-streaming h1 {
+    font-size: 2rem;
+  }
+
+  .action-buttons .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .cast-card {
+    margin-bottom: 1rem;
+  }
+
+  .recommendations-section {
+    padding: 2rem 0;
+  }
+
+  .quick-info-badge {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-hero {
+    min-height: 25vh;
+    padding: 1.5rem 0;
+  }
+
+  .hero-streaming h1 {
+    font-size: 1.75rem;
+  }
+
+  .movie-info {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .action-buttons {
+    gap: 0.5rem;
+  }
+
+  .action-buttons .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .trailer-container {
+    border-radius: 0.5rem;
+  }
+
+  .cast-card img {
+    height: 200px !important;
+  }
+
+  .recommendations-section .card img {
+    height: 250px !important;
+  }
+}
+
+/* Melhorias de acessibilidade */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Focus indicators melhorados */
+.action-buttons .btn:focus,
+.cast-card:focus,
+.recommendations-section a:focus {
+  outline: 0.125rem solid var(--primary-accent);
+  outline-offset: 0.125rem;
+  box-shadow: 0 0 0 0.25rem rgba(229, 62, 62, 0.25);
+}
+
+body.light-theme .action-buttons .btn:focus,
+body.light-theme .cast-card:focus,
+body.light-theme .recommendations-section a:focus {
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .genre-badge,
+  .quick-info-badge {
+    border: 0.125rem solid currentColor;
+  }
+
+  .cast-card,
+  .recommendations-section .card {
+    border: 0.125rem solid var(--text-primary);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .movie-poster-container img,
+  .cast-card,
+  .recommendations-section .card,
+  .action-buttons .btn,
+  .trailer-container {
+    transition: none;
+  }
+
+  .loading-skeleton {
+    animation: none;
+  }
+
+  .fade-in,
+  .slide-up {
+    animation: none;
+  }
+}

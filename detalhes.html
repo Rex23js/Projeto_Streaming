@@ -1,0 +1,384 @@
+<!-- ========================================================================
+   Projeto: Meu Streaming
+   Autores: Ismael Bayard Soares Gomes, Eduardo Monteiro
+   Arquivo: detalhes.html
+   Descrição: Página de detalhes de filme/série do projeto de streaming
+   Data: 2025
+   Observações: Página dinâmica que consome dados da API TMDb
+   ======================================================================== -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Filme - Meu Streaming</title>
+
+    <!-- Meta tags para compartilhamento social -->
+    <meta
+      property="og:title"
+      content="Detalhes do Filme - Meu Streaming"
+      id="og-title"
+    />
+    <meta
+      property="og:description"
+      content="Confira os detalhes deste filme em nossa plataforma"
+      id="og-description"
+    />
+    <meta property="og:image" content="" id="og-image" />
+    <meta property="og:type" content="video.movie" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar Padronizada -->
+    <nav class="navbar navbar-expand-lg navbar-streaming">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="Bem_Vindo.html">
+          <i class="fas fa-play-circle me-2"></i>Meu Streaming
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Bem_Vindo.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="catalogo.html">Catálogo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ajuda.html">Ajuda</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Loading inicial -->
+    <div id="loading-container" class="container-fluid py-5">
+      <div class="text-center py-5">
+        <div
+          class="spinner-border text-primary"
+          role="status"
+          style="width: 3rem; height: 3rem"
+        >
+          <span class="visually-hidden">Carregando detalhes do filme...</span>
+        </div>
+        <p class="mt-3 text-muted">Carregando informações do filme...</p>
+        <small class="text-muted">Conectando com TMDb API</small>
+      </div>
+    </div>
+
+    <!-- Container principal - inicialmente oculto -->
+    <div id="main-content" class="d-none">
+      <!-- Hero Section com Backdrop -->
+      <section class="hero-streaming position-relative overflow-hidden">
+        <div
+          id="movie-backdrop-container"
+          class="position-absolute top-0 start-0 w-100 h-100"
+          style="z-index: -1"
+        >
+          <!-- Backdrop será inserido aqui dinamicamente -->
+        </div>
+
+        <div class="container py-5">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="catalogo.html" class="text-light">
+                      <i class="fas fa-arrow-left me-1"></i>Voltar ao Catálogo
+                    </a>
+                  </li>
+                  <li
+                    class="breadcrumb-item active text-light"
+                    aria-current="page"
+                  >
+                    Detalhes do Filme
+                  </li>
+                </ol>
+              </nav>
+
+              <h1 id="movie-title" class="display-4 fw-bold mb-3">
+                <!-- Título será inserido aqui -->
+              </h1>
+
+              <div id="movie-subtitle" class="lead mb-4">
+                <!-- Subtítulo com ano e gêneros principais -->
+              </div>
+
+              <div id="movie-quick-info" class="d-flex flex-wrap gap-3 mb-4">
+                <!-- Rating, duração, etc. - inseridos dinamicamente -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detalhes do Filme -->
+      <main class="container my-5" role="main">
+        <div class="row">
+          <!-- Coluna Esquerda - Pôster -->
+          <div class="col-lg-4 mb-4">
+            <div class="sticky-top" style="top: 2rem">
+              <div class="text-center">
+                <img
+                  id="movie-poster"
+                  src=""
+                  alt=""
+                  class="img-fluid rounded shadow-lg"
+                  style="max-height: 600px; object-fit: cover"
+                  loading="lazy"
+                />
+              </div>
+
+              <!-- Botões de Ação -->
+              <div class="d-grid gap-2 mt-4">
+                <button class="btn btn-primary btn-lg" id="btn-assistir">
+                  <i class="fas fa-play me-2"></i>Assistir Agora
+                </button>
+                <button class="btn btn-outline-primary" id="btn-minha-lista">
+                  <i class="fas fa-plus me-2"></i>Adicionar à Minha Lista
+                </button>
+                <button class="btn btn-outline-secondary" id="btn-compartilhar">
+                  <i class="fas fa-share me-2"></i>Compartilhar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna Direita - Informações -->
+          <div class="col-lg-8">
+            <!-- Informações Principais -->
+            <section class="mb-5">
+              <h2 id="movie-title-detail" class="h3 mb-3">
+                <!-- Título repetido para SEO -->
+              </h2>
+
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <p>
+                    <strong>Data de Lançamento:</strong>
+                    <span id="movie-release-date">-</span>
+                  </p>
+                  <p>
+                    <strong>Avaliação:</strong> <span id="movie-rating">-</span>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong>Duração:</strong> <span id="movie-runtime">-</span>
+                  </p>
+                  <div>
+                    <strong>Gêneros:</strong>
+                    <div id="movie-genres" class="mt-1">
+                      <!-- Badges de gêneros serão inseridos aqui -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h3 class="h5">Sinopse</h3>
+                <p id="movie-overview" class="text-secondary lead">
+                  <!-- Sinopse será inserida aqui -->
+                </p>
+              </div>
+            </section>
+
+            <!-- Trailer -->
+            <section class="mb-5" id="trailer-section">
+              <h3 class="h4 mb-3">
+                <i class="fas fa-play-circle me-2 text-primary"></i>Trailer
+              </h3>
+              <div id="movie-trailer-container" class="ratio ratio-16x9">
+                <!-- Iframe do YouTube ou fallback será inserido aqui -->
+              </div>
+            </section>
+
+            <!-- Elenco -->
+            <section class="mb-5" id="cast-section">
+              <h3 class="h4 mb-3">
+                <i class="fas fa-users me-2 text-primary"></i>Elenco Principal
+              </h3>
+              <div id="movie-cast" class="row">
+                <!-- Cards do elenco serão inseridos aqui -->
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <!-- Recomendações -->
+      <section
+        class="container-fluid bg-dark py-5"
+        id="recommendations-section"
+      >
+        <div class="container">
+          <h3 class="h4 mb-4 text-white">
+            <i class="fas fa-thumbs-up me-2 text-primary"></i>Filmes
+            Recomendados
+          </h3>
+          <div id="movie-recommendations" class="row">
+            <!-- Cards de recomendações serão inseridos aqui -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Container de Erro -->
+    <div id="error-container" class="container py-5 d-none">
+      <div class="text-center">
+        <i
+          class="fas fa-exclamation-triangle text-warning mb-3"
+          style="font-size: 4rem"
+        ></i>
+        <h2 class="text-white">Filme não encontrado</h2>
+        <p class="text-muted mb-4">
+          O filme solicitado não foi encontrado ou ocorreu um erro ao carregar
+          as informações.
+        </p>
+        <div class="d-flex gap-3 justify-content-center">
+          <a href="catalogo.html" class="btn btn-primary">
+            <i class="fas fa-arrow-left me-2"></i>Voltar ao Catálogo
+          </a>
+          <button
+            class="btn btn-outline-primary"
+            onclick="window.location.reload()"
+          >
+            <i class="fas fa-refresh me-2"></i>Tentar Novamente
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Padronizado -->
+    <footer class="footer-streaming text-center text-white mt-5">
+      <div class="container p-4">
+        <!-- Seção de Redes Sociais -->
+        <section class="social-section mb-4">
+          <h5>Siga-nos</h5>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating"
+            href="#!"
+            role="button"
+            aria-label="YouTube"
+          >
+            <i class="fab fa-youtube"></i>
+          </a>
+        </section>
+
+        <!-- Descrição do Projeto -->
+        <section class="mb-4">
+          <p class="footer-description">
+            Este é um protótipo de plataforma de streaming criado para fins
+            educacionais. Nenhuma das mídias exibidas está hospedada neste
+            servidor. Experiência premium de entretenimento ao seu alcance.
+          </p>
+        </section>
+
+        <!-- Links do Footer -->
+        <section class="">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+              <h5>Navegação</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="Bem_Vindo.html" class="footer-link">Início</a></li>
+                <li>
+                  <a href="catalogo.html" class="footer-link">Catálogo</a>
+                </li>
+                <li><a href="ajuda.html" class="footer-link">Ajuda</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+              <h5>Suporte</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="ajuda.html#faq" class="footer-link">FAQ</a></li>
+                <li>
+                  <a href="ajuda.html#contact" class="footer-link">Contato</a>
+                </li>
+                <li>
+                  <a href="ajuda.html#accessibility" class="footer-link"
+                    >Acessibilidade</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+              <h5>Sobre o Projeto</h5>
+              <p class="footer-description">
+                Desenvolvido com HTML, CSS, Bootstrap e JavaScript. Integrado
+                com TMDb API para dados reais de filmes e séries.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Seção de Copyright -->
+      <div class="copyright-section text-center p-3">
+        © 2025 Copyright:
+        <a class="text-white" href="Bem_Vindo.html">MeuStreaming.com</a>
+        <br />
+        <small class="text-muted">
+          Dados de filmes fornecidos por
+          <a
+            href="https://www.themoviedb.org/"
+            target="_blank"
+            class="text-info"
+            >TMDb</a
+          >
+        </small>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="Acessibility.js"></script>
+  </body>
+</html>

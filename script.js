@@ -621,6 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const TMDB_CONFIG = {
   apiKey: "76f602a068980cf0c3f918176a5f3214",
   baseURL: "https://api.themoviedb.org/3",
+
   imageBaseURL: "https://image.tmdb.org/t/w500", // Para pôsteres
   language: "pt-BR",
 };
@@ -998,6 +999,10 @@ PaginaManager.prototype.exibirFilmes = function (filmes) {
   this.resultsGrid.offsetHeight;
 };
 
+// SUBSTITUA esta função no seu script.js original
+// Encontre a função PaginaManager.prototype.criarCardFilme (linha ~457)
+// e substitua por esta versão:
+
 PaginaManager.prototype.criarCardFilme = function (filme) {
   const sinopseResumida =
     filme.sinopse.length > 100
@@ -1012,17 +1017,17 @@ PaginaManager.prototype.criarCardFilme = function (filme) {
 
   return `
     <div class="col-md-3 mb-4">
-     
-        <div class="card h-100">
-         <img
-  src="${filme.poster}"
-  class="card-img-top"
-  alt="Pôster de ${filme.titulo}"
-  loading="lazy"
-  style="height: 375px; object-fit: cover;"
-  onload="console.log('IMG OK →', this.src)"
-  onerror="console.error('IMG ERROR →', this.src); this.onerror=null; this.src='https://via.placeholder.com/500x750/333/fff?text=Sem+Imagem';"
->
+      <a href="detalhes.html?movie_id=${filme.id}" class="text-decoration-none">
+        <div class="card h-100" data-movie-id="${filme.id}">
+          <img
+            src="${filme.poster}"
+            class="card-img-top"
+            alt="Pôster de ${filme.titulo}"
+            loading="lazy"
+            style="height: 375px; object-fit: cover;"
+            onload="console.log('IMG OK ←', this.src)"
+            onerror="console.error('IMG ERROR ←', this.src); this.onerror=null; this.src='https://via.placeholder.com/500x750/333/fff?text=Sem+Imagem';"
+          >
 
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${filme.titulo}</h5>
@@ -1042,6 +1047,55 @@ PaginaManager.prototype.criarCardFilme = function (filme) {
       </a>
     </div>
   `;
+};
+
+// TAMBÉM ADICIONE esta modificação no detectarPaginaAtual
+// Encontre PaginaManager.prototype.detectarPaginaAtual (linha ~217)
+// e adicione este caso ANTES do return "desconhecida":
+
+PaginaManager.prototype.detectarPaginaAtual = function () {
+  const path = window.location.pathname.toLowerCase();
+  const filename = path.substring(path.lastIndexOf("/") + 1);
+
+  if (filename.includes("bem_vindo") || filename === "" || filename === "/") {
+    return "bem-vindo";
+  } else if (filename.includes("pagamento")) {
+    return "pagamento";
+  } else if (filename.includes("catalogo")) {
+    return "catalogo";
+  } else if (filename.includes("detalhes")) {
+    return "detalhes";
+  } else if (filename.includes("ajuda")) {
+    return "ajuda";
+  }
+
+  return "desconhecida";
+};
+
+// E MODIFIQUE o initEventListeners para incluir detalhes
+// Encontre PaginaManager.prototype.initEventListeners (linha ~201)
+// e adicione o caso "detalhes":
+
+PaginaManager.prototype.initEventListeners = function () {
+  const currentPage = this.detectarPaginaAtual();
+
+  switch (currentPage) {
+    case "bem-vindo":
+      this.initBemVindo();
+      break;
+    case "pagamento":
+      this.initPagamento();
+      break;
+    case "catalogo":
+      this.initCatalogo();
+      break;
+    case "detalhes":
+      this.initDetalhes();
+      break;
+    case "ajuda":
+      this.initAjuda();
+      break;
+  }
 };
 
 PaginaManager.prototype.mostrarLoading = function () {
@@ -1089,4 +1143,842 @@ PaginaManager.prototype.mostrarSemResultados = function (
       </button>
     </div>
   `;
+};
+
+// =================================================================
+// ================ EXTENSÕES PARA PÁGINA DE DETALHES =============
+// =================================================================
+
+// Adicione este código ao final do seu script.js existente
+
+// =================================================================
+// ============= EXTENSÕES DA CLASSE TMDbAPI ======================
+// =================================================================
+
+/**
+ * Busca detalhes completos de um filme específico
+ * @param {number} movieId - ID do filme
+ * @returns {Object} Dados detalhados do filme
+ */
+TMDbAPI.prototype.buscarDetalhesFilme = async function (movieId) {
+  if (!movieId) {
+    throw new Error("ID do filme é obrigatório");
+  }
+
+  const url = this.construirURL(`/movie/${movieId}`);
+  return await this.fazerRequisicao(url);
+};
+
+/**
+ * Busca vídeos (trailers) de um filme
+ * @param {number} movieId - ID do filme
+ * @returns {Object} Lista de vídeos do filme
+ */
+TMDbAPI.prototype.buscarVideosFilme = async function (movieId) {
+  if (!movieId) {
+    throw new Error("ID do filme é obrigatório");
+  }
+
+  const url = this.construirURL(`/movie/${movieId}/videos`);
+  return await this.fazerRequisicao(url);
+};
+
+/**
+ * Busca créditos (elenco) de um filme
+ * @param {number} movieId - ID do filme
+ * @returns {Object} Elenco e equipe do filme
+ */
+TMDbAPI.prototype.buscarCreditosFilme = async function (movieId) {
+  if (!movieId) {
+    throw new Error("ID do filme é obrigatório");
+  }
+
+  const url = this.construirURL(`/movie/${movieId}/credits`);
+  return await this.fazerRequisicao(url);
+};
+
+/**
+ * Busca filmes recomendados baseados em um filme
+ * @param {number} movieId - ID do filme
+ * @param {number} page - Página dos resultados
+ * @returns {Object} Filmes recomendados
+ */
+TMDbAPI.prototype.buscarRecomendacoes = async function (movieId, page = 1) {
+  if (!movieId) {
+    throw new Error("ID do filme é obrigatório");
+  }
+
+  const url = this.construirURL(`/movie/${movieId}/recommendations`, { page });
+  return await this.fazerRequisicao(url);
+};
+
+/**
+ * Constrói URL da imagem de perfil do TMDb
+ * @param {string} profilePath - Caminho da imagem de perfil
+ * @param {string} size - Tamanho da imagem (w185, h632, original)
+ * @returns {string} URL completa da imagem
+ */
+TMDbAPI.prototype.construirURLImagemPerfil = function (
+  profilePath,
+  size = "w185"
+) {
+  if (!profilePath)
+    return "https://via.placeholder.com/185x278/333/fff?text=Sem+Foto";
+
+  const cleanPath = profilePath.startsWith("/")
+    ? profilePath
+    : "/" + profilePath;
+  return `https://image.tmdb.org/t/p/${size}${cleanPath}`;
+};
+
+/**
+ * Constrói URL da imagem de backdrop
+ * @param {string} backdropPath - Caminho do backdrop
+ * @param {string} size - Tamanho da imagem
+ * @returns {string} URL completa da imagem
+ */
+TMDbAPI.prototype.construirURLBackdrop = function (
+  backdropPath,
+  size = "w1280"
+) {
+  if (!backdropPath) return null;
+
+  const cleanPath = backdropPath.startsWith("/")
+    ? backdropPath
+    : "/" + backdropPath;
+  return `https://image.tmdb.org/t/p/${size}${cleanPath}`;
+};
+
+/**
+ * Formata dados detalhados do filme para uso na aplicação
+ * @param {Object} movie - Dados brutos do filme da API
+ * @returns {Object} Dados formatados e enriched
+ */
+TMDbAPI.prototype.formatarDetalhesFilme = function (movie) {
+  return {
+    id: movie.id,
+    titulo: movie.title || "Título não disponível",
+    tituloOriginal: movie.original_title || "",
+    sinopse: movie.overview || "Sinopse não disponível.",
+    poster: this.construirURLImagem(movie.poster_path),
+    backdrop: this.construirURLBackdrop(movie.backdrop_path),
+    dataLancamento: movie.release_date || "",
+    nota: movie.vote_average || 0,
+    votos: movie.vote_count || 0,
+    generos: movie.genres || [],
+    duracao: movie.runtime || 0,
+    orcamento: movie.budget || 0,
+    receita: movie.revenue || 0,
+    status: movie.status || "",
+    tagline: movie.tagline || "",
+    popularidade: movie.popularity || 0,
+    adult: movie.adult || false,
+    homepage: movie.homepage || "",
+    imdbId: movie.imdb_id || "",
+  };
+};
+
+/**
+ * Processa dados de vídeos e encontra trailer principal
+ * @param {Object} videosData - Dados da API de vídeos
+ * @returns {Object|null} Dados do trailer principal ou null
+ */
+TMDbAPI.prototype.processarVideosFilme = function (videosData) {
+  if (!videosData.results || videosData.results.length === 0) {
+    return null;
+  }
+
+  // Procura por trailer oficial do YouTube
+  const trailer = videosData.results.find(
+    (video) =>
+      video.site === "YouTube" &&
+      video.type === "Trailer" &&
+      video.official === true
+  );
+
+  // Se não encontrou trailer oficial, pega qualquer trailer do YouTube
+  if (!trailer) {
+    const anyTrailer = videosData.results.find(
+      (video) => video.site === "YouTube" && video.type === "Trailer"
+    );
+    return anyTrailer || null;
+  }
+
+  return trailer;
+};
+
+/**
+ * Formata dados do elenco para exibição
+ * @param {Object} creditsData - Dados da API de créditos
+ * @param {number} limit - Limite de atores a retornar
+ * @returns {Array} Array com dados do elenco formatados
+ */
+TMDbAPI.prototype.formatarElenco = function (creditsData, limit = 8) {
+  if (!creditsData.cast || creditsData.cast.length === 0) {
+    return [];
+  }
+
+  return creditsData.cast.slice(0, limit).map((actor) => ({
+    id: actor.id,
+    nome: actor.name || "Nome não disponível",
+    personagem: actor.character || "Personagem não informado",
+    foto: this.construirURLImagemPerfil(actor.profile_path),
+    ordem: actor.order || 999,
+  }));
+};
+
+// =================================================================
+// ======== EXTENSÕES DA CLASSE PAGINAMANAGER - DETALHES =========
+// =================================================================
+
+/**
+ * Atualiza detecção de página para incluir detalhes
+ */
+const originalDetectarPaginaAtual = PaginaManager.prototype.detectarPaginaAtual;
+PaginaManager.prototype.detectarPaginaAtual = function () {
+  const path = window.location.pathname.toLowerCase();
+  const filename = path.substring(path.lastIndexOf("/") + 1);
+
+  if (filename.includes("detalhes")) {
+    return "detalhes";
+  }
+
+  // Chama o método original para outras páginas
+  return originalDetectarPaginaAtual.call(this);
+};
+
+/**
+ * Atualiza inicialização para incluir detalhes
+ */
+const originalInitEventListeners = PaginaManager.prototype.initEventListeners;
+PaginaManager.prototype.initEventListeners = function () {
+  const currentPage = this.detectarPaginaAtual();
+
+  if (currentPage === "detalhes") {
+    this.initDetalhes();
+    return;
+  }
+
+  // Chama o método original para outras páginas
+  originalInitEventListeners.call(this);
+};
+
+/**
+ * Inicialização específica da página de detalhes
+ */
+PaginaManager.prototype.initDetalhes = function () {
+  console.log("Inicializando página de Detalhes...");
+
+  // Inicializa API TMDb se não existir
+  if (!this.tmdbAPI) {
+    this.tmdbAPI = new TMDbAPI();
+  }
+
+  // Obtém ID do filme da URL
+  const movieId = this.obterMovieIdDaURL();
+
+  if (!movieId) {
+    this.exibirErroDetalhes("ID do filme não fornecido na URL");
+    return;
+  }
+
+  // Carrega dados do filme
+  this.carregarDetalhesCompletos(movieId);
+};
+
+/**
+ * Obtém o movie_id da query string
+ * @returns {string|null} ID do filme ou null se não encontrado
+ */
+PaginaManager.prototype.obterMovieIdDaURL = function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const movieId = urlParams.get("movie_id");
+
+  if (movieId && /^\d+$/.test(movieId)) {
+    return parseInt(movieId);
+  }
+
+  return null;
+};
+
+/**
+ * Carrega todos os dados necessários para a página de detalhes
+ * @param {number} movieId - ID do filme
+ */
+PaginaManager.prototype.carregarDetalhesCompletos = async function (movieId) {
+  try {
+    // Mostra loading
+    this.mostrarLoadingDetalhes();
+
+    // Faz requisições paralelas para otimizar performance
+    const [detalhes, videos, creditos, recomendacoes] =
+      await Promise.allSettled([
+        this.tmdbAPI.buscarDetalhesFilme(movieId),
+        this.tmdbAPI.buscarVideosFilme(movieId),
+        this.tmdbAPI.buscarCreditosFilme(movieId),
+        this.tmdbAPI.buscarRecomendacoes(movieId),
+      ]);
+
+    // Verifica se pelo menos os detalhes carregaram
+    if (detalhes.status === "rejected") {
+      throw new Error("Não foi possível carregar os detalhes do filme");
+    }
+
+    const movieData = this.tmdbAPI.formatarDetalhesFilme(detalhes.value);
+
+    // Atualiza meta tags e título da página
+    this.atualizarMetaTags(movieData);
+
+    // Popula a página com os dados
+    this.popularDetalhesFilme(movieData);
+
+    // Processa trailer se disponível
+    if (videos.status === "fulfilled") {
+      const trailer = this.tmdbAPI.processarVideosFilme(videos.value);
+      this.popularTrailer(trailer);
+    } else {
+      this.ocultarSecaoTrailer();
+    }
+
+    // Processa elenco se disponível
+    if (creditos.status === "fulfilled") {
+      const elenco = this.tmdbAPI.formatarElenco(creditos.value);
+      this.popularElenco(elenco);
+    } else {
+      this.ocultarSecaoElenco();
+    }
+
+    // Processa recomendações se disponíveis
+    if (
+      recomendacoes.status === "fulfilled" &&
+      recomendacoes.value.results.length > 0
+    ) {
+      const recomendacoesFormatadas = recomendacoes.value.results
+        .slice(0, 8)
+        .map((movie) => this.tmdbAPI.formatarDadosFilme(movie));
+      this.popularRecomendacoes(recomendacoesFormatadas);
+    } else {
+      this.ocultarSecaoRecomendacoes();
+    }
+
+    // Configura botões de ação
+    this.configurarBotoesAcao(movieData);
+
+    // Mostra conteúdo e esconde loading
+    this.mostrarConteudoDetalhes();
+
+    console.log(
+      `Detalhes do filme "${movieData.titulo}" carregados com sucesso`
+    );
+  } catch (error) {
+    console.error("Erro ao carregar detalhes do filme:", error);
+    this.exibirErroDetalhes(error.message);
+  }
+};
+
+/**
+ * Atualiza meta tags da página para compartilhamento social
+ * @param {Object} movieData - Dados formatados do filme
+ */
+PaginaManager.prototype.atualizarMetaTags = function (movieData) {
+  // Atualiza título da página
+  document.title = `${movieData.titulo} - Meu Streaming`;
+
+  // Atualiza meta tags Open Graph
+  const ogTitle = document.getElementById("og-title");
+  const ogDescription = document.getElementById("og-description");
+  const ogImage = document.getElementById("og-image");
+
+  if (ogTitle) ogTitle.content = `${movieData.titulo} - Meu Streaming`;
+  if (ogDescription)
+    ogDescription.content = movieData.sinopse.substring(0, 160) + "...";
+  if (ogImage) ogImage.content = movieData.poster;
+};
+
+/**
+ * Popula os elementos da página com dados do filme
+ * @param {Object} movieData - Dados formatados do filme
+ */
+PaginaManager.prototype.popularDetalhesFilme = function (movieData) {
+  // Título principal
+  const title = document.getElementById("movie-title");
+  const titleDetail = document.getElementById("movie-title-detail");
+  if (title) title.textContent = movieData.titulo;
+  if (titleDetail) titleDetail.textContent = movieData.titulo;
+
+  // Subtítulo com ano e gêneros principais
+  const subtitle = document.getElementById("movie-subtitle");
+  if (subtitle) {
+    const ano = movieData.dataLancamento
+      ? new Date(movieData.dataLancamento).getFullYear()
+      : "";
+    const generosPrincipais = movieData.generos
+      .slice(0, 3)
+      .map((g) => g.name)
+      .join(", ");
+    subtitle.textContent = `${ano} • ${generosPrincipais}`;
+  }
+
+  // Informações rápidas no hero
+  const quickInfo = document.getElementById("movie-quick-info");
+  if (quickInfo) {
+    const rating = movieData.nota > 0 ? `⭐ ${movieData.nota.toFixed(1)}` : "";
+    const duration = movieData.duracao > 0 ? `⏱️ ${movieData.duracao}min` : "";
+    const status =
+      movieData.status === "Released" ? "✅ Lançado" : movieData.status;
+
+    quickInfo.innerHTML = [rating, duration, status]
+      .filter((info) => info)
+      .map((info) => `<span class="badge bg-primary me-2">${info}</span>`)
+      .join("");
+  }
+
+  // Pôster
+  const poster = document.getElementById("movie-poster");
+  if (poster) {
+    poster.src = movieData.poster;
+    poster.alt = `Pôster de ${movieData.titulo}`;
+  }
+
+  // Backdrop
+  if (movieData.backdrop) {
+    this.configurarBackdrop(movieData.backdrop);
+  }
+
+  // Informações detalhadas
+  const releaseDate = document.getElementById("movie-release-date");
+  const rating = document.getElementById("movie-rating");
+  const runtime = document.getElementById("movie-runtime");
+  const overview = document.getElementById("movie-overview");
+  const genres = document.getElementById("movie-genres");
+
+  if (releaseDate) {
+    const dataFormatada = movieData.dataLancamento
+      ? new Date(movieData.dataLancamento).toLocaleDateString("pt-BR")
+      : "Não informado";
+    releaseDate.textContent = dataFormatada;
+  }
+
+  if (rating) {
+    const notaTexto =
+      movieData.nota > 0
+        ? `⭐ ${movieData.nota.toFixed(1)}/10 (${movieData.votos.toLocaleString(
+            "pt-BR"
+          )} votos)`
+        : "Não avaliado";
+    rating.textContent = notaTexto;
+  }
+
+  if (runtime) {
+    const duracaoTexto =
+      movieData.duracao > 0
+        ? `${movieData.duracao} minutos (${Math.floor(
+            movieData.duracao / 60
+          )}h ${movieData.duracao % 60}min)`
+        : "Não informado";
+    runtime.textContent = duracaoTexto;
+  }
+
+  if (overview) {
+    overview.textContent = movieData.sinopse;
+  }
+
+  if (genres && movieData.generos.length > 0) {
+    genres.innerHTML = movieData.generos
+      .map(
+        (genre) =>
+          `<span class="badge bg-secondary me-1 mb-1">${genre.name}</span>`
+      )
+      .join("");
+  }
+};
+
+/**
+ * Configura imagem de backdrop no hero
+ * @param {string} backdropUrl - URL do backdrop
+ */
+PaginaManager.prototype.configurarBackdrop = function (backdropUrl) {
+  const backdropContainer = document.getElementById("movie-backdrop-container");
+  if (!backdropContainer || !backdropUrl) return;
+
+  const img = document.createElement("img");
+  img.src = backdropUrl;
+  img.alt = "Imagem de fundo do filme";
+  img.className = "w-100 h-100";
+  img.style.objectFit = "cover";
+  img.style.opacity = "0.3";
+  img.loading = "lazy";
+
+  img.onerror = () => {
+    // Remove backdrop se falhar no carregamento
+    backdropContainer.innerHTML = "";
+  };
+
+  backdropContainer.innerHTML = "";
+  backdropContainer.appendChild(img);
+};
+
+/**
+ * Popula seção de trailer
+ * @param {Object|null} trailer - Dados do trailer
+ */
+PaginaManager.prototype.popularTrailer = function (trailer) {
+  const container = document.getElementById("movie-trailer-container");
+  if (!container) return;
+
+  if (!trailer) {
+    this.ocultarSecaoTrailer();
+    return;
+  }
+
+  // Cria iframe do YouTube
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube.com/embed/${trailer.key}?rel=0`;
+  iframe.title = `Trailer: ${trailer.name}`;
+  iframe.frameBorder = "0";
+  iframe.allow =
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true;
+  iframe.className = "w-100 h-100";
+
+  container.innerHTML = "";
+  container.appendChild(iframe);
+};
+
+/**
+ * Popula seção de elenco
+ * @param {Array} elenco - Array com dados do elenco
+ */
+PaginaManager.prototype.popularElenco = function (elenco) {
+  const container = document.getElementById("movie-cast");
+  if (!container) return;
+
+  if (!elenco || elenco.length === 0) {
+    this.ocultarSecaoElenco();
+    return;
+  }
+
+  container.innerHTML = elenco
+    .map(
+      (actor) => `
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <img
+          src="${actor.foto}"
+          class="card-img-top"
+          alt="Foto de ${actor.nome}"
+          style="height: 300px; object-fit: cover;"
+          loading="lazy"
+          onerror="this.src='https://via.placeholder.com/300x300/333/fff?text=Sem+Foto'"
+        />
+        <div class="card-body text-center">
+          <h6 class="card-title mb-1">${actor.nome}</h6>
+          <small class="text-muted">${actor.personagem}</small>
+        </div>
+      </div>
+    </div>
+  `
+    )
+    .join("");
+};
+
+/**
+ * Popula seção de recomendações
+ * @param {Array} recomendacoes - Array com filmes recomendados
+ */
+PaginaManager.prototype.popularRecomendacoes = function (recomendacoes) {
+  const container = document.getElementById("movie-recommendations");
+  if (!container) return;
+
+  if (!recomendacoes || recomendacoes.length === 0) {
+    this.ocultarSecaoRecomendacoes();
+    return;
+  }
+
+  container.innerHTML = recomendacoes
+    .map(
+      (filme) => `
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <a href="detalhes.html?movie_id=${filme.id}" class="text-decoration-none">
+        <div class="card h-100">
+          <img
+            src="${filme.poster}"
+            class="card-img-top"
+            alt="Pôster de ${filme.titulo}"
+            style="height: 350px; object-fit: cover;"
+            loading="lazy"
+            onerror="this.src='https://via.placeholder.com/500x750/333/fff?text=Sem+Imagem'"
+          />
+          <div class="card-body">
+            <h6 class="card-title">${filme.titulo}</h6>
+            ${
+              filme.nota > 0
+                ? `<small class="text-warning">⭐ ${filme.nota.toFixed(
+                    1
+                  )}</small>`
+                : ""
+            }
+          </div>
+        </div>
+      </a>
+    </div>
+  `
+    )
+    .join("");
+};
+
+/**
+ * Configura botões de ação da página
+ * @param {Object} movieData - Dados do filme
+ */
+PaginaManager.prototype.configurarBotoesAcao = function (movieData) {
+  const btnAssistir = document.getElementById("btn-assistir");
+  const btnMinhaLista = document.getElementById("btn-minha-lista");
+  const btnCompartilhar = document.getElementById("btn-compartilhar");
+
+  if (btnAssistir) {
+    btnAssistir.addEventListener("click", () => {
+      // Simula ação de assistir (pode ser expandida futuramente)
+      alert(`Redirecionando para assistir "${movieData.titulo}"...`);
+    });
+  }
+
+  if (btnMinhaLista) {
+    btnMinhaLista.addEventListener("click", () => {
+      // Simula adição à lista (pode ser expandida com localStorage)
+      const isAdded = this.toggleMinhaLista(movieData);
+      btnMinhaLista.innerHTML = isAdded
+        ? '<i class="fas fa-check me-2"></i>Adicionado'
+        : '<i class="fas fa-plus me-2"></i>Adicionar à Minha Lista';
+
+      // Feedback visual
+      btnMinhaLista.classList.toggle("btn-success", isAdded);
+      btnMinhaLista.classList.toggle("btn-outline-primary", !isAdded);
+    });
+  }
+
+  if (btnCompartilhar) {
+    btnCompartilhar.addEventListener("click", () => {
+      this.compartilharFilme(movieData);
+    });
+  }
+};
+
+/**
+ * Simula toggle de adicionar/remover da lista
+ * @param {Object} movieData - Dados do filme
+ * @returns {boolean} True se adicionado, false se removido
+ */
+PaginaManager.prototype.toggleMinhaLista = function (movieData) {
+  const lista = JSON.parse(localStorage.getItem("minhaLista") || "[]");
+  const index = lista.findIndex((item) => item.id === movieData.id);
+
+  if (index === -1) {
+    // Adiciona à lista
+    lista.push({
+      id: movieData.id,
+      titulo: movieData.titulo,
+      poster: movieData.poster,
+      dataAdicionado: new Date().toISOString(),
+    });
+    localStorage.setItem("minhaLista", JSON.stringify(lista));
+    return true;
+  } else {
+    // Remove da lista
+    lista.splice(index, 1);
+    localStorage.setItem("minhaLista", JSON.stringify(lista));
+    return false;
+  }
+};
+
+/**
+ * Compartilha filme usando Web Share API ou fallback
+ * @param {Object} movieData - Dados do filme
+ */
+PaginaManager.prototype.compartilharFilme = function (movieData) {
+  const shareData = {
+    title: `${movieData.titulo} - Meu Streaming`,
+    text: `Confira este filme: ${movieData.titulo}`,
+    url: window.location.href,
+  };
+
+  if (navigator.share) {
+    navigator
+      .share(shareData)
+      .then(() => console.log("Filme compartilhado com sucesso"))
+      .catch(() => this.compartilharFallback(shareData));
+  } else {
+    this.compartilharFallback(shareData);
+  }
+};
+
+/**
+ * Fallback para compartilhamento (copia URL)
+ * @param {Object} shareData - Dados para compartilhar
+ */
+PaginaManager.prototype.compartilharFallback = function (shareData) {
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(shareData.url)
+      .then(() => {
+        alert("Link copiado para a área de transferência!");
+      })
+      .catch(() => {
+        prompt("Copie o link abaixo:", shareData.url);
+      });
+  } else {
+    prompt("Copie o link abaixo:", shareData.url);
+  }
+};
+
+/**
+ * Mostra loading inicial
+ */
+PaginaManager.prototype.mostrarLoadingDetalhes = function () {
+  const loading = document.getElementById("loading-container");
+  const content = document.getElementById("main-content");
+  const error = document.getElementById("error-container");
+
+  if (loading) loading.classList.remove("d-none");
+  if (content) content.classList.add("d-none");
+  if (error) error.classList.add("d-none");
+};
+
+/**
+ * Mostra conteúdo principal
+ */
+PaginaManager.prototype.mostrarConteudoDetalhes = function () {
+  const loading = document.getElementById("loading-container");
+  const content = document.getElementById("main-content");
+  const error = document.getElementById("error-container");
+
+  if (loading) loading.classList.add("d-none");
+  if (content) content.classList.remove("d-none");
+  if (error) error.classList.add("d-none");
+};
+
+/**
+ * Exibe erro na página
+ * @param {string} mensagem - Mensagem de erro
+ */
+PaginaManager.prototype.exibirErroDetalhes = function (mensagem) {
+  const loading = document.getElementById("loading-container");
+  const content = document.getElementById("main-content");
+  const error = document.getElementById("error-container");
+
+  if (loading) loading.classList.add("d-none");
+  if (content) content.classList.add("d-none");
+  if (error) {
+    error.classList.remove("d-none");
+
+    // Atualiza mensagem de erro se necessário
+    const errorMsg = error.querySelector("p");
+    if (errorMsg && mensagem) {
+      errorMsg.textContent = mensagem;
+    }
+  }
+
+  console.error("Erro na página de detalhes:", mensagem);
+};
+
+/**
+ * Oculta seção do trailer
+ */
+PaginaManager.prototype.ocultarSecaoTrailer = function () {
+  const section = document.getElementById("trailer-section");
+  if (section) section.classList.add("d-none");
+};
+
+/**
+ * Oculta seção do elenco
+ */
+PaginaManager.prototype.ocultarSecaoElenco = function () {
+  const section = document.getElementById("cast-section");
+  if (section) section.classList.add("d-none");
+};
+
+/**
+ * Oculta seção de recomendações
+ */
+PaginaManager.prototype.ocultarSecaoRecomendacoes = function () {
+  const section = document.getElementById("recommendations-section");
+  if (section) section.classList.add("d-none");
+};
+
+// =================================================================
+// ========= MODIFICAÇÃO DO CATÁLOGO PARA LINKS CLICÁVEIS =========
+// =================================================================
+
+/**
+ * Sobrescreve criarCardFilme para incluir links para detalhes
+ */
+const originalCriarCardFilme = PaginaManager.prototype.criarCardFilme;
+PaginaManager.prototype.criarCardFilme = function (filme) {
+  const sinopseResumida =
+    filme.sinopse.length > 100
+      ? filme.sinopse.substring(0, 100) + "..."
+      : filme.sinopse;
+
+  const anoLancamento = filme.dataLancamento
+    ? new Date(filme.dataLancamento).getFullYear()
+    : "";
+
+  const notaFormatada = filme.nota.toFixed(1);
+
+  return `
+    <div class="col-md-3 mb-4">
+      <a href="detalhes.html?movie_id=${filme.id}" class="text-decoration-none">
+        <div class="card h-100" data-movie-id="${filme.id}">
+          <img
+            src="${filme.poster}"
+            class="card-img-top"
+            alt="Pôster de ${filme.titulo}"
+            loading="lazy"
+            style="height: 375px; object-fit: cover;"
+            onload="console.log('IMG OK ←', this.src)"
+            onerror="console.error('IMG ERROR ←', this.src); this.onerror=null; this.src='https://via.placeholder.com/500x750/333/fff?text=Sem+Imagem';"
+          >
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${filme.titulo}</h5>
+            ${
+              anoLancamento
+                ? `<p class="text-muted mb-1">${anoLancamento}</p>`
+                : ""
+            }
+            ${
+              filme.nota > 0
+                ? `<p class="text-warning mb-2">⭐ ${notaFormatada}</p>`
+                : ""
+            }
+            <p class="card-text flex-grow-1">${sinopseResumida}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  `;
+};
+
+// =================================================================
+// ================ FUNÇÃO DE DEBUG ESTENDIDA =====================
+// =================================================================
+
+/**
+ * Função de debug estendida
+ */
+window.debugInfoDetalhes = function () {
+  console.log("=== DEBUG INFO DETALHES ===");
+  console.log("Página atual:", window.paginaManager?.detectarPaginaAtual());
+
+  const urlParams = new URLSearchParams(window.location.search);
+  console.log("Movie ID (URL):", urlParams.get("movie_id"));
+
+  if (window.paginaManager?.tmdbAPI) {
+    console.log("Cache TMDb size:", window.paginaManager.tmdbAPI.cache.size);
+  }
+
+  const minhaLista = JSON.parse(localStorage.getItem("minhaLista") || "[]");
+  console.log("Minha Lista:", minhaLista.length, "filmes");
+
+  console.log("=============================");
 };
