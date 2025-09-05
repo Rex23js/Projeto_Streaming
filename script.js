@@ -1,3 +1,13 @@
+// ========================================================================
+//   Projeto: Meu Streaming
+//   Autores: Ismael Bayard Soares Gomes, Eduardo Monteiro
+//   Arquivo: [script.js].html
+//   Descrição: Página do projeto educacional de plataforma de streaming
+//   Data: 2025
+//   Observações: Este arquivo faz parte de um protótipo front-end desenvolvido
+//   para fins acadêmicos e demonstração visual. Não contém backend real.
+// ========================================================================
+
 // =================================================================
 // ====================== SISTEMA DE PLANOS =======================
 // =================================================================
@@ -1002,7 +1012,7 @@ PaginaManager.prototype.criarCardFilme = function (filme) {
 
   return `
     <div class="col-md-3 mb-4">
-      <a href="detalhes.html?id=${filme.id}" class="text-decoration-none">
+     
         <div class="card h-100">
          <img
   src="${filme.poster}"
