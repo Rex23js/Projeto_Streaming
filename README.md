@@ -28,14 +28,28 @@ meu-streaming.netlify.app
 
 O "Meu Streaming" é uma interface web front-end que simula uma plataforma de streaming. O projeto foi desenvolvido como um estudo prático de desenvolvimento web, aplicando conceitos de HTML semântico, CSS moderno com variáveis, um design system consistente e componentização com Bootstrap 5.
 
-### 2. Funcionalidades da Versão Atual (v1.0-ui)
+2. Funcionalidades da Versão Atual (v1.0-ui)
+Página Inicial (Bem_Vindo.html): Apresenta uma introdução impactante do serviço com uma seção "hero", seguida por uma clara listagem dos planos disponíveis e um formulário de inscrição para novos usuários.
 
-- **Página Inicial (`Bem_Vindo.html`):** Apresentação do serviço com seção "hero", listagem de planos e chamada para ação.
-- **Catálogo (`catalogo.html`):** Grade de filmes com cards interativos e uma seção de busca e filtros.
-- **Página de Pagamento (`Pagamento.html`):** Interface para a finalização da assinatura de um plano.
-- **Página de Ajuda (`ajuda.html`):** Seção com FAQ, formulário de contato e informações de acessibilidade.
-- **Design Responsivo:** A interface se adapta a diferentes tamanhos de tela, de desktops a dispositivos móveis.
-- **Tema Escuro e Estilização Coesa:** Todas as páginas seguem uma identidade visual única, com foco em uma experiência de usuário imersiva.
+Catálogo (catalogo.html): Oferece uma galeria de filmes e séries com cards interativos. Inclui uma barra de busca funcional que interage com a API do TMDb para filtrar e exibir resultados dinamicamente.
+
+Página de Pagamento (Pagamento.html): Interface intuitiva para a finalização da assinatura de um plano, com um formulário que se adapta ao plano selecionado pelo usuário na página inicial.
+
+Página de Ajuda (ajuda.html): Central de suporte ao usuário, contendo uma seção de Perguntas Frequentes (FAQ) interativa, um formulário de contato e informações detalhadas sobre os recursos de acessibilidade.
+
+Dashboard Analítico (dashboard.html): Uma página de análise de dados que exibe visualizações sobre o catálogo de filmes. Apresenta gráficos gerados dinamicamente com a biblioteca Chart.js, como "Distribuição de Gêneros" e "Popularidade Média vs. Contagem de Votos".
+
+Acessibilidade Avançada (Acessibility.js):
+
+Alternância de Tema: Permite que o usuário alterne entre um tema claro e um escuro (alto contraste) em todo o site.
+
+Ajuste de Fonte: Funcionalidade para aumentar ou diminuir o tamanho da fonte para melhor legibilidade.
+
+Persistência de Configurações: As escolhas de acessibilidade do usuário são salvas no localStorage do navegador e aplicadas consistentemente em todas as páginas.
+
+Design Responsivo: A interface se adapta a diferentes tamanhos de tela, desde desktops a dispositivos móveis, garantindo uma experiência de usuário consistente e agradável em qualquer dispositivo.
+
+Identidade Visual Coesa: Todas as páginas seguem uma estilização única e moderna, com foco em uma experiência de usuário imersiva e profissional.
 
 O projeto contará com as seguintes funcionalidades e telas/seções:
 
