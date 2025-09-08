@@ -38,6 +38,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <!-- Navbar Padronizada -->
@@ -140,7 +141,7 @@
         <div class="row">
           <!-- Coluna Esquerda - Pôster -->
           <div class="col-lg-4 mb-4">
-            <div class="sticky-top" style="top: 2rem">
+            <div class="sticky-top" style="top: 2rem; z-index: 1">
               <div class="text-center">
                 <img
                   id="movie-poster"
@@ -209,7 +210,11 @@
             <!-- Trailer -->
             <section class="mb-5" id="trailer-section">
               <h3 class="h4 mb-3">
-                <i class="fas fa-play-circle me-2 text-primary"></i>Trailer
+                <i
+                  class="fas fa-play-circle me-2"
+                  style="color: var(--price-primary)"
+                ></i
+                >Trailer
               </h3>
               <div id="movie-trailer-container" class="ratio ratio-16x9">
                 <!-- Iframe do YouTube ou fallback será inserido aqui -->
@@ -219,7 +224,11 @@
             <!-- Elenco -->
             <section class="mb-5" id="cast-section">
               <h3 class="h4 mb-3">
-                <i class="fas fa-users me-2 text-primary"></i>Elenco Principal
+                <i
+                  class="fas fa-users me-2"
+                  style="color: var(--price-primary)"
+                ></i
+                >Elenco Principal
               </h3>
               <div id="movie-cast" class="row">
                 <!-- Cards do elenco serão inseridos aqui -->
@@ -236,8 +245,11 @@
       >
         <div class="container">
           <h3 class="h4 mb-4 text-white">
-            <i class="fas fa-thumbs-up me-2 text-primary"></i>Filmes
-            Recomendados
+            <i
+              class="fas fa-thumbs-up me-2"
+              style="color: var(--price-primary)"
+            ></i
+            >Filmes Recomendados
           </h3>
           <div id="movie-recommendations" class="row">
             <!-- Cards de recomendações serão inseridos aqui -->

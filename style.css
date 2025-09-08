@@ -22,7 +22,7 @@
 
   /* Paleta Vermelha Refinada */
   --primary-accent: #e53e3e;
-  --primary-accent-hover: #ff2d55;
+  --primary-accent-hover: #9e0505;
   --primary-accent-dark: #c53030;
   --primary-accent-light: #ff6b6b;
 
@@ -891,6 +891,18 @@ body.light-theme .accordion-button:not(.collapsed)::after {
   font-weight: 600;
   padding: 0.5em 0.75em;
   border-radius: 0.375rem;
+}
+
+.badge:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-accent-hover) 0%,
+    var(--primary-accent) 100%
+  ) !important;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0.25rem 0.9375rem rgba(229, 62, 62, 0.4);
+  transform: translateY(-0.125rem);
 }
 
 .bg-info {
@@ -2173,5 +2185,117 @@ body.light-theme .recommendations-section a:focus {
   .fade-in,
   .slide-up {
     animation: none;
+  }
+}
+
+/* ====================================================================== */
+/* ===================== CUSTOM CURSOR MOUSE ============================== */
+/* ======================================================================= */
+:root {
+  /* ------- CONFIGURÁVEIS (muda aqui) ------- */
+  --cursor-size: 75px; /* tamanho total do cursor (container) */
+  --cursor-dot-size: 7px; /* tamanho do ponto central */
+  --cursor-ring-thickness: 2px; /* espessura do anel */
+  --cursor-color: #e03434; /* cor principal (anel + ponto) */
+  --cursor-hover-scale: 1.3; /* escala do anel ao passar em elementos interativos */
+  --cursor-click-scale: 0.85; /* escala ao clicar */
+  --cursor-transition-ms: 160ms; /* tempo das transições */
+  --cursor-smoothness: 0.13; /* suavização do seguimento (0 - rígido, 0.2 - suave, 1 - sem suavização) */
+  --cursor-z: 9999; /* z-index do cursor */
+}
+
+/* ======= CURSOR CUSTOM (apenas desktop) ======= */
+@media (pointer: fine) {
+  /* esconde o cursor nativo (exceto em inputs) */
+  body {
+    cursor: none;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    cursor: auto !important;
+  }
+
+  .site-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    pointer-events: none;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: var(--cursor-z);
+    transition: transform var(--cursor-transition-ms)
+        cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity calc(var(--cursor-transition-ms) / 1.2);
+    will-change: transform;
+    mix-blend-mode: normal;
+  }
+
+  /* ANEL (pseudo-element) */
+  .site-cursor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: var(--cursor-ring-thickness) solid var(--cursor-color);
+    transform-origin: center;
+    transition: transform var(--cursor-transition-ms)
+        cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color var(--cursor-transition-ms);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 0 12px rgba(0, 0, 0, 0.06);
+  }
+
+  /* PONTO central */
+  .site-cursor::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--cursor-dot-size);
+    height: var(--cursor-dot-size);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--cursor-color);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform var(--cursor-transition-ms),
+      width var(--cursor-transition-ms), height var(--cursor-transition-ms),
+      background var(--cursor-transition-ms);
+  }
+
+  /* hover em elementos interativos */
+  .site-cursor.cursor--hover::before {
+    transform: scale(var(--cursor-hover-scale));
+    box-shadow: 0 0 26px rgba(0, 0, 0, 0.1);
+  }
+  .site-cursor.cursor--hover::after {
+    transform: translate(-50%, -50%) scale(0.45);
+    opacity: 0.95;
+  }
+
+  /* click feedback */
+  .site-cursor.cursor--click::before {
+    transform: scale(calc(var(--cursor-hover-scale) * 0.9));
+  }
+  .site-cursor.cursor--click::after {
+    transform: translate(-50%, -50%) scale(var(--cursor-click-scale));
+  }
+}
+
+/* fallback mobile (touch) */
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* reduz animações se usuário pediu */
+@media (prefers-reduced-motion: reduce) {
+  .site-cursor,
+  .site-cursor::before,
+  .site-cursor::after {
+    transition: none !important;
   }
 }

@@ -1982,3 +1982,78 @@ window.debugInfoDetalhes = function () {
 
   console.log("=============================");
 };
+
+/* =================================================================
+  ================ CURSOR DO MOUSE PERSONALIZADO ================
+  ================================================================= */
+
+// script.js - Cursor custom simples (sem lanterna)
+document.addEventListener("DOMContentLoaded", function () {
+  if (typeof window === "undefined") return;
+  if (window.matchMedia && !window.matchMedia("(pointer: fine)").matches)
+    return; // ignora touch
+
+  // cria cursor se não existir
+  if (!document.querySelector(".site-cursor")) {
+    const cursor = document.createElement("div");
+    cursor.className = "site-cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    document.body.appendChild(cursor);
+  }
+  const cursorEl = document.querySelector(".site-cursor");
+
+  // Opção: ler o smoothness do CSS (se quiser usar a var)
+  // Você pode manter a var no CSS ou sobrescrever aqui com JS.
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  // ler var CSS --cursor-smoothness
+  const root = getComputedStyle(document.documentElement);
+  let smoothness = parseFloat(root.getPropertyValue("--cursor-smoothness"));
+  if (Number.isNaN(smoothness)) smoothness = 0.16;
+  if (prefersReduced) smoothness = 1; // sem suavização se for reduzido
+
+  // posições
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let posX = mouseX,
+    posY = mouseY;
+
+  // atualiza alvo com mousemove
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorEl.style.display = "";
+  });
+
+  // animação suave (requestAnimationFrame)
+  function loop() {
+    posX += (mouseX - posX) * smoothness;
+    posY += (mouseY - posY) * smoothness;
+    cursorEl.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  // hover e click states
+  const hoverSelector = "a, button, .btn, .card, [data-cursor='hover']";
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest(hoverSelector))
+      cursorEl.classList.add("cursor--hover");
+  });
+  document.addEventListener("mouseout", (e) => {
+    if (
+      !e.relatedTarget ||
+      !e.relatedTarget.closest ||
+      !e.relatedTarget.closest(hoverSelector)
+    ) {
+      cursorEl.classList.remove("cursor--hover");
+    }
+  });
+  document.addEventListener("mousedown", () =>
+    cursorEl.classList.add("cursor--click")
+  );
+  document.addEventListener("mouseup", () =>
+    cursorEl.classList.remove("cursor--click")
+  );
+});
