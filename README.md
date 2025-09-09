@@ -1,28 +1,16 @@
 # Meu Streaming 🎬
 
-
-
 ![Status do Projeto](https://img.shields.io/badge/versão-v1.0--ui-success)
-
-
 
 Bem-vindo ao "Meu Streaming", um projeto de plataforma de streaming de filmes e séries. Esta primeira versão foca na construção de uma interface de usuário (UI) moderna, responsiva e acessível, servindo como a base visual para futuras funcionalidades dinâmicas.
 
-
-
 As próximas etapas incluirão o consumo de APIs públicas para exibir um catálogo dinâmico, visualizações de dados com Chart.js e implementação de testes.
-
-
 
 # Link do Projeto Em Deploy
 
 meu-streaming.netlify.app
 
-
-
 ## Índice
-
-
 
 1.  [Visão Geral](#1-visão-geral)
 
@@ -44,8 +32,6 @@ meu-streaming.netlify.app
 
 10. [Como Executar o Projeto](#10-como-executar-o-projeto)
 
-
-
 ---
 
 ### 1. Visão Geral e Justificativa
@@ -54,11 +40,10 @@ meu-streaming.netlify.app
 
 **Justificativa:** Este projeto foi escolhido pela oportunidade de trabalhar com desafios técnicos completos, como o consumo de múltiplas APIs, a criação de uma interface de usuário rica e acessível, a implementação de testes automatizados e a prática de um fluxo de trabalho de versionamento profissional com Git.
 
-
 ### 2. Funcionalidades da Versão Atual (v1.0-ui)
 
-- **Página Inicial (`Bem_Vindo.html`):**  
-  Apresenta uma introdução impactante do serviço com uma seção *hero*, seguida por uma clara listagem dos planos disponíveis e um formulário de inscrição para novos usuários.
+- **Página Inicial (`index.html`):**  
+  Apresenta uma introdução impactante do serviço com uma seção _hero_, seguida por uma clara listagem dos planos disponíveis e um formulário de inscrição para novos usuários.
 
 - **Catálogo (`catalogo.html`):**  
   Oferece uma galeria de filmes e séries com cards interativos. Inclui uma barra de busca funcional que interage com a API do TMDb para filtrar e exibir resultados dinamicamente.
@@ -70,12 +55,13 @@ meu-streaming.netlify.app
   Central de suporte ao usuário, contendo uma seção de Perguntas Frequentes (FAQ) interativa, um formulário de contato e informações detalhadas sobre os recursos de acessibilidade.
 
 - **Dashboard Analítico (`dashboard.html`):**  
-  Uma página de análise de dados que exibe visualizações sobre o catálogo de filmes. Apresenta gráficos gerados dinamicamente com a biblioteca Chart.js, como *Distribuição de Gêneros* e *Popularidade Média vs. Contagem de Votos*.
+  Uma página de análise de dados que exibe visualizações sobre o catálogo de filmes. Apresenta gráficos gerados dinamicamente com a biblioteca Chart.js, como _Distribuição de Gêneros_ e _Popularidade Média vs. Contagem de Votos_.
 
 - **Acessibilidade Avançada (`Acessibility.js`):**
-  - **Alternância de Tema:** Permite que o usuário alterne entre um tema claro e um escuro (alto contraste) em todo o site.  
-  - **Ajuste de Fonte:** Funcionalidade para aumentar ou diminuir o tamanho da fonte para melhor legibilidade.  
-  - **Persistência de Configurações:** As escolhas de acessibilidade do usuário são salvas no `localStorage` do navegador e aplicadas consistentemente em todas as páginas.  
+
+  - **Alternância de Tema:** Permite que o usuário alterne entre um tema claro e um escuro (alto contraste) em todo o site.
+  - **Ajuste de Fonte:** Funcionalidade para aumentar ou diminuir o tamanho da fonte para melhor legibilidade.
+  - **Persistência de Configurações:** As escolhas de acessibilidade do usuário são salvas no `localStorage` do navegador e aplicadas consistentemente em todas as páginas.
 
 - **Design Responsivo:**  
   A interface se adapta a diferentes tamanhos de tela, desde desktops a dispositivos móveis, garantindo uma experiência de usuário consistente e agradável em qualquer dispositivo.
@@ -83,12 +69,7 @@ meu-streaming.netlify.app
 - **Identidade Visual Coesa:**  
   Todas as páginas seguem uma estilização única e moderna, com foco em uma experiência de usuário imersiva e profissional.
 
-
-
-
 O projeto contará com as seguintes funcionalidades e telas/seções:
-
-
 
 - Visão geral da plataforma com destaques do catálogo.
 
@@ -98,85 +79,49 @@ O projeto contará com as seguintes funcionalidades e telas/seções:
 
 - Uma **visão geral da dashboard** (ex: um gráfico com Chart.js mostrando gêneros populares).
 
-
-
 - **Página de Catálogo (`catalogo.html`):**
 
+- Exibirá o catálogo completo de filmes e séries.
 
+- Funcionalidade de **busca**, **filtro** e **ordenação** dos resultados.
 
-  - Exibirá o catálogo completo de filmes e séries.
-
-  - Funcionalidade de **busca**, **filtro** e **ordenação** dos resultados.
-
-  - Componente de Paginação para navegar por múltiplos resultados.
-
-
+- Componente de Paginação para navegar por múltiplos resultados.
 
 - **Página de Pagamento (`pagamento.html`):**
 
+- Uma nova página para simular o pagamento da assinatura.
 
-
-  - Uma nova página para simular o pagamento da assinatura.
-
-  - Exibirá um **QR Code de pagamento fictício (Pix)** gerado dinamicamente com base no plano que o usuário selecionou na página inicial.
-
-
+- Exibirá um **QR Code de pagamento fictício (Pix)** gerado dinamicamente com base no plano que o usuário selecionou na página inicial.
 
 - **Página de Detalhes (`detalhes.html`):**
 
-
-
-  - Mostra informações completas de um filme/série.
-
-
+- Mostra informações completas de um filme/série.
 
 - **Página de Ajuda/Acessibilidade (`ajuda.html`):**
 
-  - Fornece informações sobre os recursos de acessibilidade do site.
+- Fornece informações sobre os recursos de acessibilidade do site.
 
-  - Oferece uma opção para alternar para um tema de alto contraste.
-
-
+- Oferece uma opção para alternar para um tema de alto contraste.
 
 ### 3. Wireframe e Protótipo de UI
 
-
-
 Foram criados wireframes de baixa fidelidade para planejar a estrutura visual e a disposição dos elementos nas telas principais do projeto.
-
-
 
 #### Página Inicial (Home)
 
-
-
-![Wireframe da Página Inicial](wireframes/Wireframe_Bem_Vindo.png)
-
-
+![Wireframe da Página Inicial](wireframes/Wireframe_index.png)
 
 #### Página de Catálogo
 
-
-
 ![Wireframe da Página de Catálogo](wireframes/Wireframe_Catalogo.png)
-
-
 
 #### Página de Detalhes
 
-
-
 ![Wireframe da Página de Detalhes](wireframes/Wireframe_Detalhes_Trailers.png)
-
-
 
 O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, utilizando componentes do Bootstrap 5 para uma prototipação ágil.
 
-
-
 ### 4. Tecnologias Utilizadas
-
-
 
 - **Frontend:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.
 
@@ -186,37 +131,21 @@ O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, 
 
 - **Ferramentas:** Git, GitHub, VS Code.
 
-
-
 ### 5. APIs Selecionadas
-
-
 
 1. **The Movie Database (TMDb) API:**
 
-
-
-   - Fonte principal de dados sobre filmes e séries.
-
-
+- Fonte principal de dados sobre filmes e séries.
 
 2. **QR Code Generator API (`goqr.me`):**
 
-
-
-   - Gera QR Codes de pagamento fictício (Pix).
-
-
+- Gera QR Codes de pagamento fictício (Pix).
 
 3. **Chart.js (Biblioteca):**
 
-   - Para criar gráficos interativos.
-
-
+- Para criar gráficos interativos.
 
 ### 6. Estrutura do Projeto
-
-
 
 /meu-streaming
 
@@ -226,7 +155,7 @@ O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, 
 
 |-- tests/
 
-|-- Bem_Vindo.html
+|-- index.html
 
 |-- catalogo.html
 
@@ -240,7 +169,7 @@ O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, 
 
 |-- wireframes/
 
-| |-- Wireframe_Bem_Vindo.png
+| |-- Wireframe_index.png
 
 | |-- Wireframe_Catalogo.png
 
@@ -248,15 +177,9 @@ O design da UI seguirá um tema escuro, com foco na usabilidade e legibilidade, 
 
 |-- README.md
 
-
-
 ### 7. Versionamento com Git
 
-
-
 O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes branches:
-
-
 
 - **master:** Contém o código de produção, estável e pronto para deploy. Cada versão final será marcada com uma `tag`.
 
@@ -264,11 +187,7 @@ O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes bra
 
 - **feature/\*:** Branches temporárias para o desenvolvimento de novas funcionalidades (ex: `feature/formulario-contato`).
 
-
-
 ### 8. Acessibilidade e Responsividade
-
-
 
 - **Responsividade:** Layout totalmente adaptável a desktops, tablets e smartphones.
 
@@ -276,21 +195,15 @@ O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes bra
 
 - Haverá uma **opção de acessibilidade** na página de ajuda para ativar um modo de alto contraste.
 
-
-
 ### 9. Testes Automatizados
 
-
-
 #### **Tabela de Casos de Teste**
-
-
 
 | ID do Teste | Funcionalidade Testada       | Cenário de Teste                        | Passos de Execução                                                             | Resultado Esperado                                                                       |
 
 | ----------- | ---------------------------- | --------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
 
-| **TC-001**  | **Navegação Principal**      | Navegação da Home para o Catálogo       | 1. Abrir `Bem_Vindo.html`.<br>2. Clicar em "Assistir" ou "Login".              | Usuário é redirecionado para `catalogo.html`. `<h1>Explore nosso Catálogo</h1>` visível. |
+| **TC-001**  | **Navegação Principal**      | Navegação da Home para o Catálogo       | 1. Abrir `index.html`.<br>2. Clicar em "Assistir" ou "Login".              | Usuário é redirecionado para `catalogo.html`. `<h1>Explore nosso Catálogo</h1>` visível. |
 
 | **TC-002**  | **Seleção de Plano**         | Redirecionamento para pagamento Premium | 1. Abrir a página inicial.<br>2. Clicar em "Assinar Agora" no card Premium.    | Usuário vai para `/pagamento.html?plano=premium`.                                        |
 
@@ -308,16 +221,12 @@ O projeto utiliza um fluxo de trabalho baseado no Git Flow, com as seguintes bra
 
 | **TC-009**  | **Responsividade**           | Layout em mobile                        | 1. Redimensionar navegador para 375px de largura.                              | Cards reorganizados em 1 coluna, navbar vira menu hambúrguer.                            |
 
-
-
 ### 10. Como Executar o Projeto
-
-
 
 1. Clone o repositório:
 
-   ```bash
+```bash
 
-   git clone https://github.com/Rex23js/meu-streaming.git
+git clone https://github.com/Rex23js/meu-streaming.git
 
-   ```
+```

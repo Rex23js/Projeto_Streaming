@@ -227,7 +227,7 @@ class PaginaManager {
     const path = window.location.pathname.toLowerCase();
     const filename = path.substring(path.lastIndexOf("/") + 1);
 
-    if (filename.includes("bem_vindo") || filename === "" || filename === "/") {
+    if (filename.includes("index") || filename === "" || filename === "/") {
       return "bem-vindo";
     } else if (filename.includes("pagamento")) {
       return "pagamento";
@@ -392,7 +392,7 @@ class PaginaManager {
   redirecionarParaHome(mensagem) {
     console.error(mensagem);
     alert(mensagem);
-    window.location.href = "Bem_Vindo.html";
+    window.location.href = "index.html";
   }
 
   /**
@@ -1057,7 +1057,7 @@ PaginaManager.prototype.detectarPaginaAtual = function () {
   const path = window.location.pathname.toLowerCase();
   const filename = path.substring(path.lastIndexOf("/") + 1);
 
-  if (filename.includes("bem_vindo") || filename === "" || filename === "/") {
+  if (filename.includes("index") || filename === "" || filename === "/") {
     return "bem-vindo";
   } else if (filename.includes("pagamento")) {
     return "pagamento";
